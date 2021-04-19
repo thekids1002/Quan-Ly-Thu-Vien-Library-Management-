@@ -32,7 +32,8 @@ public class SachDAL {
             	ls.setMaloai(rs.getInt(5));
             	ls.setNamxb(rs.getInt(6));
             	ls.setSoluong(rs.getInt(7));
-            	ls.setGhichu(rs.getString(8));
+            	ls.setGhichu(rs.getString("GhiChu"));
+            	ls.setMake(rs.getInt("Make"));
             	
             	
             	

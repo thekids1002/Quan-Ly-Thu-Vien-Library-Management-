@@ -64,6 +64,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import javax.swing.JMenuItem;
 
 public class DesignLai extends JFrame {
 	TacGiaDTO tacgiasl;
@@ -443,7 +446,8 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblThngK);
 		PanelChinh.add(pnTrangChu, "name_890335498390600");
 		PanelChinh.add(pnSach, "name_890193837575500");
-
+		
+		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "H\u00ECnh \u1EA2nh", TitledBorder.LEADING, TitledBorder.ABOVE_BOTTOM,
 				null, null));
@@ -1297,8 +1301,16 @@ public class DesignLai extends JFrame {
 		dtmsach.addColumn("Năm Xuất Bản");
 		dtmsach.addColumn("Số Lượng");
 		dtmsach.addColumn("Mã Kệ");
+		
+		
 		table = new JTable(dtmsach);
 		scrollPane.setViewportView(table);
+		JPopupMenu popupMenu = new JPopupMenu();
+		mntmNewMenuItem = new JMenuItem("Thông tin chi tiết");
+		mntmNewMenuItem.setBounds(0, 0, 113, 19);
+		popupMenu.add(mntmNewMenuItem);
+
+		addPopup(table, popupMenu);
 
 	}
 
@@ -2437,11 +2449,19 @@ public class DesignLai extends JFrame {
 				String tensach = txttensach.getText();
 				int namxb = Integer.parseInt(txtnamxbsach.getText());
 				int soluong = Integer.parseInt(txtsoluongsach.getText());
-
+				System.out.println(makesach);
+				System.out.println(manxb);
+				System.out.println(matg);
+				System.out.println(loai);
+				System.out.println(anh);
+				System.out.println(tensach);
+				System.out.println(namxb);
+				System.out.println(soluong);
+				
 				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, anh, "", makesach);
-
+				
 				if (SachDAL.themsach(sach) >= 0) {
-					loaddocgia();
+					loadsach();
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
 
 				} else {
@@ -2612,6 +2632,7 @@ public class DesignLai extends JFrame {
 	}
 
 	public static ArrayList<SachDTO> sach = new ArrayList<SachDTO>();
+	private JMenuItem mntmNewMenuItem;
 
 	public void loadsach() {
 		sach = null;
@@ -2631,5 +2652,22 @@ public class DesignLai extends JFrame {
 			vec.add(sachitem.getMake());
 			dtmsach.addRow(vec);
 		}
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 }
