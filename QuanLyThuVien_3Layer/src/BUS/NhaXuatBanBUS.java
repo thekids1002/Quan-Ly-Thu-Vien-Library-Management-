@@ -27,6 +27,7 @@ public class NhaXuatBanBUS {
 	public int xoanxb(NhaXuatBan nxb) {
 		return NhaXuatBanDAL.xoanxb(nxb);
 	}
+	
 	public static NhaXuatBanBUS gI() {
 		return new NhaXuatBanBUS(); 
 	}

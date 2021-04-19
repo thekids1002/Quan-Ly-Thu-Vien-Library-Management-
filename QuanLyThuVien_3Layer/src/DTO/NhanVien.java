@@ -11,8 +11,7 @@ public class NhanVien {
 
 	@Override
 	public String toString() {
-		return "NhanVien [MaNV=" + MaNV + ", TenNV=" + TenNV + ", NamSinh=" + NamSinh + ", GioiTinh=" + GioiTinh
-				+ ", Sdt=" + Sdt + ", NgayBatDau=" + NgayBatDau + ", luong=" + luong + ", DiaChi=" + DiaChi + "]";
+		return MaNV + "-" + TenNV ; 
 	}
 
 	public NhanVien() {

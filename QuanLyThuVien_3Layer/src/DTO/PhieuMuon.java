@@ -6,7 +6,7 @@ public class PhieuMuon {
 	private int MaPhieuMuon ;
 	private int MaNV;
 	private int MaDocGia;
-	private Date NgayMuon;
+	private String NgayMuon;
 	private String tinhtrang;
 	public int getMaPhieuMuon() {
 		return MaPhieuMuon;
@@ -26,27 +26,10 @@ public class PhieuMuon {
 	public void setMaDocGia(int maDocGia) {
 		MaDocGia = maDocGia;
 	}
-	public PhieuMuon() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public PhieuMuon(int maPhieuMuon, int maNV, int maDocGia, Date ngayMuon, String tinhtrang) {
-		super();
-		MaPhieuMuon = maPhieuMuon;
-		MaNV = maNV;
-		MaDocGia = maDocGia;
-		NgayMuon = ngayMuon;
-		this.tinhtrang = tinhtrang;
-	}
-	@Override
-	public String toString() {
-		return "PhieuMuon [MaPhieuMuon=" + MaPhieuMuon + ", MaNV=" + MaNV + ", MaDocGia=" + MaDocGia + ", NgayMuon="
-				+ NgayMuon + ", tinhtrang=" + tinhtrang + "]";
-	}
-	public Date getNgayMuon() {
+	public String getNgayMuon() {
 		return NgayMuon;
 	}
-	public void setNgayMuon(Date ngayMuon) {
+	public void setNgayMuon(String ngayMuon) {
 		NgayMuon = ngayMuon;
 	}
 	public String getTinhtrang() {
@@ -54,6 +37,24 @@ public class PhieuMuon {
 	}
 	public void setTinhtrang(String tinhtrang) {
 		this.tinhtrang = tinhtrang;
+	}
+	public PhieuMuon(int maPhieuMuon, int maNV, int maDocGia, String ngayMuon, String tinhtrang) {
+		super();
+		MaPhieuMuon = maPhieuMuon;
+		MaNV = maNV;
+		MaDocGia = maDocGia;
+		NgayMuon = ngayMuon;
+		this.tinhtrang = tinhtrang;
+	}
+	public PhieuMuon() {
+		super();
+		// TODO Auto-generated constructor stub
+
+	}
+	@Override
+	public String toString() {
+		return "PhieuMuon [MaPhieuMuon=" + MaPhieuMuon + ", MaNV=" + MaNV + ", MaDocGia=" + MaDocGia + ", NgayMuon="
+				+ NgayMuon + ", tinhtrang=" + tinhtrang + "]";
 	}
 	
 }

@@ -35,6 +35,7 @@ import BUS.LoaiBUS;
 import BUS.NhaCungcapbus;
 import BUS.NhaXuatBanBUS;
 import BUS.NhanVienBus;
+import BUS.PhieuMuonBus;
 import BUS.SachBus;
 import BUS.TacGiaBUS;
 import BUS.TaiKhoanBus;
@@ -44,6 +45,7 @@ import DAL.LoaiSachDAL;
 import DAL.NhaCungCapDAL;
 import DAL.NhaXuatBanDAL;
 import DAL.NhanVienDAL;
+import DAL.PhieuMuonDAL;
 import DAL.SachDAL;
 import DAL.TacGiaDAL;
 import DTO.DocGia;
@@ -53,6 +55,7 @@ import DTO.LoaisachDTO;
 import DTO.NhaCungCapDTO;
 import DTO.NhaXuatBan;
 import DTO.NhanVien;
+import DTO.PhieuMuon;
 import DTO.SachDTO;
 import DTO.TacGiaDTO;
 
@@ -67,12 +70,16 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JMenuItem;
+import com.toedter.calendar.JDayChooser;
+import com.toedter.calendar.JDateChooser;
 
 public class DesignLai extends JFrame {
 	TacGiaDTO tacgiasl;
 	LoaisachDTO loaisl;
 	NhaXuatBan nxbsl;
 	KeSachDTO kesl;
+	NhanVien nvsl;
+	DocGia dgsl;
 	private JPanel contentPane;
 	private JLabel iconsgu;
 	private JLabel exit;
@@ -193,16 +200,12 @@ public class DesignLai extends JFrame {
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
 	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JButton btnNewButton_1;
-	private JButton btnNewButton_2;
-	private JButton btnNewButton_3;
-	private JButton btnNewButton_4;
+	private JTextField txttinhtrang;
+	private JButton btnthemphieumuon;
+	private JButton btnxoaphieumuon;
+	private JButton btnsuaphieumuon;
+	private JButton btnreloadphieumuon;
 	private JScrollPane scrollPane_5;
-	private JTable tablemuon;
 	private DefaultTableModel dtmmuon;
 	private JLabel lblphieumuon;
 	private JLabel lbltimkiempm;
@@ -245,6 +248,9 @@ public class DesignLai extends JFrame {
 	private JComboBox cmbmatg;
 	private JComboBox cmbmakesach;
 	private String hinhanh = null;
+	private JComboBox cmbnhanvienpm;
+	private JComboBox cmbmadocgiaphieumuon;
+	private JDateChooser dateChooser;
 	public static int idtaikhoan;
 
 	/**
@@ -286,6 +292,7 @@ public class DesignLai extends JFrame {
 		loadtacgia();
 		loaddocgia();
 		loadsach();
+		loadphieumuon();
 	}
 
 	public void thanhtitle() {
@@ -446,8 +453,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblThngK);
 		PanelChinh.add(pnTrangChu, "name_890335498390600");
 		PanelChinh.add(pnSach, "name_890193837575500");
-		
-		
+
 		JPanel panel_5 = new JPanel();
 		panel_5.setBorder(new TitledBorder(null, "H\u00ECnh \u1EA2nh", TitledBorder.LEADING, TitledBorder.ABOVE_BOTTOM,
 				null, null));
@@ -498,58 +504,79 @@ public class DesignLai extends JFrame {
 		panel_3.add(lblNewLabel_7);
 
 		textField_4 = new JTextField();
-		textField_4.setBounds(111, 13, 236, 36);
+		textField_4.setEditable(false);
+		textField_4.setBounds(111, 14, 236, 36);
 		panel_3.add(textField_4);
 		textField_4.setColumns(10);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(111, 61, 236, 36);
-		panel_3.add(textField_5);
+		txttinhtrang = new JTextField();
+		txttinhtrang.setColumns(10);
+		txttinhtrang.setBounds(111, 228, 236, 36);
+		panel_3.add(txttinhtrang);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(111, 110, 236, 36);
-		panel_3.add(textField_6);
+		btnthemphieumuon = new JButton("Thêm Phiếu Mượn");
+		btnthemphieumuon.setBounds(380, 13, 97, 36);
+		panel_3.add(btnthemphieumuon);
 
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(111, 171, 236, 36);
-		panel_3.add(textField_7);
+		btnxoaphieumuon = new JButton("Sửa");
+		btnxoaphieumuon.setBounds(380, 61, 97, 36);
+		panel_3.add(btnxoaphieumuon);
 
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(111, 228, 236, 36);
-		panel_3.add(textField_8);
+		btnsuaphieumuon = new JButton("Xoá");
+		btnsuaphieumuon.setBounds(380, 110, 97, 36);
+		panel_3.add(btnsuaphieumuon);
 
-		btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(380, 13, 97, 36);
-		panel_3.add(btnNewButton_1);
+		btnreloadphieumuon = new JButton("Tải Lại");
+		btnreloadphieumuon.setBounds(380, 171, 97, 36);
+		panel_3.add(btnreloadphieumuon);
 
-		btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(380, 61, 97, 36);
-		panel_3.add(btnNewButton_2);
+		cmbnhanvienpm = new JComboBox();
+		cmbnhanvienpm.setBounds(111, 62, 236, 36);
+		cmbnhanvienpm.addActionListener(new ActionListener() {
 
-		btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setBounds(380, 110, 97, 36);
-		panel_3.add(btnNewButton_3);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cmbnhanvienpm.getSelectedItem() == null) {
+					return;
+				}
 
-		btnNewButton_4 = new JButton("New button");
-		btnNewButton_4.setBounds(380, 171, 97, 36);
-		panel_3.add(btnNewButton_4);
+				nvsl = (NhanVien) cmbnhanvienpm.getSelectedItem();
+
+			}
+		});
+		panel_3.add(cmbnhanvienpm);
+
+		cmbmadocgiaphieumuon = new JComboBox();
+		cmbmadocgiaphieumuon.setBounds(111, 114, 236, 32);
+		cmbmadocgiaphieumuon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (cmbmadocgiaphieumuon.getSelectedItem() == null) {
+					return;
+				}
+				dgsl = (DocGia) cmbmadocgiaphieumuon.getSelectedItem();
+
+			}
+		});
+		panel_3.add(cmbmadocgiaphieumuon);
+
+		dateChooser = new JDateChooser();
+		dateChooser.setDateFormatString("yyyy-MM-dd");
+		dateChooser.setBounds(111, 171, 236, 36);
+		panel_3.add(dateChooser);
 
 		scrollPane_5 = new JScrollPane();
 		scrollPane_5.setBounds(540, 13, 553, 294);
 		pnPhieumuon.add(scrollPane_5);
-
 		dtmmuon = new DefaultTableModel();
 		dtmmuon.addColumn("Mã Phiếu Mượn");
 		dtmmuon.addColumn("Mã Nhân Viên");
 		dtmmuon.addColumn("Mã Đọc Giả");
 		dtmmuon.addColumn("Ngày Mượn");
 		dtmmuon.addColumn("Tình Trạng");
-		tablemuon = new JTable(dtmmuon);
 
+		tablemuon = new JTable(dtmmuon);
 		scrollPane_5.setViewportView(tablemuon);
 
 		lbltimkiempm = new JLabel("Tìm Kiếm");
@@ -576,17 +603,18 @@ public class DesignLai extends JFrame {
 		scrollPane_6.setViewportView(tablectpm);
 
 		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(770, 391, 323, 331);
 		pnPhieumuon.add(panel);
 		panel.setLayout(null);
 
 		JLabel lblNewLabel_8 = new JLabel("Mã Sách");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_8.setBounds(12, 13, 91, 49);
+		lblNewLabel_8.setBounds(12, 45, 91, 49);
 		panel.add(lblNewLabel_8);
 
 		textField_10 = new JTextField();
-		textField_10.setBounds(96, 21, 142, 35);
+		textField_10.setBounds(96, 53, 142, 35);
 		panel.add(textField_10);
 		textField_10.setColumns(10);
 
@@ -595,7 +623,7 @@ public class DesignLai extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_5.setBounds(250, 26, 54, 25);
+		btnNewButton_5.setBounds(263, 58, 54, 25);
 		panel.add(btnNewButton_5);
 
 		JLabel lblNewLabel_8_1 = new JLabel("Ngày Trả");
@@ -619,19 +647,23 @@ public class DesignLai extends JFrame {
 		panel.add(textField_12);
 
 		JButton btnNewButton_6 = new JButton("Thêm");
-		btnNewButton_6.setBounds(6, 243, 97, 25);
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton_6.setBounds(12, 227, 91, 41);
 		panel.add(btnNewButton_6);
 
 		JButton btnNewButton_6_1 = new JButton("Sửa");
-		btnNewButton_6_1.setBounds(207, 243, 97, 25);
+		btnNewButton_6_1.setBounds(207, 227, 97, 41);
 		panel.add(btnNewButton_6_1);
 
 		JButton btnNewButton_6_2 = new JButton("Xoá");
-		btnNewButton_6_2.setBounds(6, 293, 97, 25);
+		btnNewButton_6_2.setBounds(15, 280, 88, 38);
 		panel.add(btnNewButton_6_2);
 
 		JButton bnttailaipm = new JButton("Tải Lại");
-		bnttailaipm.setBounds(207, 293, 97, 25);
+		bnttailaipm.setBounds(217, 280, 87, 38);
 		panel.add(bnttailaipm);
 		PanelChinh.add(pnPhieuNhap, "name_901242535638200");
 
@@ -1301,8 +1333,7 @@ public class DesignLai extends JFrame {
 		dtmsach.addColumn("Năm Xuất Bản");
 		dtmsach.addColumn("Số Lượng");
 		dtmsach.addColumn("Mã Kệ");
-		
-		
+
 		table = new JTable(dtmsach);
 		scrollPane.setViewportView(table);
 		JPopupMenu popupMenu = new JPopupMenu();
@@ -2457,9 +2488,9 @@ public class DesignLai extends JFrame {
 				System.out.println(tensach);
 				System.out.println(namxb);
 				System.out.println(soluong);
-				
+
 				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, anh, "", makesach);
-				
+
 				if (SachDAL.themsach(sach) >= 0) {
 					loadsach();
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
@@ -2468,6 +2499,28 @@ public class DesignLai extends JFrame {
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
+			}
+		});
+
+		////////////////////////////////////////////////////////////
+		////////////////// * THEM SUA XOA PHIEU MUON *///////////////
+		///////////////////////////////////////////////////////////
+
+		btnthemphieumuon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int manv = nvsl.getMaNV();
+				int madocgia = dgsl.getMaDocGia();
+				String tinhtrang = txttinhtrang.getText();
+				String ngaymuon = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+				PhieuMuon pm = new PhieuMuon(0, manv, madocgia, ngaymuon, tinhtrang);
+				if (PhieuMuonBus.gI().thempm(pm) >= 0) {
+					loadphieumuon();
+					JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Thành Công");
+
+				}
+				JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Không Thành Công");
 			}
 		});
 
@@ -2573,6 +2626,7 @@ public class DesignLai extends JFrame {
 			vec.add(nv.getDiaChi());
 			vec.add(nv.getSdt());
 			dtmnhanvien.addRow(vec);
+			cmbnhanvienpm.addItem(nv);
 			// .DesignLai.dtm.addRow(vec);
 		}
 		/*
@@ -2626,13 +2680,13 @@ public class DesignLai extends JFrame {
 			vec.add(dg1.getDiachi());
 
 			dtmdocgia.addRow(vec);
+			cmbmadocgiaphieumuon.addItem(dg1);
 			// .DesignLai.dtm.addRow(vec);
 		}
 
 	}
 
 	public static ArrayList<SachDTO> sach = new ArrayList<SachDTO>();
-	private JMenuItem mntmNewMenuItem;
 
 	public void loadsach() {
 		sach = null;
@@ -2653,6 +2707,30 @@ public class DesignLai extends JFrame {
 			dtmsach.addRow(vec);
 		}
 	}
+
+	private JTable tablemuon;
+	public static ArrayList<PhieuMuon> dspm = new ArrayList<PhieuMuon>();
+
+	public void loadphieumuon() {
+		dspm = null;
+		PhieuMuonBus pmbus = new PhieuMuonBus();
+		dspm = pmbus.getdanhsachpm();
+		dtmmuon.setRowCount(0);
+
+		for (PhieuMuon pm : dspm) {
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(pm.getMaPhieuMuon());
+			vec.add(pm.getMaNV());
+			vec.add(pm.getMaDocGia());
+			vec.add(pm.getNgayMuon());
+			vec.add(pm.getTinhtrang());
+
+			dtmmuon.addRow(vec);
+		}
+	}
+
+	private JMenuItem mntmNewMenuItem;
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -2660,11 +2738,13 @@ public class DesignLai extends JFrame {
 					showMenu(e);
 				}
 			}
+
 			public void mouseReleased(MouseEvent e) {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
 				}
 			}
+
 			private void showMenu(MouseEvent e) {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
