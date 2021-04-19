@@ -43,6 +43,7 @@ import BUS.PhieuMuonBus;
 import BUS.SachBus;
 import BUS.TacGiaBUS;
 import BUS.TaiKhoanBus;
+import BUS.chitietpmbus;
 import DAL.DocGiaDAL;
 import DAL.KeSachDAL;
 import DAL.LoaiSachDAL;
@@ -52,6 +53,8 @@ import DAL.NhanVienDAL;
 import DAL.PhieuMuonDAL;
 import DAL.SachDAL;
 import DAL.TacGiaDAL;
+import DAL.chitietpmDAL;
+import DTO.ChiTieuPMDTO;
 import DTO.DocGia;
 import DTO.KeSachDTO;
 import DTO.LoaisachDTO;
@@ -217,9 +220,8 @@ public class DesignLai extends JFrame {
 	private JScrollPane scrollPane_6;
 	private JTable tablectpm;
 	private DefaultTableModel dtmctpm;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
+	private JTextField txtmasachmuon;
+	private JTextField txtghichuctpm;
 	private JTextField txttenloai;
 	private JTable tableloai;
 	private JButton btnsualoai;
@@ -297,6 +299,7 @@ public class DesignLai extends JFrame {
 		loaddocgia();
 		loadsach();
 		loadphieumuon();
+		loadctphieumuon();
 	}
 
 	public void thanhtitle() {
@@ -618,10 +621,10 @@ public class DesignLai extends JFrame {
 		lblNewLabel_8.setBounds(12, 45, 91, 49);
 		panel.add(lblNewLabel_8);
 
-		textField_10 = new JTextField();
-		textField_10.setBounds(96, 53, 142, 35);
-		panel.add(textField_10);
-		textField_10.setColumns(10);
+		txtmasachmuon = new JTextField();
+		txtmasachmuon.setBounds(96, 53, 142, 35);
+		panel.add(txtmasachmuon);
+		txtmasachmuon.setColumns(10);
 
 		JButton btnNewButton_5 = new JButton("...");
 		btnNewButton_5.addActionListener(new ActionListener() {
@@ -636,40 +639,39 @@ public class DesignLai extends JFrame {
 		lblNewLabel_8_1.setBounds(12, 106, 91, 49);
 		panel.add(lblNewLabel_8_1);
 
-		textField_11 = new JTextField();
-		textField_11.setColumns(10);
-		textField_11.setBounds(96, 106, 142, 35);
-		panel.add(textField_11);
-
 		JLabel lblNewLabel_8_1_1 = new JLabel("Ghi Chú");
 		lblNewLabel_8_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_8_1_1.setBounds(12, 181, 91, 49);
+		lblNewLabel_8_1_1.setBounds(12, 172, 91, 49);
 		panel.add(lblNewLabel_8_1_1);
 
-		textField_12 = new JTextField();
-		textField_12.setColumns(10);
-		textField_12.setBounds(96, 189, 142, 35);
-		panel.add(textField_12);
+		txtghichuctpm = new JTextField();
+		txtghichuctpm.setColumns(10);
+		txtghichuctpm.setBounds(96, 180, 142, 35);
+		panel.add(txtghichuctpm);
 
-		JButton btnNewButton_6 = new JButton("Thêm");
-		btnNewButton_6.addActionListener(new ActionListener() {
+		JButton btnthemctpm = new JButton("Thêm");
+		btnthemctpm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnNewButton_6.setBounds(12, 227, 91, 41);
-		panel.add(btnNewButton_6);
+		btnthemctpm.setBounds(12, 227, 91, 41);
+		panel.add(btnthemctpm);
 
-		JButton btnNewButton_6_1 = new JButton("Sửa");
-		btnNewButton_6_1.setBounds(207, 227, 97, 41);
-		panel.add(btnNewButton_6_1);
+		JButton btnsuactpm = new JButton("Sửa");
+		btnsuactpm.setBounds(207, 227, 97, 41);
+		panel.add(btnsuactpm);
 
-		JButton btnNewButton_6_2 = new JButton("Xoá");
-		btnNewButton_6_2.setBounds(15, 280, 88, 38);
-		panel.add(btnNewButton_6_2);
+		JButton btnxoactpm = new JButton("Xoá");
+		btnxoactpm.setBounds(15, 280, 88, 38);
+		panel.add(btnxoactpm);
 
-		JButton bnttailaipm = new JButton("Tải Lại");
-		bnttailaipm.setBounds(217, 280, 87, 38);
-		panel.add(bnttailaipm);
+		JButton bnttailaictpm = new JButton("Tải Lại");
+		bnttailaictpm.setBounds(217, 280, 87, 38);
+		panel.add(bnttailaictpm);
+		
+		JDateChooser dateChooser_ngaytra = new JDateChooser();
+		dateChooser_ngaytra.setBounds(96, 111, 142, 35);
+		panel.add(dateChooser_ngaytra);
 		PanelChinh.add(pnPhieuNhap, "name_901242535638200");
 
 		pnchung = new JPanel();
@@ -1415,7 +1417,23 @@ public class DesignLai extends JFrame {
 						}
 					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					dtmctpm.setRowCount(0);
+					for (int k = 0; k < ctpm.size(); k++) {
+						if (ctpm.get(k).getMaPhieuMuon() == Integer.parseInt(dtmmuon.getValueAt(i, 0).toString())) {
+							Vector<Object> vec = new Vector<Object>();
+							vec.add(ctpm.get(k).getMaChiTietPhieuMuon());
+							vec.add(ctpm.get(k).getMaPhieuMuon());
+							vec.add(ctpm.get(k).getMaSach());
+							vec.add(ctpm.get(k).getNgayTra());
+							vec.add(ctpm.get(k).getGhichu());
+							dtmctpm.addRow(vec);
+							txtmasachmuon.setText(dtmctpm.getValueAt(0, 3).toString());
+							txtghichuctpm.setText(dtmctpm.getValueAt(0, 4).toString());
+							break;
 
+						}
+
+					}
 				}
 
 			}
@@ -2533,14 +2551,6 @@ public class DesignLai extends JFrame {
 				String tensach = txttensach.getText();
 				int namxb = Integer.parseInt(txtnamxbsach.getText());
 				int soluong = Integer.parseInt(txtsoluongsach.getText());
-				System.out.println(makesach);
-				System.out.println(manxb);
-				System.out.println(matg);
-				System.out.println(loai);
-				System.out.println(anh);
-				System.out.println(tensach);
-				System.out.println(namxb);
-				System.out.println(soluong);
 
 				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, anh, "", makesach);
 
@@ -2607,6 +2617,36 @@ public class DesignLai extends JFrame {
 				}
 			}
 		});
+
+		btnxoaphieumuon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				int i = tablemuon.getSelectedRow();
+				if (i >= 0) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					String ngaymuon = sdf.format(dateChooser.getDate());
+					int vitri = Integer.parseInt(dtmmuon.getValueAt(i, 0).toString());
+					PhieuMuon pm = new PhieuMuon(vitri, nvsl.getMaNV(), dgsl.getMaDocGia(), ngaymuon,
+							txttinhtrang.getText());
+					if (PhieuMuonBus.gI().xoapm(pm) >= 0) {
+						loadphieumuon();
+						JOptionPane.showMessageDialog(contentPane, "Xoá Phiếu Mượn Thành Công");
+
+					} else
+						JOptionPane.showMessageDialog(contentPane, "Xoá Phiếu Mượn Không Thành Công");
+				}
+
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
+				}
+			}
+		});
+
+		////////////////////////////////////////////////////////////
+		////////////////// * THEM SUA XOA CHI TIET PHIEU MUON *///////////////
+		///////////////////////////////////////////////////////////
 
 	}
 
@@ -2811,6 +2851,27 @@ public class DesignLai extends JFrame {
 			vec.add(pm.getTinhtrang());
 
 			dtmmuon.addRow(vec);
+		}
+	}
+
+	public static ArrayList<ChiTieuPMDTO> ctpm = new ArrayList<ChiTieuPMDTO>();
+
+	public void loadctphieumuon() {
+		ctpm = null;
+		chitietpmbus ctpmbus = new chitietpmbus();
+		ctpm = ctpmbus.getdanhsachpm();
+		dtmctpm.setRowCount(0);
+
+		for (ChiTieuPMDTO pm : ctpm) {
+
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(pm.getMaChiTietPhieuMuon());
+			vec.add(pm.getMaPhieuMuon());
+			vec.add(pm.getMaSach());
+			vec.add(pm.getNgayTra());
+			vec.add(pm.getGhichu());
+
+			// dtmctpm.addRow(vec);
 		}
 	}
 
