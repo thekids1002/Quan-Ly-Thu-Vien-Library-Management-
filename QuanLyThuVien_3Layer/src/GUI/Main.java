@@ -33,7 +33,7 @@ public class Main extends Thread{
 		}
 	}
 	public static void Login() {
-		
+		System.out.println("Hello word");
 		while(!LoginForm.dangnhap) {
 			Sleep(1000);
 		}
