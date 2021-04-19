@@ -24,7 +24,7 @@ public class PhieuMuonDAL {
 				pm.setMaDocGia(rs.getInt(3));
 				pm.setNgayMuon(rs.getString(4));
 				pm.setTinhtrang(rs.getString(5));
-				System.out.println(pm);
+				dsl.add(pm);
 
 			}
 

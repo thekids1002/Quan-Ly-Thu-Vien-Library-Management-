@@ -2714,10 +2714,11 @@ public class DesignLai extends JFrame {
 	public void loadphieumuon() {
 		dspm = null;
 		PhieuMuonBus pmbus = new PhieuMuonBus();
-		dspm = pmbus.getdanhsachpm();
+		dspm = PhieuMuonDAL.getdanhsachphieumuon(); 
 		dtmmuon.setRowCount(0);
 
 		for (PhieuMuon pm : dspm) {
+			
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(pm.getMaPhieuMuon());
 			vec.add(pm.getMaNV());
