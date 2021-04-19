@@ -6,11 +6,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -19,6 +22,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import java.awt.SystemColor;
 import java.awt.CardLayout;
@@ -199,11 +203,11 @@ public class DesignLai extends JFrame {
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
 	private JLabel lblNewLabel_7;
-	private JTextField textField_4;
+	private JTextField txtmapm;
 	private JTextField txttinhtrang;
 	private JButton btnthemphieumuon;
-	private JButton btnxoaphieumuon;
 	private JButton btnsuaphieumuon;
+	private JButton btnxoaphieumuon;
 	private JButton btnreloadphieumuon;
 	private JScrollPane scrollPane_5;
 	private DefaultTableModel dtmmuon;
@@ -503,11 +507,11 @@ public class DesignLai extends JFrame {
 		lblNewLabel_7.setBounds(12, 227, 82, 36);
 		panel_3.add(lblNewLabel_7);
 
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setBounds(111, 14, 236, 36);
-		panel_3.add(textField_4);
-		textField_4.setColumns(10);
+		txtmapm = new JTextField();
+		txtmapm.setEditable(false);
+		txtmapm.setBounds(111, 14, 236, 36);
+		panel_3.add(txtmapm);
+		txtmapm.setColumns(10);
 
 		txttinhtrang = new JTextField();
 		txttinhtrang.setColumns(10);
@@ -518,13 +522,13 @@ public class DesignLai extends JFrame {
 		btnthemphieumuon.setBounds(380, 13, 97, 36);
 		panel_3.add(btnthemphieumuon);
 
-		btnxoaphieumuon = new JButton("Sửa");
-		btnxoaphieumuon.setBounds(380, 61, 97, 36);
-		panel_3.add(btnxoaphieumuon);
-
-		btnsuaphieumuon = new JButton("Xoá");
-		btnsuaphieumuon.setBounds(380, 110, 97, 36);
+		btnsuaphieumuon = new JButton("Sửa");
+		btnsuaphieumuon.setBounds(380, 61, 97, 36);
 		panel_3.add(btnsuaphieumuon);
+
+		btnxoaphieumuon = new JButton("Xoá");
+		btnxoaphieumuon.setBounds(380, 110, 97, 36);
+		panel_3.add(btnxoaphieumuon);
 
 		btnreloadphieumuon = new JButton("Tải Lại");
 		btnreloadphieumuon.setBounds(380, 171, 97, 36);
@@ -577,6 +581,7 @@ public class DesignLai extends JFrame {
 		dtmmuon.addColumn("Tình Trạng");
 
 		tablemuon = new JTable(dtmmuon);
+
 		scrollPane_5.setViewportView(tablemuon);
 
 		lbltimkiempm = new JLabel("Tìm Kiếm");
@@ -1216,7 +1221,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				if (cmbmaloai.getSelectedItem() == null) {
 					return;
 				}
@@ -1232,7 +1237,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				if (cmbmanhaxuatban.getSelectedItem() == null) {
 					return;
 				}
@@ -1247,7 +1252,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				if (cmbmatg.getSelectedItem() == null) {
 					return;
 				}
@@ -1262,7 +1267,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				if (cmbmakesach.getSelectedItem() == null) {
 					return;
 				}
@@ -1359,35 +1364,87 @@ public class DesignLai extends JFrame {
 	}
 
 	public void addEvent() {
-		tabledocgia.addMouseListener(new MouseListener() {
+		tablemuon.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseReleased(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+			public void mouseReleased(MouseEvent e) {
 
 			}
 
 			@Override
-			public void mousePressed(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+			public void mousePressed(MouseEvent e) {
 
 			}
 
 			@Override
-			public void mouseExited(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+			public void mouseExited(MouseEvent e) {
 
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+			public void mouseEntered(MouseEvent e) {
 
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				// TODO Auto-generated method stub
+				int i = tablemuon.getSelectedRow();
+				if (i >= 0) {
+					try {
+						Date date = new SimpleDateFormat("yyyy-MM-dd")
+								.parse((String) dtmmuon.getValueAt(i, 3).toString());
+
+						dateChooser.setDate(date);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					txtmapm.setText(dtmmuon.getValueAt(i, 0).toString());
+					txttinhtrang.setText(dtmmuon.getValueAt(i, 4).toString());
+					String ngay = dtmmuon.getValueAt(i, 3).toString();
+
+					for (int j = 0; j < nv.size(); j++) {
+						if (nv.get(j).getMaNV() == Integer.parseInt(dtmmuon.getValueAt(i, 1).toString())) {
+							cmbnhanvienpm.setSelectedIndex(j);
+							break;
+						}
+					}
+					for (int j = 0; j < dg.size(); j++) {
+						if (dg.get(j).getMaDocGia() == Integer.parseInt(dtmmuon.getValueAt(i, 2).toString())) {
+							cmbmadocgiaphieumuon.setSelectedIndex(j);
+							break;
+						}
+					}
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+				}
+
+			}
+		});
+		tabledocgia.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+
 				int i = tabledocgia.getSelectedRow();
 				if (i >= 0) {
 					txtTendocgia.setText(dtmdocgia.getValueAt(i, 1).toString());
@@ -1403,25 +1460,21 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -2399,7 +2452,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+
 				int i = tabledocgia.getRowCount();
 
 				DocGia docgia = new DocGia(0, txtTendocgia.getText(), txtgioitinhdocgia.getText(),
@@ -2471,7 +2524,7 @@ public class DesignLai extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+
 				int makesach = kesl.getMaKeSach();
 				int manxb = nxbsl.getMaNXB();
 				int matg = tacgiasl.getMaTacGia();
@@ -2513,14 +2566,45 @@ public class DesignLai extends JFrame {
 				int manv = nvsl.getMaNV();
 				int madocgia = dgsl.getMaDocGia();
 				String tinhtrang = txttinhtrang.getText();
-				String ngaymuon = ((JTextField) dateChooser.getDateEditor().getUiComponent()).getText();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				// String ngaymuon = ((JTextField)
+				// dateChooser.getDateEditor().getUiComponent()).getText();
+				String ngaymuon = sdf.format(dateChooser.getDate());
 				PhieuMuon pm = new PhieuMuon(0, manv, madocgia, ngaymuon, tinhtrang);
 				if (PhieuMuonBus.gI().thempm(pm) >= 0) {
 					loadphieumuon();
 					JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Thành Công");
 
+				} else
+					JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Không Thành Công");
+			}
+		});
+
+		btnsuaphieumuon.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+
+				int i = tablemuon.getSelectedRow();
+				if (i >= 0) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					// String ngaymuon = ((JTextField)
+					// dateChooser.getDateEditor().getUiComponent()).getText();
+					String ngaymuon = sdf.format(dateChooser.getDate());
+					int vitri = Integer.parseInt(dtmmuon.getValueAt(i, 0).toString());
+					PhieuMuon pm = new PhieuMuon(vitri, nvsl.getMaNV(), dgsl.getMaDocGia(), ngaymuon,
+							txttinhtrang.getText());
+					if (PhieuMuonBus.gI().suapm(pm) >= 0) {
+						loadphieumuon();
+						JOptionPane.showMessageDialog(contentPane, "Sửa Phiếu Mượn Thành Công");
+
+					} else
+						JOptionPane.showMessageDialog(contentPane, "Sửa Phiếu Mượn Không Thành Công");
 				}
-				JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Không Thành Công");
+
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
+				}
 			}
 		});
 
@@ -2714,11 +2798,11 @@ public class DesignLai extends JFrame {
 	public void loadphieumuon() {
 		dspm = null;
 		PhieuMuonBus pmbus = new PhieuMuonBus();
-		dspm = PhieuMuonDAL.getdanhsachphieumuon(); 
+		dspm = PhieuMuonDAL.getdanhsachphieumuon();
 		dtmmuon.setRowCount(0);
 
 		for (PhieuMuon pm : dspm) {
-			
+
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(pm.getMaPhieuMuon());
 			vec.add(pm.getMaNV());

@@ -62,7 +62,7 @@ public class PhieuMuonDAL {
 
 	public static int suanxb(PhieuMuon ke) {
 		int i = -1;
-		String sql = "update phieumuon set manv = ? , MaDocGia = ?, NgayMuon = , TinhTrang =?  where mapm = ?";
+		String sql = "update phieumuon set manv = ? , MaDocGia = ?, NgayMuon =? , TinhTrang =?  where mapm = ?";
 
 		try {
 
