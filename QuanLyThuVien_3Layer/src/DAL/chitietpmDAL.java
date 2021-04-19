@@ -37,7 +37,7 @@ public class chitietpmDAL {
 	// @SuppressWarnings("null")
 	public static int themctpm(ChiTieuPMDTO ke) {
 		int i = -1;
-		String sql = "insert into phieumuon (MaPM,MaSach,NgayTra,GhiChu) values(?,?,?,?)";
+		String sql = "insert into chitietphieumuon (MaPM,MaSach,NgayTra,GhiChu) values(?,?,?,?)";
 
 		try {
 
@@ -60,7 +60,7 @@ public class chitietpmDAL {
 
 	public static int suactpm(ChiTieuPMDTO ke) {
 		int i = -1;
-		String sql = "update phieumuon set MaPM = ? , MaSach = ?, NgayTra =? , GhiChu =?  where mactpm = ?";
+		String sql = "update chitietphieumuon set MaPM = ? , MaSach = ?, NgayTra =? , GhiChu =?  where mactpm = ?";
 
 		try {
 

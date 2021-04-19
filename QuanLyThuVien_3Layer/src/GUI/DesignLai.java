@@ -257,6 +257,11 @@ public class DesignLai extends JFrame {
 	private JComboBox cmbnhanvienpm;
 	private JComboBox cmbmadocgiaphieumuon;
 	private JDateChooser dateChooser;
+	private JButton btnthemctpm;
+	private JButton btnsuactpm;
+	private JButton btnxoactpm;
+	private JButton bnttailaictpm;
+	private JDateChooser dateChooser_ngaytra;
 	public static int idtaikhoan;
 
 	/**
@@ -649,7 +654,7 @@ public class DesignLai extends JFrame {
 		txtghichuctpm.setBounds(96, 180, 142, 35);
 		panel.add(txtghichuctpm);
 
-		JButton btnthemctpm = new JButton("Thêm");
+		btnthemctpm = new JButton("Thêm");
 		btnthemctpm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -657,19 +662,19 @@ public class DesignLai extends JFrame {
 		btnthemctpm.setBounds(12, 227, 91, 41);
 		panel.add(btnthemctpm);
 
-		JButton btnsuactpm = new JButton("Sửa");
+		btnsuactpm = new JButton("Sửa");
 		btnsuactpm.setBounds(207, 227, 97, 41);
 		panel.add(btnsuactpm);
 
-		JButton btnxoactpm = new JButton("Xoá");
+		btnxoactpm = new JButton("Xoá");
 		btnxoactpm.setBounds(15, 280, 88, 38);
 		panel.add(btnxoactpm);
 
-		JButton bnttailaictpm = new JButton("Tải Lại");
+		bnttailaictpm = new JButton("Tải Lại");
 		bnttailaictpm.setBounds(217, 280, 87, 38);
 		panel.add(bnttailaictpm);
-		
-		JDateChooser dateChooser_ngaytra = new JDateChooser();
+
+		dateChooser_ngaytra = new JDateChooser();
 		dateChooser_ngaytra.setBounds(96, 111, 142, 35);
 		panel.add(dateChooser_ngaytra);
 		PanelChinh.add(pnPhieuNhap, "name_901242535638200");
@@ -2647,6 +2652,27 @@ public class DesignLai extends JFrame {
 		////////////////////////////////////////////////////////////
 		////////////////// * THEM SUA XOA CHI TIET PHIEU MUON *///////////////
 		///////////////////////////////////////////////////////////
+		btnthemctpm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				// String ngaymuon = ((JTextField)
+				// dateChooser.getDateEditor().getUiComponent()).getText();
+				String ngaytra = sdf.format(dateChooser_ngaytra.getDate());
+
+				ChiTieuPMDTO ctpm = new ChiTieuPMDTO(0, Integer.parseInt(txtmapm.getText()),
+						Integer.parseInt(txtmasachmuon.getText()), ngaytra, txtghichuctpm.getText());
+				if (chitietpmbus.gI().thempm(ctpm) > 0) {
+					loadctphieumuon();
+					JOptionPane.showMessageDialog(contentPane, "Thêm CT Phiếu Mượn Thành Công");
+
+				} else
+					JOptionPane.showMessageDialog(contentPane, "Thêm CT Phiếu Mượn Không Thành Công");
+			}
+
+		});
 
 	}
 

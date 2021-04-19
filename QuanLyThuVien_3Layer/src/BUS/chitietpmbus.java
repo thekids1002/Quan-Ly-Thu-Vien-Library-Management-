@@ -29,11 +29,11 @@ public class chitietpmbus {
 		return chitietpmDAL.xoactpm(pm);
 	}
 
-	public static ChiTieuPMDTO iBus = null;
+	public static chitietpmbus iBus = null;
 
-	public static ChiTieuPMDTO gI() {
+	public static chitietpmbus gI() {
 		if (iBus == null) {
-			iBus = new ChiTieuPMDTO();
+			iBus = new chitietpmbus();
 		}
 
 		return iBus;
