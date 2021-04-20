@@ -574,7 +574,7 @@ public class DesignLai extends JFrame {
 		dtmmuon.addColumn("Ngày Mượn");
 		dtmmuon.addColumn("Tình Trạng");
 
-		tablemuon = new JTable(dtmmuon);
+		tablemuon = new MyTable(dtmmuon);
 
 		scrollPane_5.setViewportView(tablemuon);
 
@@ -598,7 +598,7 @@ public class DesignLai extends JFrame {
 		dtmctpm.addColumn("Mã Sách");
 		dtmctpm.addColumn("Ngày Trả");
 		dtmctpm.addColumn("Ghi Chú");
-		tablectpm = new JTable(dtmctpm);
+		tablectpm = new MyTable(dtmctpm);
 		scrollPane_6.setViewportView(tablectpm);
 
 		JPanel panel = new JPanel();
@@ -692,7 +692,7 @@ public class DesignLai extends JFrame {
 		dtmloai = new DefaultTableModel();
 		dtmloai.addColumn("Mã Loại");
 		dtmloai.addColumn("Tên Loại");
-		tableloai = new JTable(dtmloai);
+		tableloai = new MyTable(dtmloai);
 		scrollPane.setViewportView(tableloai);
 
 		btnThemloai = new JButton("Thêm");
@@ -743,7 +743,7 @@ public class DesignLai extends JFrame {
 		dtmncc = new DefaultTableModel();
 		dtmncc.addColumn("Mã NCC");
 		dtmncc.addColumn("Tên Nhà Cung Cấp");
-		tablencc = new JTable(dtmncc);
+		tablencc = new MyTable(dtmncc);
 		scrollPane_7.setViewportView(tablencc);
 
 		JPanel panel_4_2 = new JPanel();
@@ -780,7 +780,7 @@ public class DesignLai extends JFrame {
 		dtmke = new DefaultTableModel();
 		dtmke.addColumn("Mã Kệ");
 		dtmke.addColumn("Tên Kệ");
-		tablekesach = new JTable(dtmke);
+		tablekesach = new MyTable(dtmke);
 		scrollPane_8.setViewportView(tablekesach);
 
 	}
@@ -897,7 +897,7 @@ public class DesignLai extends JFrame {
 		dtmnhanvien.addColumn("Địa Chi");
 		dtmnhanvien.addColumn("SĐT");
 
-		tablenhanvien = new JTable(dtmnhanvien);
+		tablenhanvien = new MyTable(dtmnhanvien);
 		scrollPane_4.setViewportView(tablenhanvien);
 
 	}
@@ -978,7 +978,7 @@ public class DesignLai extends JFrame {
 		dtmnhaxuatban.addColumn("Tên Nhà Xuất Bản");
 		dtmnhaxuatban.addColumn("Địa Chỉ");
 		dtmnhaxuatban.addColumn("Số Điện Thoại");
-		tablenhaxuatban = new JTable(dtmnhaxuatban);
+		tablenhaxuatban = new MyTable(dtmnhaxuatban);
 		scrollPane_3.setViewportView(tablenhaxuatban);
 
 	}
@@ -1069,7 +1069,7 @@ public class DesignLai extends JFrame {
 		dtmdocgia.addColumn("Giới Tính");
 		dtmdocgia.addColumn("Số Điện Thạoi");
 		dtmdocgia.addColumn("Địa Chỉ");
-		tabledocgia = new JTable(dtmdocgia); 
+		tabledocgia = new MyTable(dtmdocgia); 
 		scrollPane_1.setViewportView(tabledocgia);
 
 	}
@@ -1124,7 +1124,7 @@ public class DesignLai extends JFrame {
 		dtmtacgia.addColumn("Tên Tác Giả");
 		dtmtacgia.addColumn("Năm Sinh");
 		dtmtacgia.addColumn("Quê Quán");
-		tabletacgia = new JTable(dtmtacgia);
+		tabletacgia = new MyTable(dtmtacgia);
 		scrollPane_2.setViewportView(tabletacgia);
 
 		btnThemTacgia = new JButton("Thêm");
@@ -1332,7 +1332,7 @@ public class DesignLai extends JFrame {
 		dtmsach.addColumn("Số Lượng");
 		dtmsach.addColumn("Mã Kệ");
 
-		table = new JTable(dtmsach);
+		table = new MyTable(dtmsach);
 		scrollPane.setViewportView(table);
 		JPopupMenu popupMenu = new JPopupMenu();
 		mntmNewMenuItem = new JMenuItem("Thông tin chi tiết");
