@@ -24,7 +24,7 @@ public class MyTable extends JTable {
         header.setBackground(new Color(242, 153, 74));
         header.setFont(new Font("Arial", Font.BOLD, 16));
         header.setOpaque(false);
-        header.setForeground(Color.WHITE);
+        header.setForeground(Color.BLACK);
         header.setReorderingAllowed(false);
         ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         //======/CUSTOM TABLE/=======
