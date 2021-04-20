@@ -1,19 +1,15 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
-import java.awt.SystemColor;
 import java.awt.CardLayout;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
@@ -44,16 +39,8 @@ import BUS.SachBus;
 import BUS.TacGiaBUS;
 import BUS.TaiKhoanBus;
 import BUS.chitietpmbus;
-import DAL.DocGiaDAL;
-import DAL.KeSachDAL;
-import DAL.LoaiSachDAL;
-import DAL.NhaCungCapDAL;
-import DAL.NhaXuatBanDAL;
-import DAL.NhanVienDAL;
 import DAL.PhieuMuonDAL;
 import DAL.SachDAL;
-import DAL.TacGiaDAL;
-import DAL.chitietpmDAL;
 import DTO.ChiTieuPMDTO;
 import DTO.DocGia;
 import DTO.KeSachDTO;
@@ -77,7 +64,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPopupMenu;
 import java.awt.Component;
 import javax.swing.JMenuItem;
-import com.toedter.calendar.JDayChooser;
 import com.toedter.calendar.JDateChooser;
 
 public class DesignLai extends JFrame {
