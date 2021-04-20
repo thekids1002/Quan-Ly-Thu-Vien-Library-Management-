@@ -72,8 +72,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JDialog {
 
 	private JPanel contentPane, paneldanhmuc, panelmuonsach, paneltra, paneldmsach, panelloaisach, paneldocgia,
 			panelnxb;
@@ -166,9 +167,9 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
-
+		setModal(true);
 		// setIconImage(new ImageIcon("/img/iconsgu.png"));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1280, 720);
 
 		JmenuBar();

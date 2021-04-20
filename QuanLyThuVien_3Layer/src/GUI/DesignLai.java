@@ -1083,7 +1083,7 @@ public class DesignLai extends JFrame {
 		dtmdocgia.addColumn("Giới Tính");
 		dtmdocgia.addColumn("Số Điện Thạoi");
 		dtmdocgia.addColumn("Địa Chỉ");
-		tabledocgia = new JTable(dtmdocgia);
+		tabledocgia = new JTable(dtmdocgia); 
 		scrollPane_1.setViewportView(tabledocgia);
 
 	}
