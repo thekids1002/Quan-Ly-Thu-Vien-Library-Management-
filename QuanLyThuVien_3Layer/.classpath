@@ -7,5 +7,22 @@
 	<classpathentry kind="lib" path="C:/Users/asus/Downloads/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/asus/Downloads/jfreechart-1.0.19/jfreechart-1.0.19/jfreechart-1.0.19-demo.jar"/>
 	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/commons-codec-1.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/commons-compress-1.20.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/curvesapi-1.06.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/mysql-connector-java-5.1.48-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-examples-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-excelant-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-integration-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-ooxml-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-ooxml-full-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-ooxml-lite-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/poi-scratchpad-5.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/SparseBitSet-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/xmlbeans-4.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/asus/git/repository/QuanLyThuVien_3Layer/libs/itextpdf-5.5.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -64,6 +64,8 @@ import DTO.PhieuMuon;
 import DTO.PhieuNhap;
 import DTO.SachDTO;
 import DTO.TacGiaDTO;
+import Export.ExportExcel;
+import Export.ImportExcel;
 
 import javax.swing.UIManager;
 import javax.swing.JTextField;
@@ -477,7 +479,7 @@ public class DesignLai extends JFrame {
 		lbldangxuat.setForeground(Color.WHITE);
 		lbldangxuat.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lbldangxuat.setBackground(Color.DARK_GRAY);
-		lbldangxuat.setBounds(0, 682, 187, 46);
+		lbldangxuat.setBounds(0, 675, 187, 46);
 		menuleft.add(lbldangxuat);
 
 		lblthongke = new JLabel("Thống Kê");
@@ -915,15 +917,15 @@ public class DesignLai extends JFrame {
 		btnthemphieunhap_2.setBounds(599, 10, 97, 46);
 		panel_7.add(btnthemphieunhap_2);
 
-		btnthemphieunhap_3 = new JButton("Xuất\r\n");
-		btnthemphieunhap_3.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnthemphieunhap_3.setBounds(729, 10, 97, 46);
-		panel_7.add(btnthemphieunhap_3);
+		btnxuatexcel = new JButton("Xuất\r\n");
+		btnxuatexcel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnxuatexcel.setBounds(729, 10, 97, 46);
+		panel_7.add(btnxuatexcel);
 
-		btnthemphieunhap_4 = new JButton("Nhập");
-		btnthemphieunhap_4.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnthemphieunhap_4.setBounds(873, 10, 97, 46);
-		panel_7.add(btnthemphieunhap_4);
+		btnnhapexcel = new JButton("Nhập");
+		btnnhapexcel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnnhapexcel.setBounds(873, 10, 97, 46);
+		panel_7.add(btnnhapexcel);
 
 		pnchung = new JPanel();
 		PanelChinh.add(pnchung, "name_903253398621700");
@@ -1686,6 +1688,26 @@ public class DesignLai extends JFrame {
 	}
 
 	public void addEvent() {
+		btnxuatexcel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Export.ExportExcel ex = new ExportExcel();
+				ex.xuatExcel(tablephieunhap);
+				
+			}
+		});
+		btnnhapexcel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Export.ImportExcel ix = new ImportExcel();
+				ix.nhapExcel(tablephieunhap);
+				
+				
+			}
+		});
+		
 		btnmanvphieunhap.addActionListener(new ActionListener() {
 			
 			@Override
@@ -3489,8 +3511,8 @@ public class DesignLai extends JFrame {
 	private JLabel lblNewLabel_16;
 	private JTextField textField_4;
 	private JButton btnthemphieunhap_2;
-	private JButton btnthemphieunhap_3;
-	private JButton btnthemphieunhap_4;
+	private JButton btnxuatexcel;
+	private JButton btnnhapexcel;
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
