@@ -36,6 +36,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.DefaultCategoryItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 
+import BUS.ChiTietPhieuNhapBUS;
 import BUS.DocGiaBUS;
 import BUS.KeSachBus;
 import BUS.LoaiBUS;
@@ -50,6 +51,7 @@ import BUS.TaiKhoanBus;
 import BUS.chitietpmbus;
 import DAL.PhieuMuonDAL;
 import DAL.SachDAL;
+import DTO.ChiTietPhieuNhap;
 import DTO.ChiTieuPMDTO;
 import DTO.DocGia;
 import DTO.KeSachDTO;
@@ -262,12 +264,11 @@ public class DesignLai extends JFrame {
 	private JButton bnttailaictpm;
 	private JDateChooser dateChooser_ngaytra;
 	private JLabel lblthongke;
-	private JTable tablephieumuon;
+	private JTable tablephieunhap;
 	private DefaultTableModel dtmphieunhap;
 	private DefaultTableModel dtmchitietphieunhap;
-	
-	
-	
+	private JDateChooser NgayNhapPhieuNhap;
+
 	public static int idtaikhoan;
 
 	/**
@@ -312,6 +313,7 @@ public class DesignLai extends JFrame {
 		loadphieumuon();
 		loadctphieumuon();
 		loadphieunhap();
+		loadctphieunhap();
 	}
 
 	public void thanhtitle() {
@@ -386,7 +388,7 @@ public class DesignLai extends JFrame {
 		ThuVienSgu.setBounds(0, 0, 187, 62);
 		menuleft.add(ThuVienSgu);
 
-		lblTrangchu = new JLabel("Trang Chủ");
+		lblTrangchu = new JLabel("  Trang Chủ");
 		lblTrangchu.setBackground(new Color(64, 64, 64));
 		lblTrangchu.setOpaque(true);
 		lblTrangchu.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -396,7 +398,7 @@ public class DesignLai extends JFrame {
 
 		menuleft.add(lblTrangchu);
 
-		lblSach = new JLabel("Sách");
+		lblSach = new JLabel("  Sách");
 		lblSach.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\bookicon.png"));
 		lblSach.setBackground(new Color(64, 64, 64));
 		lblSach.setOpaque(true);
@@ -406,8 +408,9 @@ public class DesignLai extends JFrame {
 
 		menuleft.add(lblSach);
 
-		lbldocgia = new JLabel("Đọc Giả");
-		lbldocgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Readericon.png"));
+		lbldocgia = new JLabel("  Độc Giả");
+		lbldocgia.setIcon(
+				new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Readericon.png"));
 		lbldocgia.setBackground(new Color(64, 64, 64));
 		lbldocgia.setOpaque(true);
 		lbldocgia.setForeground(Color.WHITE);
@@ -427,7 +430,8 @@ public class DesignLai extends JFrame {
 		menuleft.add(lbltacgia);
 
 		lblnhaxuatban = new JLabel("Nhà Xuất Bản");
-		lblnhaxuatban.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Company.png"));
+		lblnhaxuatban
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Company.png"));
 		lblnhaxuatban.setBackground(new Color(64, 64, 64));
 		lblnhaxuatban.setOpaque(true);
 		lblnhaxuatban.setForeground(Color.WHITE);
@@ -446,7 +450,7 @@ public class DesignLai extends JFrame {
 
 		menuleft.add(lblnhanvien);
 
-		lblphieumuon = new JLabel("Phiếu Mượn");
+		lblphieumuon = new JLabel(" Phiếu Mượn");
 		lblphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Note.png"));
 		lblphieumuon.setOpaque(true);
 		lblphieumuon.setForeground(Color.WHITE);
@@ -455,7 +459,7 @@ public class DesignLai extends JFrame {
 		lblphieumuon.setBounds(0, 428, 187, 46);
 		menuleft.add(lblphieumuon);
 
-		lblchung = new JLabel("Chung");
+		lblchung = new JLabel(" Chung");
 		lblchung.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\chungpng.png"));
 		lblchung.setOpaque(true);
 		lblchung.setForeground(Color.WHITE);
@@ -473,16 +477,18 @@ public class DesignLai extends JFrame {
 		lbldangxuat.setBounds(0, 682, 187, 46);
 		menuleft.add(lbldangxuat);
 
-		 lblthongke = new JLabel("Thống Kê");
-		lblthongke.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Combo Chart.png"));
+		lblthongke = new JLabel("Thống Kê");
+		lblthongke.setIcon(
+				new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Combo Chart.png"));
 		lblthongke.setOpaque(true);
 		lblthongke.setForeground(Color.WHITE);
 		lblthongke.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblthongke.setBackground(Color.DARK_GRAY);
 		lblthongke.setBounds(0, 533, 187, 46);
 		menuleft.add(lblthongke);
-		
-		JLabel lblphieunhap = new JLabel("Phiếu Nhập");
+
+		JLabel lblphieunhap = new JLabel("   Phiếu Nhập");
+		lblphieunhap.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\phieunhap.png"));
 		lblphieunhap.setOpaque(true);
 		lblphieunhap.setForeground(Color.WHITE);
 		lblphieunhap.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -553,25 +559,29 @@ public class DesignLai extends JFrame {
 		panel_3.add(txttinhtrang);
 
 		btnthemphieumuon = new JButton("Thêm");
-		btnthemphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnthemphieumuon
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
 		btnthemphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnthemphieumuon.setBounds(380, 13, 117, 49);
 		panel_3.add(btnthemphieumuon);
 
 		btnsuaphieumuon = new JButton("Sửa");
-		btnsuaphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuaphieumuon
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
 		btnsuaphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnsuaphieumuon.setBounds(380, 83, 117, 49);
 		panel_3.add(btnsuaphieumuon);
 
 		btnxoaphieumuon = new JButton("Xoá");
-		btnxoaphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoaphieumuon
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
 		btnxoaphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoaphieumuon.setBounds(380, 155, 117, 49);
 		panel_3.add(btnxoaphieumuon);
 
 		btnreloadphieumuon = new JButton("Tải Lại");
-		btnreloadphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnreloadphieumuon
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
 		btnreloadphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadphieumuon.setBounds(380, 228, 117, 49);
 		panel_3.add(btnreloadphieumuon);
@@ -711,7 +721,8 @@ public class DesignLai extends JFrame {
 		panel.add(btnxoactpm);
 
 		bnttailaictpm = new JButton("Tải Lại");
-		bnttailaictpm.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		bnttailaictpm
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
 		bnttailaictpm.setFont(new Font("Tahoma", Font.BOLD, 13));
 		bnttailaictpm.setBounds(193, 280, 121, 41);
 		panel.add(bnttailaictpm);
@@ -721,66 +732,68 @@ public class DesignLai extends JFrame {
 		panel.add(dateChooser_ngaytra);
 		PanelChinh.add(pnPhieuNhap, "name_901242535638200");
 		pnPhieuNhap.setLayout(null);
-		
+
 		JPanel panel_6 = new JPanel();
-		panel_6.setBorder(new TitledBorder(null, "Phi\u1EBFu Nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_6.setBorder(
+				new TitledBorder(null, "Phi\u1EBFu Nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_6.setBounds(22, 13, 422, 304);
 		pnPhieuNhap.add(panel_6);
 		panel_6.setLayout(null);
-		
+
 		JLabel lblNewLabel_11 = new JLabel("Mã Nhân Viên");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_11.setBounds(12, 42, 102, 33);
 		panel_6.add(lblNewLabel_11);
-		
+
 		txtManhanvienphieunhap = new JTextField();
 		txtManhanvienphieunhap.setBounds(144, 43, 91, 33);
 		panel_6.add(txtManhanvienphieunhap);
 		txtManhanvienphieunhap.setColumns(10);
-		
+
 		JButton btnmanvphieunhap = new JButton("...");
 		btnmanvphieunhap.setBounds(241, 48, 48, 25);
 		panel_6.add(btnmanvphieunhap);
-		
+
 		JLabel lblNewLabel_11_1 = new JLabel("Mã NCC");
 		lblNewLabel_11_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_11_1.setBounds(12, 104, 102, 33);
 		panel_6.add(lblNewLabel_11_1);
-		
+
 		txtManccPhieuNhap = new JTextField();
 		txtManccPhieuNhap.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtManccPhieuNhap.setColumns(10);
 		txtManccPhieuNhap.setBounds(144, 104, 91, 33);
 		panel_6.add(txtManccPhieuNhap);
-		
+
 		JButton btnmanccphieunhap = new JButton("...");
 		btnmanccphieunhap.setBounds(241, 109, 48, 25);
 		panel_6.add(btnmanccphieunhap);
-		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(144, 174, 145, 33);
-		panel_6.add(dateChooser_1);
-		
+
+		NgayNhapPhieuNhap = new JDateChooser();
+		NgayNhapPhieuNhap.setBounds(144, 174, 145, 33);
+		NgayNhapPhieuNhap.setDateFormatString("yyyy-MM-dd");
+		panel_6.add(NgayNhapPhieuNhap);
+
 		JLabel lblNewLabel_11_1_1 = new JLabel("Ngày Nhập");
 		lblNewLabel_11_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_11_1_1.setBounds(12, 174, 102, 33);
 		panel_6.add(lblNewLabel_11_1_1);
-		
+
 		JButton btnthemphieunhap = new JButton("Thêm");
 		btnthemphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap.setBounds(12, 242, 97, 46);
 		panel_6.add(btnthemphieunhap);
-		
+
 		JButton btnsuaphieunhap = new JButton("Sửa");
 		btnsuaphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnsuaphieunhap.setBounds(138, 242, 97, 46);
 		panel_6.add(btnsuaphieunhap);
-		
+
 		JButton btnxoaphieunhap = new JButton("Xoá");
 		btnxoaphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnxoaphieunhap.setBounds(261, 242, 97, 46);
 		panel_6.add(btnxoaphieunhap);
-		
+
 		JScrollPane scrollPane_9 = new JScrollPane();
 		scrollPane_9.setBounds(456, 13, 625, 304);
 		pnPhieuNhap.add(scrollPane_9);
@@ -789,77 +802,77 @@ public class DesignLai extends JFrame {
 		dtmphieunhap.addColumn("Mã NV");
 		dtmphieunhap.addColumn("Mã NCC");
 		dtmphieunhap.addColumn("Mã Ngày Nhập");
-		
-		
-		tablephieumuon = new MyTable(dtmphieunhap) ;
-		
-		scrollPane_9.setViewportView(tablephieumuon);
-		
+
+		tablephieunhap = new MyTable(dtmphieunhap);
+
+		scrollPane_9.setViewportView(tablephieunhap);
+
 		JPanel panel_6_1 = new JPanel();
-		panel_6_1.setBorder(new TitledBorder(null, "Chi Ti\u1EBFt Phi\u1EBFu Nh\u1EADp", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		
+		panel_6_1.setBorder(new TitledBorder(null, "Chi Ti\u1EBFt Phi\u1EBFu Nh\u1EADp", TitledBorder.LEADING,
+				TitledBorder.TOP, null, null));
+
 		panel_6_1.setBounds(22, 418, 422, 304);
 		pnPhieuNhap.add(panel_6_1);
 		panel_6_1.setLayout(null);
-		
+
 		lblNewLabel_12 = new JLabel("Mã Sách");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_12.setBounds(12, 60, 102, 33);
 		panel_6_1.add(lblNewLabel_12);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(152, 60, 91, 33);
-		panel_6_1.add(textField);
-		
+
+		txtMaSachctpn = new JTextField();
+		txtMaSachctpn.setColumns(10);
+		txtMaSachctpn.setBounds(152, 60, 91, 33);
+		panel_6_1.add(txtMaSachctpn);
+
 		btnmanvphieunhap_1 = new JButton("...");
 		btnmanvphieunhap_1.setBounds(278, 65, 48, 25);
 		panel_6_1.add(btnmanvphieunhap_1);
-		
+
 		lblNewLabel_13 = new JLabel("Số Lượng");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_13.setBounds(12, 122, 102, 33);
 		panel_6_1.add(lblNewLabel_13);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(152, 122, 91, 33);
-		panel_6_1.add(textField_1);
-		
+
+		txtsoluongctpn = new JTextField();
+		txtsoluongctpn.setColumns(10);
+		txtsoluongctpn.setBounds(152, 122, 91, 33);
+		panel_6_1.add(txtsoluongctpn);
+
 		lblNewLabel_14 = new JLabel("Giá Nhập");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_14.setBounds(12, 183, 102, 33);
 		panel_6_1.add(lblNewLabel_14);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(152, 183, 91, 33);
-		panel_6_1.add(textField_2);
-		
-		lblNewLabel_15 = new JLabel("Mã Phiếu Nhập");
-		lblNewLabel_15.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_15.setBounds(12, 13, 127, 33);
-		panel_6_1.add(lblNewLabel_15);
-		
+
+		txtgianhap = new JTextField();
+		txtgianhap.setColumns(10);
+		txtgianhap.setBounds(152, 183, 91, 33);
+		panel_6_1.add(txtgianhap);
+
+		lblmaphieunhap = new JLabel("Mã Phiếu Nhập");
+		lblmaphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblmaphieunhap.setBounds(12, 13, 127, 33);
+		panel_6_1.add(lblmaphieunhap);
+
 		btnthemphieunhap_1 = new JButton("Thêm");
 		btnthemphieunhap_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap_1.setBounds(12, 245, 97, 46);
 		panel_6_1.add(btnthemphieunhap_1);
-		
+
 		btnsuaphieunhap_1 = new JButton("Sửa");
 		btnsuaphieunhap_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnsuaphieunhap_1.setBounds(138, 245, 97, 46);
 		panel_6_1.add(btnsuaphieunhap_1);
-		
+
 		btnxoaphieunhap_1 = new JButton("Xoá");
 		btnxoaphieunhap_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnxoaphieunhap_1.setBounds(261, 245, 97, 46);
 		panel_6_1.add(btnxoaphieunhap_1);
-		
+
 		JScrollPane scrollPane_9_1 = new JScrollPane();
 		scrollPane_9_1.setBounds(456, 418, 625, 304);
 		pnPhieuNhap.add(scrollPane_9_1);
-		
+
 		dtmchitietphieunhap = new DefaultTableModel();
 		dtmchitietphieunhap.addColumn("Mã CTPN");
 		dtmchitietphieunhap.addColumn("Mã PN");
@@ -868,36 +881,36 @@ public class DesignLai extends JFrame {
 		dtmchitietphieunhap.addColumn("Đơn Giá");
 		dtmchitietphieunhap.addColumn("Thành Tiền");
 		tablechitietphieunhap = new MyTable(dtmchitietphieunhap);
-		
+
 		scrollPane_9_1.setViewportView(tablechitietphieunhap);
-		
+
 		panel_7 = new JPanel();
 		panel_7.setBorder(new LineBorder(new Color(253, 245, 230), 2));
 		panel_7.setBounds(22, 330, 1059, 68);
 		pnPhieuNhap.add(panel_7);
 		panel_7.setLayout(null);
-		
+
 		lblNewLabel_16 = new JLabel("Tìm Kiếm");
 		lblNewLabel_16.setToolTipText("Tìm Kiếm Theo Mã Phiếu Nhập");
 		lblNewLabel_16.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_16.setBounds(12, 17, 127, 33);
 		panel_7.add(lblNewLabel_16);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setBounds(141, 13, 425, 42);
 		panel_7.add(textField_4);
 		textField_4.setColumns(10);
-		
+
 		btnthemphieunhap_2 = new JButton("In");
 		btnthemphieunhap_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap_2.setBounds(599, 10, 97, 46);
 		panel_7.add(btnthemphieunhap_2);
-		
+
 		btnthemphieunhap_3 = new JButton("Xuất\r\n");
 		btnthemphieunhap_3.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap_3.setBounds(729, 10, 97, 46);
 		panel_7.add(btnthemphieunhap_3);
-		
+
 		btnthemphieunhap_4 = new JButton("Nhập");
 		btnthemphieunhap_4.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap_4.setBounds(873, 10, 97, 46);
@@ -985,7 +998,8 @@ public class DesignLai extends JFrame {
 		scrollPane_7.setViewportView(tablencc);
 
 		JPanel panel_4_2 = new JPanel();
-		panel_4_2.setBorder(new TitledBorder(null, "K\u1EC7 S\u00E1ch", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(255, 127, 80)));
+		panel_4_2.setBorder(new TitledBorder(null, "K\u1EC7 S\u00E1ch", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(255, 127, 80)));
 		panel_4_2.setBounds(352, 408, 389, 292);
 		pnchung.add(panel_4_2);
 		panel_4_2.setLayout(null);
@@ -1021,29 +1035,27 @@ public class DesignLai extends JFrame {
 		dtmke.addColumn("Tên Kệ");
 		tablekesach = new MyTable(dtmke);
 		scrollPane_8.setViewportView(tablekesach);
-		
+
 		panelThongKe = new JPanel();
 		PanelChinh.add(panelThongKe, "name_8485672922600");
 		panelThongKe.setLayout(null);
-		
+
 		JPanel barchart = new JPanel();
 		barchart.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		barchart.setBounds(62, 63, 553, 316);
-		/*DefaultCategoryDataset dcd = new DefaultCategoryDataset() ;
-		dcd.setValue(78.8, "Marks", "Kiệt");
-		dcd.setValue(88.8, "Marks", "Long");
-		dcd.setValue(12.8, "Marks", "Phúc");
-		dcd.setValue(34.8, "Marks", "Khang");
-		dcd.setValue(45.8, "Marks", "Khanh");
-		
-		JFreeChart jchart = ChartFactory.createBarChart("Student record", "Student Name", "Student Mark ", dcd, PlotOrientation.VERTICAL,true,true,false);
-		CategoryPlot plot =  jchart.getCategoryPlot();
-		plot.setRangeGridlinePaint(Color.green);
-		ChartFrame chartFm = new ChartFrame("Student record",jchart , true) ;
-		\
-		*/
-		
-		
+		/*
+		 * DefaultCategoryDataset dcd = new DefaultCategoryDataset() ;
+		 * dcd.setValue(78.8, "Marks", "Kiệt"); dcd.setValue(88.8, "Marks", "Long");
+		 * dcd.setValue(12.8, "Marks", "Phúc"); dcd.setValue(34.8, "Marks", "Khang");
+		 * dcd.setValue(45.8, "Marks", "Khanh");
+		 * 
+		 * JFreeChart jchart = ChartFactory.createBarChart("Student record",
+		 * "Student Name", "Student Mark ", dcd,
+		 * PlotOrientation.VERTICAL,true,true,false); CategoryPlot plot =
+		 * jchart.getCategoryPlot(); plot.setRangeGridlinePaint(Color.green); ChartFrame
+		 * chartFm = new ChartFrame("Student record",jchart , true) ; \
+		 */
+
 		panelThongKe.add(barchart);
 		barchart.setLayout(null);
 
@@ -1231,7 +1243,8 @@ public class DesignLai extends JFrame {
 		panel_1.add(btnxoanxb);
 
 		btnreloadnxb = new JButton("Tải Lại");
-		btnreloadnxb.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnreloadnxb
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
 		btnreloadnxb.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadnxb.setBounds(562, 252, 108, 47);
 		panel_1.add(btnreloadnxb);
@@ -1323,7 +1336,8 @@ public class DesignLai extends JFrame {
 		panelthongtindocgia.add(btnsuadocgia);
 
 		btnxoadocgia = new JButton("Xoá");
-		btnxoadocgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoadocgia
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
 		btnxoadocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoadocgia.setBounds(658, 190, 119, 49);
 		panelthongtindocgia.add(btnxoadocgia);
@@ -1334,7 +1348,8 @@ public class DesignLai extends JFrame {
 		txtTimkiemdocgia.setColumns(10);
 
 		btnTimkiemdocgia = new JButton("Tìm");
-		btnTimkiemdocgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Search.png"));
+		btnTimkiemdocgia
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Search.png"));
 		btnTimkiemdocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnTimkiemdocgia.setBounds(765, 316, 120, 53);
 		pndocgia.add(btnTimkiemdocgia);
@@ -1353,7 +1368,7 @@ public class DesignLai extends JFrame {
 		dtmdocgia.addColumn("Giới Tính");
 		dtmdocgia.addColumn("Số Điện Thạoi");
 		dtmdocgia.addColumn("Địa Chỉ");
-		tabledocgia = new MyTable(dtmdocgia); 
+		tabledocgia = new MyTable(dtmdocgia);
 		scrollPane_1.setViewportView(tabledocgia);
 
 	}
@@ -1424,13 +1439,15 @@ public class DesignLai extends JFrame {
 		pntacgia.add(btnsuatacgia);
 
 		btnxoatacgia = new JButton("Xoá");
-		btnxoatacgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoatacgia
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
 		btnxoatacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoatacgia.setBounds(819, 203, 126, 47);
 		pntacgia.add(btnxoatacgia);
 
 		btnreloadtacgia = new JButton("Tải Lại");
-		btnreloadtacgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnreloadtacgia
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
 		btnreloadtacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadtacgia.setBounds(819, 262, 126, 47);
 		pntacgia.add(btnreloadtacgia);
@@ -1615,7 +1632,8 @@ public class DesignLai extends JFrame {
 
 		btnloadlaitrang = new JButton("Tải Lại");
 		btnloadlaitrang.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnloadlaitrang.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnloadlaitrang
+				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
 		btnloadlaitrang.setBounds(620, 204, 112, 53);
 		panel.add(btnloadlaitrang);
 
@@ -1657,6 +1675,82 @@ public class DesignLai extends JFrame {
 	}
 
 	public void addEvent() {
+		tablephieunhap.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int i = tablephieunhap.getSelectedRow();
+				if (i >= 0) {
+					txtManhanvienphieunhap.setText(dtmphieunhap.getValueAt(i, 0).toString());
+					txtManccPhieuNhap.setText(dtmphieunhap.getValueAt(i, 1).toString());
+
+				}
+			}
+		});
+
+		tablechitietphieunhap.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int i = tablechitietphieunhap.getSelectedRow();
+				if (i >= 0) {
+					lblmaphieunhap.setText("Mã Phiếu Nhập " +dtmchitietphieunhap.getValueAt(i, 1).toString());
+					txtMaSachctpn.setText(dtmchitietphieunhap.getValueAt(i, 2).toString());
+					txtsoluongctpn.setText(dtmchitietphieunhap.getValueAt(i, 3).toString());
+					txtgianhap.setText(dtmchitietphieunhap.getValueAt(i, 4).toString());
+				}
+			}
+		});
 		tablemuon.addMouseListener(new MouseListener() {
 
 			@Override
@@ -2034,7 +2128,7 @@ public class DesignLai extends JFrame {
 				panelThongKe.show(false);
 			}
 		});
-		
+
 		lblSach.addMouseListener(new MouseListener() {
 
 			@Override
@@ -2113,33 +2207,33 @@ public class DesignLai extends JFrame {
 				panelThongKe.show(false);
 			}
 		});
-		
+
 		lblthongke.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -2768,7 +2862,7 @@ public class DesignLai extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tabletacgia.getSelectedRow();
-				if(i>=0) {
+				if (i >= 0) {
 					int vitri = Integer.parseInt(dtmtacgia.getValueAt(i, 0).toString());
 					TacGiaDTO tg = new TacGiaDTO(vitri, txtTentacgia.getText(), txtnamsinhtacgia.getText(),
 							txtQueQuan.getText());
@@ -2780,8 +2874,7 @@ public class DesignLai extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn chưa chọn vào table");
 				}
 
@@ -3243,13 +3336,13 @@ public class DesignLai extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
-	
+
 	public static ArrayList<PhieuNhap> phieunhap = new ArrayList<PhieuNhap>();
 
 	public void loadphieunhap() {
 		phieunhap = null;
 		phieunhap = PhieuNhapBUS.gI().getdanhsachphieunhap();
-		
+
 		dtmphieunhap.setRowCount(0);
 
 		for (PhieuNhap pn : phieunhap) {
@@ -3258,8 +3351,32 @@ public class DesignLai extends JFrame {
 			vec.add(pn.getMaPhieuNhap());
 			vec.add(pn.getMaNhaCung());
 			vec.add(pn.getMaNhanVien());
-			vec.add(pn.getNgayNhap()) ;
+			vec.add(pn.getNgayNhap());
 			dtmphieunhap.addRow(vec);
+
+			// dtmctpm.addRow(vec);
+		}
+	}
+
+	public static ArrayList<ChiTietPhieuNhap> ctphieunhap = new ArrayList<ChiTietPhieuNhap>();
+
+	public void loadctphieunhap() {
+		ctphieunhap = null;
+		ctphieunhap = ChiTietPhieuNhapBUS.gI().getdanhsachpm();
+
+		dtmchitietphieunhap.setRowCount(0);
+
+		for (ChiTietPhieuNhap pn : ctphieunhap) {
+
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(pn.getMaCTPN());
+			vec.add(pn.getMaPhieuNhap());
+			vec.add(pn.getMaSach());
+			vec.add(pn.getSoLuong());
+			vec.add(pn.getGia());
+			vec.add(pn.getThanhTien());
+
+			dtmchitietphieunhap.addRow(vec);
 
 			// dtmctpm.addRow(vec);
 		}
@@ -3272,13 +3389,13 @@ public class DesignLai extends JFrame {
 	private JTextField txtManhanvienphieunhap;
 	private JTextField txtManccPhieuNhap;
 	private JLabel lblNewLabel_12;
-	private JTextField textField;
+	private JTextField txtMaSachctpn;
 	private JButton btnmanvphieunhap_1;
 	private JLabel lblNewLabel_13;
-	private JTextField textField_1;
+	private JTextField txtsoluongctpn;
 	private JLabel lblNewLabel_14;
-	private JTextField textField_2;
-	private JLabel lblNewLabel_15;
+	private JTextField txtgianhap;
+	private JLabel lblmaphieunhap;
 	private JButton btnthemphieunhap_1;
 	private JButton btnsuaphieunhap_1;
 	private JButton btnxoaphieunhap_1;
