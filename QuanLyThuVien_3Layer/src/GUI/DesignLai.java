@@ -66,6 +66,7 @@ import DTO.SachDTO;
 import DTO.TacGiaDTO;
 import Export.ExportExcel;
 import Export.ImportExcel;
+import Export.WritePDF;
 
 import javax.swing.UIManager;
 import javax.swing.JTextField;
@@ -912,10 +913,10 @@ public class DesignLai extends JFrame {
 		panel_7.add(textField_4);
 		textField_4.setColumns(10);
 
-		btnthemphieunhap_2 = new JButton("In");
-		btnthemphieunhap_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnthemphieunhap_2.setBounds(599, 10, 97, 46);
-		panel_7.add(btnthemphieunhap_2);
+		btninphieunhap = new JButton("In");
+		btninphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btninphieunhap.setBounds(599, 10, 97, 46);
+		panel_7.add(btninphieunhap);
 
 		btnxuatexcel = new JButton("Xuất\r\n");
 		btnxuatexcel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -1688,6 +1689,16 @@ public class DesignLai extends JFrame {
 	}
 
 	public void addEvent() {
+		btninphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Export.WritePDF wpdf =  new WritePDF() ;
+				wpdf.xuatPDF(tablenhanvien);
+				
+				
+			}
+		});
 		btnxuatexcel.addActionListener(new ActionListener() {
 			
 			@Override
@@ -3510,7 +3521,7 @@ public class DesignLai extends JFrame {
 	private JPanel panel_7;
 	private JLabel lblNewLabel_16;
 	private JTextField textField_4;
-	private JButton btnthemphieunhap_2;
+	private JButton btninphieunhap;
 	private JButton btnxuatexcel;
 	private JButton btnnhapexcel;
 
