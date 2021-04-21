@@ -269,6 +269,8 @@ public class DesignLai extends JFrame {
 	private DefaultTableModel dtmchitietphieunhap;
 	private JDateChooser NgayNhapPhieuNhap;
 	private JLabel lblphieunhap;
+	private JButton btnmanvphieunhap;
+	private JButton btnmanccphieunhap;
 
 	public static int idtaikhoan;
 
@@ -400,7 +402,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblTrangchu);
 
 		lblSach = new JLabel("  Sách");
-		lblSach.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\bookicon.png"));
+		lblSach.setIcon(new ImageIcon("img\\bookicon.png"));
 		lblSach.setBackground(new Color(64, 64, 64));
 		lblSach.setOpaque(true);
 		lblSach.setForeground(Color.WHITE);
@@ -411,7 +413,7 @@ public class DesignLai extends JFrame {
 
 		lbldocgia = new JLabel("  Độc Giả");
 		lbldocgia.setIcon(
-				new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Readericon.png"));
+				new ImageIcon("img\\Readericon.png"));
 		lbldocgia.setBackground(new Color(64, 64, 64));
 		lbldocgia.setOpaque(true);
 		lbldocgia.setForeground(Color.WHITE);
@@ -421,7 +423,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lbldocgia);
 
 		lbltacgia = new JLabel("Tác Giả");
-		lbltacgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Tacgia.png"));
+		lbltacgia.setIcon(new ImageIcon("img\\Tacgia.png"));
 		lbltacgia.setBackground(new Color(64, 64, 64));
 		lbltacgia.setOpaque(true);
 		lbltacgia.setForeground(Color.WHITE);
@@ -432,7 +434,7 @@ public class DesignLai extends JFrame {
 
 		lblnhaxuatban = new JLabel("Nhà Xuất Bản");
 		lblnhaxuatban
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Company.png"));
+				.setIcon(new ImageIcon("img\\Company.png"));
 		lblnhaxuatban.setBackground(new Color(64, 64, 64));
 		lblnhaxuatban.setOpaque(true);
 		lblnhaxuatban.setForeground(Color.WHITE);
@@ -442,7 +444,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblnhaxuatban);
 
 		lblnhanvien = new JLabel("Nhân Viên");
-		lblnhanvien.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Staff.png"));
+		lblnhanvien.setIcon(new ImageIcon("img\\Staff.png"));
 		lblnhanvien.setBackground(new Color(64, 64, 64));
 		lblnhanvien.setOpaque(true);
 		lblnhanvien.setForeground(Color.WHITE);
@@ -452,7 +454,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblnhanvien);
 
 		lblphieumuon = new JLabel(" Phiếu Mượn");
-		lblphieumuon.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Note.png"));
+		lblphieumuon.setIcon(new ImageIcon("img\\Note.png"));
 		lblphieumuon.setOpaque(true);
 		lblphieumuon.setForeground(Color.WHITE);
 		lblphieumuon.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -461,7 +463,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblphieumuon);
 
 		lblchung = new JLabel(" Chung");
-		lblchung.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\chungpng.png"));
+		lblchung.setIcon(new ImageIcon("img\\chungpng.png"));
 		lblchung.setOpaque(true);
 		lblchung.setForeground(Color.WHITE);
 		lblchung.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -470,7 +472,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblchung);
 
 		lbldangxuat = new JLabel("Đăng Xuất");
-		lbldangxuat.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Exit.png"));
+		lbldangxuat.setIcon(new ImageIcon("img\\Exit.png"));
 		lbldangxuat.setOpaque(true);
 		lbldangxuat.setForeground(Color.WHITE);
 		lbldangxuat.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -480,7 +482,7 @@ public class DesignLai extends JFrame {
 
 		lblthongke = new JLabel("Thống Kê");
 		lblthongke.setIcon(
-				new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Combo Chart.png"));
+				new ImageIcon("img\\Combo Chart.png"));
 		lblthongke.setOpaque(true);
 		lblthongke.setForeground(Color.WHITE);
 		lblthongke.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -489,7 +491,7 @@ public class DesignLai extends JFrame {
 		menuleft.add(lblthongke);
 
 		lblphieunhap = new JLabel("   Phiếu Nhập");
-		lblphieunhap.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\phieunhap.png"));
+		lblphieunhap.setIcon(new ImageIcon("img\\phieunhap.png"));
 		lblphieunhap.setOpaque(true);
 		lblphieunhap.setForeground(Color.WHITE);
 		lblphieunhap.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -516,7 +518,7 @@ public class DesignLai extends JFrame {
 		PanelChinh.add(pnnhanvien, "name_890389477283600");
 		
 		JLabel lblNewLabel_15 = new JLabel("");
-		lblNewLabel_15.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\searchbar-removebg-preview.png"));
+		lblNewLabel_15.setIcon(new ImageIcon("img\\searchbar-removebg-preview.png"));
 		lblNewLabel_15.setBounds(268, 392, 532, 52);
 		pnnhanvien.add(lblNewLabel_15);
 		PanelChinh.add(pnPhieumuon, "name_901238608974900");
@@ -566,28 +568,28 @@ public class DesignLai extends JFrame {
 
 		btnthemphieumuon = new JButton("Thêm");
 		btnthemphieumuon
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+				.setIcon(new ImageIcon("img\\Add.png"));
 		btnthemphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnthemphieumuon.setBounds(380, 13, 117, 49);
 		panel_3.add(btnthemphieumuon);
 
 		btnsuaphieumuon = new JButton("Sửa");
 		btnsuaphieumuon
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+				.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuaphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnsuaphieumuon.setBounds(380, 83, 117, 49);
 		panel_3.add(btnsuaphieumuon);
 
 		btnxoaphieumuon = new JButton("Xoá");
 		btnxoaphieumuon
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+				.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoaphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoaphieumuon.setBounds(380, 155, 117, 49);
 		panel_3.add(btnxoaphieumuon);
 
 		btnreloadphieumuon = new JButton("Tải Lại");
 		btnreloadphieumuon
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		btnreloadphieumuon.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadphieumuon.setBounds(380, 228, 117, 49);
 		panel_3.add(btnreloadphieumuon);
@@ -705,7 +707,7 @@ public class DesignLai extends JFrame {
 		panel.add(txtghichuctpm);
 
 		btnthemctpm = new JButton("Thêm");
-		btnthemctpm.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnthemctpm.setIcon(new ImageIcon("img\\Add.png"));
 		btnthemctpm.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnthemctpm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -715,20 +717,20 @@ public class DesignLai extends JFrame {
 		panel.add(btnthemctpm);
 
 		btnsuactpm = new JButton("Sửa");
-		btnsuactpm.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuactpm.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuactpm.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnsuactpm.setBounds(193, 227, 124, 41);
 		panel.add(btnsuactpm);
 
 		btnxoactpm = new JButton("Xoá");
-		btnxoactpm.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoactpm.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoactpm.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnxoactpm.setBounds(12, 280, 124, 41);
 		panel.add(btnxoactpm);
 
 		bnttailaictpm = new JButton("Tải Lại");
 		bnttailaictpm
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		bnttailaictpm.setFont(new Font("Tahoma", Font.BOLD, 13));
 		bnttailaictpm.setBounds(193, 280, 121, 41);
 		panel.add(bnttailaictpm);
@@ -756,7 +758,7 @@ public class DesignLai extends JFrame {
 		panel_6.add(txtManhanvienphieunhap);
 		txtManhanvienphieunhap.setColumns(10);
 
-		JButton btnmanvphieunhap = new JButton("...");
+		btnmanvphieunhap = new JButton("...");
 		btnmanvphieunhap.setBounds(241, 48, 48, 25);
 		panel_6.add(btnmanvphieunhap);
 
@@ -771,7 +773,8 @@ public class DesignLai extends JFrame {
 		txtManccPhieuNhap.setBounds(144, 104, 91, 33);
 		panel_6.add(txtManccPhieuNhap);
 
-		JButton btnmanccphieunhap = new JButton("...");
+		 btnmanccphieunhap = new JButton("...");
+		 
 		btnmanccphieunhap.setBounds(241, 109, 48, 25);
 		panel_6.add(btnmanccphieunhap);
 
@@ -1139,25 +1142,25 @@ public class DesignLai extends JFrame {
 		panel_2.add(txtgioitinhnv);
 
 		btnthemnv = new JButton("Thêm");
-		btnthemnv.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnthemnv.setIcon(new ImageIcon("img\\Add.png"));
 		btnthemnv.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnthemnv.setBounds(58, 245, 126, 53);
 		panel_2.add(btnthemnv);
 
 		btnsuanv = new JButton("Sửa");
-		btnsuanv.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuanv.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuanv.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnsuanv.setBounds(259, 245, 126, 53);
 		panel_2.add(btnsuanv);
 
 		btnxoanv = new JButton("Xoá\r\n");
-		btnxoanv.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoanv.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoanv.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoanv.setBounds(467, 245, 126, 53);
 		panel_2.add(btnxoanv);
 
 		btnreloadnv = new JButton("Tải Lại");
-		btnreloadnv.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnreloadnv.setIcon(new ImageIcon("img\\update.png"));
 		btnreloadnv.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadnv.setBounds(688, 245, 126, 53);
 		panel_2.add(btnreloadnv);
@@ -1233,26 +1236,26 @@ public class DesignLai extends JFrame {
 		panel_1.add(txtsdtnxb);
 
 		btnThemnxb = new JButton("Thêm");
-		btnThemnxb.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnThemnxb.setIcon(new ImageIcon("img\\Add.png"));
 		btnThemnxb.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnThemnxb.setBounds(45, 252, 108, 47);
 		panel_1.add(btnThemnxb);
 
 		btnsuanxb = new JButton("Sửa");
 		btnsuanxb.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnsuanxb.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuanxb.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuanxb.setBounds(221, 252, 108, 47);
 		panel_1.add(btnsuanxb);
 
 		btnxoanxb = new JButton("Xoá");
-		btnxoanxb.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoanxb.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoanxb.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoanxb.setBounds(387, 252, 108, 47);
 		panel_1.add(btnxoanxb);
 
 		btnreloadnxb = new JButton("Tải Lại");
 		btnreloadnxb
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		btnreloadnxb.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadnxb.setBounds(562, 252, 108, 47);
 		panel_1.add(btnreloadnxb);
@@ -1333,19 +1336,19 @@ public class DesignLai extends JFrame {
 
 		btnthemdocgia = new JButton("Thêm");
 		btnthemdocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnthemdocgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnthemdocgia.setIcon(new ImageIcon("img\\Add.png"));
 		btnthemdocgia.setBounds(84, 190, 119, 49);
 		panelthongtindocgia.add(btnthemdocgia);
 
 		btnsuadocgia = new JButton("Sửa");
-		btnsuadocgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuadocgia.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuadocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnsuadocgia.setBounds(375, 190, 119, 49);
 		panelthongtindocgia.add(btnsuadocgia);
 
 		btnxoadocgia = new JButton("Xoá");
 		btnxoadocgia
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+				.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoadocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoadocgia.setBounds(658, 190, 119, 49);
 		panelthongtindocgia.add(btnxoadocgia);
@@ -1357,7 +1360,7 @@ public class DesignLai extends JFrame {
 
 		btnTimkiemdocgia = new JButton("Tìm");
 		btnTimkiemdocgia
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Search.png"));
+				.setIcon(new ImageIcon("img\\Search.png"));
 		btnTimkiemdocgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnTimkiemdocgia.setBounds(765, 316, 120, 53);
 		pndocgia.add(btnTimkiemdocgia);
@@ -1435,27 +1438,27 @@ public class DesignLai extends JFrame {
 		scrollPane_2.setViewportView(tabletacgia);
 
 		btnThemTacgia = new JButton("Thêm");
-		btnThemTacgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnThemTacgia.setIcon(new ImageIcon("img\\Add.png"));
 		btnThemTacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnThemTacgia.setBounds(819, 78, 126, 54);
 		pntacgia.add(btnThemTacgia);
 
 		btnsuatacgia = new JButton("Sửa");
-		btnsuatacgia.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuatacgia.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuatacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnsuatacgia.setBounds(819, 144, 126, 47);
 		pntacgia.add(btnsuatacgia);
 
 		btnxoatacgia = new JButton("Xoá");
 		btnxoatacgia
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+				.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoatacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnxoatacgia.setBounds(819, 203, 126, 47);
 		pntacgia.add(btnxoatacgia);
 
 		btnreloadtacgia = new JButton("Tải Lại");
 		btnreloadtacgia
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		btnreloadtacgia.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnreloadtacgia.setBounds(819, 262, 126, 47);
 		pntacgia.add(btnreloadtacgia);
@@ -1622,26 +1625,26 @@ public class DesignLai extends JFrame {
 
 		btnthemsach = new JButton("Thêm");
 		btnthemsach.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnthemsach.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Add.png"));
+		btnthemsach.setIcon(new ImageIcon("img\\Add.png"));
 		btnthemsach.setBounds(32, 206, 112, 53);
 		panel.add(btnthemsach);
 
 		btnsuasach = new JButton("Sửa");
 		btnsuasach.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnsuasach.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Edit.png"));
+		btnsuasach.setIcon(new ImageIcon("img\\Edit.png"));
 		btnsuasach.setBounds(213, 206, 112, 51);
 		panel.add(btnsuasach);
 
 		btnxoasach = new JButton("Xoá");
 		btnxoasach.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnxoasach.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\Delete.png"));
+		btnxoasach.setIcon(new ImageIcon("img\\Delete.png"));
 		btnxoasach.setBounds(408, 206, 112, 51);
 		panel.add(btnxoasach);
 
 		btnloadlaitrang = new JButton("Tải Lại");
 		btnloadlaitrang.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnloadlaitrang
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		btnloadlaitrang.setBounds(620, 204, 112, 53);
 		panel.add(btnloadlaitrang);
 
@@ -1683,6 +1686,31 @@ public class DesignLai extends JFrame {
 	}
 
 	public void addEvent() {
+		btnmanvphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new TableNhanVien().setVisible(true);
+				
+			}
+		});
+		
+		btnmanccphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TableNCC().setVisible(true);
+				
+			}
+		});
+		btnmanvphieunhap_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new TableSach().setVisible(true);
+				
+			}
+		});
 		tablephieunhap.addMouseListener(new MouseListener() {
 
 			@Override
