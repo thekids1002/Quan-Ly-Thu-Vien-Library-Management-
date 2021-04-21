@@ -6,7 +6,7 @@ public class PhieuNhap {
 	private int MaPhieuNhap;
 	private int MaNhaCung;
 	private int MaNhanVien; 
-	private Date NgayNhap;
+	private String NgayNhap;
 	public int getMaPhieuNhap() {
 		return MaPhieuNhap;
 	}
@@ -25,13 +25,18 @@ public class PhieuNhap {
 	public void setMaNhanVien(int maNhanVien) {
 		MaNhanVien = maNhanVien;
 	}
-	public Date getNgayNhap() {
+	public String getNgayNhap() {
 		return NgayNhap;
 	}
-	public void setNgayNhap(Date ngayNhap) {
+	public void setNgayNhap(String ngayNhap) {
 		NgayNhap = ngayNhap;
 	}
-	public PhieuNhap(int maPhieuNhap, int maNhaCung, int maNhanVien, Date ngayNhap) {
+	@Override
+	public String toString() {
+		return "PhieuNhap [MaPhieuNhap=" + MaPhieuNhap + ", MaNhaCung=" + MaNhaCung + ", MaNhanVien=" + MaNhanVien
+				+ ", NgayNhap=" + NgayNhap + "]";
+	}
+	public PhieuNhap(int maPhieuNhap, int maNhaCung, int maNhanVien, String ngayNhap) {
 		super();
 		MaPhieuNhap = maPhieuNhap;
 		MaNhaCung = maNhaCung;
@@ -42,10 +47,6 @@ public class PhieuNhap {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "PhieuNhap [MaPhieuNhap=" + MaPhieuNhap + ", MaNhaCung=" + MaNhaCung + ", MaNhanVien=" + MaNhanVien
-				+ ", NgayNhap=" + NgayNhap + "]";
-	}
+
 	
 }

@@ -6,6 +6,7 @@ public class ChiTietPhieuNhap {
 	private int MaSach;
 	private int Gia;
 	private int SoLuong;
+	private int ThanhTien;
 	public int getMaCTPN() {
 		return MaCTPN;
 	}
@@ -36,22 +37,29 @@ public class ChiTietPhieuNhap {
 	public void setSoLuong(int soLuong) {
 		SoLuong = soLuong;
 	}
-	@Override
-	public String toString() {
-		return "ChiTietPhieuNhap [MaCTPN=" + MaCTPN + ", MaPhieuNhap=" + MaPhieuNhap + ", MaSach=" + MaSach + ", Gia="
-				+ Gia + ", SoLuong=" + SoLuong + "]";
+	public int getThanhTien() {
+		return ThanhTien;
 	}
-	public ChiTietPhieuNhap(int maCTPN, int maPhieuNhap, int maSach, int gia, int soLuong) {
+	public void setThanhTien(int thanhTien) {
+		ThanhTien = thanhTien;
+	}
+	public ChiTietPhieuNhap() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public ChiTietPhieuNhap(int maCTPN, int maPhieuNhap, int maSach, int gia, int soLuong, int thanhTien) {
 		super();
 		MaCTPN = maCTPN;
 		MaPhieuNhap = maPhieuNhap;
 		MaSach = maSach;
 		Gia = gia;
 		SoLuong = soLuong;
+		ThanhTien = thanhTien;
 	}
-	public ChiTietPhieuNhap() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	@Override
+	public String toString() {
+		return "ChiTietPhieuNhap [MaCTPN=" + MaCTPN + ", MaPhieuNhap=" + MaPhieuNhap + ", MaSach=" + MaSach + ", Gia="
+				+ Gia + ", SoLuong=" + SoLuong + ", ThanhTien=" + ThanhTien + "]";
+	} 
 	
 }
