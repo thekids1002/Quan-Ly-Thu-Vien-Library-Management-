@@ -43,6 +43,7 @@ import BUS.NhaCungcapbus;
 import BUS.NhaXuatBanBUS;
 import BUS.NhanVienBus;
 import BUS.PhieuMuonBus;
+import BUS.PhieuNhapBUS;
 import BUS.SachBus;
 import BUS.TacGiaBUS;
 import BUS.TaiKhoanBus;
@@ -58,6 +59,7 @@ import DTO.NhaCungCapDTO;
 import DTO.NhaXuatBan;
 import DTO.NhanVien;
 import DTO.PhieuMuon;
+import DTO.PhieuNhap;
 import DTO.SachDTO;
 import DTO.TacGiaDTO;
 
@@ -309,6 +311,7 @@ public class DesignLai extends JFrame {
 		loadsach();
 		loadphieumuon();
 		loadctphieumuon();
+		loadphieunhap();
 	}
 
 	public void thanhtitle() {
@@ -3236,6 +3239,27 @@ public class DesignLai extends JFrame {
 			vec.add(pm.getMaSach());
 			vec.add(pm.getNgayTra());
 			vec.add(pm.getGhichu());
+
+			// dtmctpm.addRow(vec);
+		}
+	}
+	
+	public static ArrayList<PhieuNhap> phieunhap = new ArrayList<PhieuNhap>();
+
+	public void loadphieunhap() {
+		phieunhap = null;
+		phieunhap = PhieuNhapBUS.gI().getdanhsachphieunhap();
+		
+		dtmphieunhap.setRowCount(0);
+
+		for (PhieuNhap pn : phieunhap) {
+
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(pn.getMaPhieuNhap());
+			vec.add(pn.getMaNhaCung());
+			vec.add(pn.getMaNhanVien());
+			vec.add(pn.getNgayNhap()) ;
+			dtmphieunhap.addRow(vec);
 
 			// dtmctpm.addRow(vec);
 		}
