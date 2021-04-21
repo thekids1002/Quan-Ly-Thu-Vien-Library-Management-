@@ -513,6 +513,11 @@ public class DesignLai extends JFrame {
 		PanelChinh.add(pntacgia, "name_890226525489300");
 		PanelChinh.add(pnnhaxuatban, "name_890210577532500");
 		PanelChinh.add(pnnhanvien, "name_890389477283600");
+		
+		JLabel lblNewLabel_15 = new JLabel("");
+		lblNewLabel_15.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\searchbar-removebg-preview.png"));
+		lblNewLabel_15.setBounds(268, 392, 532, 52);
+		pnnhanvien.add(lblNewLabel_15);
 		PanelChinh.add(pnPhieumuon, "name_901238608974900");
 		pnPhieumuon.setLayout(null);
 
@@ -1162,7 +1167,9 @@ public class DesignLai extends JFrame {
 		pnnhanvien.add(lbltimkiem);
 
 		txtTimKiemnv = new JTextField();
-		txtTimKiemnv.setBounds(294, 405, 382, 39);
+		txtTimKiemnv.setBorder(new EmptyBorder(0, 0, 0, 0));
+		txtTimKiemnv.setBackground(new Color(214,217,223));
+		txtTimKiemnv.setBounds(290, 399, 425, 39);
 		pnnhanvien.add(txtTimKiemnv);
 		txtTimKiemnv.setColumns(10);
 
