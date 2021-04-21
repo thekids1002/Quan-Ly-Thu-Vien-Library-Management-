@@ -98,7 +98,7 @@ public class DesignLai extends JFrame {
 	private JLabel lblthuviensgu;
 	private JPanel PanelChinh;
 	private JPanel CardLayout;
-	PanelSach panelSach = new PanelSach();
+	
 	private JPanel SachPanel;
 	private JPanel LoaiSach;
 	private JPanel Sach;
@@ -268,6 +268,7 @@ public class DesignLai extends JFrame {
 	private DefaultTableModel dtmphieunhap;
 	private DefaultTableModel dtmchitietphieunhap;
 	private JDateChooser NgayNhapPhieuNhap;
+	private JLabel lblphieunhap;
 
 	public static int idtaikhoan;
 
@@ -487,7 +488,7 @@ public class DesignLai extends JFrame {
 		lblthongke.setBounds(0, 533, 187, 46);
 		menuleft.add(lblthongke);
 
-		JLabel lblphieunhap = new JLabel("   Phiếu Nhập");
+		lblphieunhap = new JLabel("   Phiếu Nhập");
 		lblphieunhap.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\phieunhap.png"));
 		lblphieunhap.setOpaque(true);
 		lblphieunhap.setForeground(Color.WHITE);
@@ -1973,6 +1974,7 @@ public class DesignLai extends JFrame {
 				pnPhieumuon.show(false);
 				pnchung.show();
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
 		});
 		exit.addMouseListener(new MouseAdapter() {
@@ -2018,6 +2020,7 @@ public class DesignLai extends JFrame {
 				pnPhieumuon.show(false);
 				pnchung.show(false);
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
 		});
 
@@ -2057,7 +2060,9 @@ public class DesignLai extends JFrame {
 				pnPhieumuon.show(false);
 				pnchung.show(false);
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
+			
 		});
 		lbldocgia.addMouseListener(new MouseListener() {
 
@@ -2095,6 +2100,7 @@ public class DesignLai extends JFrame {
 				pnPhieumuon.show(false);
 				pnchung.show(false);
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
 		});
 		lblTrangchu.addMouseListener(new MouseListener() {
@@ -2132,6 +2138,7 @@ public class DesignLai extends JFrame {
 				pnnhanvien.show(false);
 				pnPhieumuon.show(false);
 				pnchung.show(false);
+				pnPhieuNhap.show(false);
 				panelThongKe.show(false);
 			}
 		});
@@ -2172,6 +2179,7 @@ public class DesignLai extends JFrame {
 				pnPhieumuon.show(false);
 				pnchung.show(false);
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
 		});
 		lbltacgia.addMouseListener(new MouseListener() {
@@ -2212,6 +2220,7 @@ public class DesignLai extends JFrame {
 
 				pnchung.show(false);
 				panelThongKe.show(false);
+				pnPhieuNhap.show(false);
 			}
 		});
 
@@ -2252,10 +2261,10 @@ public class DesignLai extends JFrame {
 				pnnhanvien.show(false);
 				pnPhieumuon.show(false);
 				pnchung.show(false);
-				/*
-				 * panelThongKe.show();
-				 */
-				pnPhieuNhap.show();
+				
+				 panelThongKe.show();
+				
+				pnPhieuNhap.show(false);
 			}
 		});
 
@@ -2293,7 +2302,49 @@ public class DesignLai extends JFrame {
 				pnnhaxuatban.show(false);
 				pnnhanvien.show(false);
 				pnPhieumuon.show();
+				pnPhieuNhap.show(false);
+				pnchung.show(false);
+				panelThongKe.show(false);
+			}
+		});
+		lblphieunhap.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				lblphieunhap.setBackground(new Color(64, 64, 64));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				lblphieunhap.setBackground(Color.blue);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
 
+				pnTrangChu.show(false);
+				pnSach.show(false);
+				pndocgia.show(false);
+				pntacgia.show(false);
+				pnnhaxuatban.show(false);
+				pnnhanvien.show(false);
+				pnPhieumuon.show(false);
+				pnPhieuNhap.show();
 				pnchung.show(false);
 				panelThongKe.show(false);
 			}
