@@ -28,19 +28,24 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class WritePDF {
 	Font fontData;
-
-	public void xuatPDF(JTable table) {
+	
+	public WritePDF() {
+		super();
 		try {
 			fontData = new Font(
 					BaseFont.createFont("C:\\Windows\\Fonts\\Arial.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 11,
 					Font.NORMAL);
 		} catch (DocumentException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
+	}
+
+	public void xuatPDF(JTable table) {
+		
 		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
 		String path = "";
 		JFileChooser j = new JFileChooser();
@@ -56,6 +61,10 @@ public class WritePDF {
 			PdfWriter.getInstance(doc, new FileOutputStream(path + ".pdf"));
 			doc.open();
 			PdfPTable tbl = new PdfPTable(table.getColumnCount());
+			/*
+			 * Paragraph paragraph = new Paragraph(); paragraph.add("Võ Hoàng Kiệt");
+			 * doc.add(paragraph);
+			 */
 
 			for (int i = 0; i < dtm.getColumnCount(); i++) {
 				String data = String.valueOf(dtm.getColumnName(i) + "");
