@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 import DTO.DocGia;
 import DTO.LoaisachDTO;
+import DTO.PhieuNhap;
 import DTO.SachDTO;
 
 public class SachDAL {
@@ -33,6 +34,7 @@ public class SachDAL {
             	ls.setNamxb(rs.getInt(6));
             	ls.setSoluong(rs.getInt(7));
             	ls.setGhichu(rs.getString("GhiChu"));
+            	ls.setHinhanh(rs.getString("HinhAnh"));
             	ls.setMake(rs.getInt("Make"));
             	
             	
@@ -65,6 +67,55 @@ public class SachDAL {
 			pstm.setString(7, String.valueOf(sach.getMake()));
 			pstm.setString(8,sach.getHinhanh()); 
 			
+			i = pstm.executeUpdate();
+			conn.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// dreturn null;
+		}
+
+		return i;
+	}
+	public static int suasach(SachDTO sach) {
+		int i = -1;
+		String sql = "update sach set tensach = ? , MaLoai = ?, MaNXB = ?, MaTacGia =? , NamXB =? ,SoLuong  =? ,MaKe  =? , HinhAnh =? where Masach = ?";
+
+		try {
+
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setString(1, sach.getTensach());
+			pstm.setInt(2, sach.getMaloai());
+			pstm.setInt(3, sach.getMaNXB());
+			pstm.setInt(4, sach.getMatacgia());
+			pstm.setInt(5, sach.getMaNXB());
+			pstm.setInt(6, sach.getSoluong());
+			pstm.setString(7, String.valueOf(sach.getMake()));
+			pstm.setString(8,sach.getHinhanh()); 
+			pstm.setInt(9, sach.getMasosach());
+			// System.out.println(ke.getViTri());
+			i = pstm.executeUpdate();
+			conn.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// dreturn null;
+		}
+
+		return i;
+	}
+
+	public static int xoanxb(SachDTO ke) {
+		int i = -1;
+		String sql = "delete from sach where Masach = ?";
+
+		try {
+
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ke.getMasosach());
+			// System.out.println(ke.getViTri());
 			i = pstm.executeUpdate();
 			conn.close();
 

@@ -45,6 +45,11 @@ public class ChiTietPhieuNhapDAL {
 
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ke.getMaPhieuNhap());
+			pstm.setInt(2, ke.getMaSach());
+			pstm.setInt(3, ke.getGia());
+			pstm.setInt(4, ke.getSoLuong());
+			pstm.setInt(5, ke.getThanhTien());
 			
 			i = pstm.executeUpdate();
 			conn.close();

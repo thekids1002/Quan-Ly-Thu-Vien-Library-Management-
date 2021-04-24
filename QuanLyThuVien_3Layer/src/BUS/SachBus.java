@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import DAL.LoaiSachDAL;
 import DTO.LoaisachDTO;
+import DTO.PhieuNhap;
 import DTO.SachDTO;
 import DAL.SachDAL;
 
@@ -14,5 +15,26 @@ public class SachBus {
 	public ArrayList<SachDTO> getLoaisachLoai(){
 		
 		return DAL.SachDAL.getdanhsachLoai(); 
+	}
+	public int themsach(SachDTO pm) {
+		return SachDAL.themsach(pm) ; 
+	}
+
+	public int suapm(SachDTO pm) {
+		return SachDAL.suasach(pm) ;
+	}
+
+	public int xoapm(SachDTO pm) {
+		return SachDAL.xoanxb(pm); 
+	}
+
+	public static SachBus iBus = null;
+
+	public static SachBus gI() {
+		if (iBus == null) {
+			iBus = new SachBus();
+		}
+
+		return iBus;
 	}
 }

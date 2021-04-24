@@ -52,7 +52,7 @@ public class TableSach extends JFrame {
 	 */
 	public TableSach() {
 		setTitle("Chọn Loại Sách");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 857, 482);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -104,7 +104,12 @@ public class TableSach extends JFrame {
 				int i = table.getSelectedRow();
 				if(i>=0) {
 					String masach =  dtmsach.getValueAt(i, 0).toString();
-					DesignLai.txtMaSachctpn.setText(masach);
+					if(DesignLai.pnPhieumuon.isShowing()) {
+						DesignLai.txtmasachmuon.setText(masach);
+					}
+					else {
+						DesignLai.txtMaSachctpn.setText(masach);
+					}
 				}
 				else {
 					JOptionPane.showMessageDialog(contentPane, "Chưa chọn vào table");
