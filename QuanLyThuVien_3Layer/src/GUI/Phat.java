@@ -122,7 +122,7 @@ public class Phat extends JFrame {
 		});
 		btnNewButton.setBounds(237, 269, 97, 25);
 		contentPane.add(btnNewButton);
-		textField.setText(DesignLai.Ma);
+		textField.setText(MainFrame.Ma);
 		setLocationRelativeTo(null);
 	}
 	

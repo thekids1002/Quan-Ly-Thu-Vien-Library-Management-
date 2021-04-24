@@ -32,19 +32,7 @@ public class TableNCC extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TableNCC frame = new TableNCC();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -92,7 +80,7 @@ public class TableNCC extends JFrame {
 				int i = table.getSelectedRow();
 				if(i>=0) {
 					String masach =  dtmncc.getValueAt(i, 0).toString();
-					DesignLai.txtManccPhieuNhap.setText(masach);
+					MainFrame.txtManccPhieuNhap.setText(masach);
 					dispose();
 				}
 				else {
@@ -108,11 +96,11 @@ public class TableNCC extends JFrame {
 		setLocationRelativeTo(null);
 	}
 	public void loadnhacungcap() {
-		DesignLai.ncc = null;
+		MainFrame.ncc = null;
 		NhaCungcapbus nccbus = new NhaCungcapbus();
-		DesignLai.ncc = nccbus.getdanhsachncc();
+		MainFrame.ncc = nccbus.getdanhsachncc();
 		dtmncc.setRowCount(0);
-		for (NhaCungCapDTO nhaCungCapDTO : DesignLai.ncc) {
+		for (NhaCungCapDTO nhaCungCapDTO : MainFrame.ncc) {
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(nhaCungCapDTO.getMaNCC());
 

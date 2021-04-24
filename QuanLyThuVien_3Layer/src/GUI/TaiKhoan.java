@@ -67,7 +67,7 @@ public class TaiKhoan extends JDialog {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					int idtaikhoan = DesignLai.idtaikhoan; 
+					int idtaikhoan = MainFrame.idtaikhoan; 
 					
 					String user = txtusername.getText();
 					String pass = txtpass.getText();

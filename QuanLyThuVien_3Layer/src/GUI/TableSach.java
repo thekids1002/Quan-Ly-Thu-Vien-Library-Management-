@@ -34,18 +34,7 @@ public class TableSach extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TableSach frame = new TableSach();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -104,11 +93,11 @@ public class TableSach extends JFrame {
 				int i = table.getSelectedRow();
 				if(i>=0) {
 					String masach =  dtmsach.getValueAt(i, 0).toString();
-					if(DesignLai.pnPhieumuon.isShowing()) {
-						DesignLai.txtmasachmuon.setText(masach);
+					if(MainFrame.pnPhieumuon.isShowing()) {
+						MainFrame.txtmasachmuon.setText(masach);
 					}
 					else {
-						DesignLai.txtMaSachctpn.setText(masach);
+						MainFrame.txtMaSachctpn.setText(masach);
 					}
 				}
 				else {
@@ -125,7 +114,7 @@ public class TableSach extends JFrame {
 	
 	public void loadsach() {
 		dtmsach.setRowCount(0);
-		for(SachDTO sachitem : DesignLai.sach) {
+		for(SachDTO sachitem : MainFrame.sach) {
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(sachitem.getMasosach());
 			vec.add(sachitem.getTensach());

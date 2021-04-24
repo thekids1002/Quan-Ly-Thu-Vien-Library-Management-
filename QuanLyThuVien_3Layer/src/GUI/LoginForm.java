@@ -47,6 +47,7 @@ public class LoginForm extends JFrame {
 	public static int quyen;
 	public static boolean isdangnhap = true;
 	public static boolean dangnhap = false;
+	public static String username = "";
 	public static ArrayList<TaiKhoan> taikhoan = null;
 
 	public void loadtaikhoan() {
@@ -59,36 +60,6 @@ public class LoginForm extends JFrame {
 			System.out.println("Mật Khẩu :" + taiKhoan2.getPassword().trim());
 		}
 
-	}
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
-							.getInstalledLookAndFeels()) {
-						if ("Nimbus".equals(info.getName())) {
-							javax.swing.UIManager.setLookAndFeel(info.getClassName());
-							break;
-						}
-					}
-				} catch (ClassNotFoundException ex) {
-
-				} catch (InstantiationException ex) {
-
-				} catch (IllegalAccessException ex) {
-
-				} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-
-				}
-				try {
-					LoginForm frame = new LoginForm();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	private int x_mouse;
@@ -191,7 +162,7 @@ public class LoginForm extends JFrame {
 
 					pref.put("Password", txtPass.getText());
 				}
-				
+
 				for (TaiKhoan taiKhoan2 : taikhoan) {
 					if (taiKhoan2.getUsername().trim().equals(txtUser.getText().trim())
 							&& taiKhoan2.getPassword().trim().equals(txtPass.getText().trim())) {
@@ -200,6 +171,8 @@ public class LoginForm extends JFrame {
 						isdangnhap = true;
 						dangnhap = true;
 						setVisible(false);
+						username = taiKhoan2.getUsername();
+						
 						return;
 					}
 

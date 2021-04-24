@@ -43,7 +43,7 @@ public class Main extends Thread{
 			Sleep(2000);
 			load.setVisible(false);
 			load.dispose();
-			new DesignLai().setVisible(true);
+			new MainFrame().setVisible(true);
 		}
 	}
 }

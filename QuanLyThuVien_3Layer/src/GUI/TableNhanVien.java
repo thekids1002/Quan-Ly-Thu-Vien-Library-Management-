@@ -35,19 +35,7 @@ public class TableNhanVien extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TableNhanVien frame = new TableNhanVien();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
@@ -102,7 +90,7 @@ public class TableNhanVien extends JFrame {
 				int i = tablenhanvien.getSelectedRow();
 				if(i>=0) {
 					String masach =  dtmnhanvien.getValueAt(i, 0).toString();
-					DesignLai.txtManhanvienphieunhap.setText(masach);
+					MainFrame.txtManhanvienphieunhap.setText(masach);
 					dispose();
 				}
 				else {
@@ -119,11 +107,11 @@ public class TableNhanVien extends JFrame {
 	}
 	
 	public void loadnhanvien() {
-		DesignLai.nv = null;
+		MainFrame.nv = null;
 		NhanVienBus nvbuss = new NhanVienBus();
-		DesignLai.nv = nvbuss.getdanhsachnv();
+		MainFrame.nv = nvbuss.getdanhsachnv();
 		dtmnhanvien.setRowCount(0);
-		for (NhanVien nv : DesignLai.nv) {
+		for (NhanVien nv : MainFrame.nv) {
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(nv.getMaNV());
 			vec.add(nv.getTenNV());
