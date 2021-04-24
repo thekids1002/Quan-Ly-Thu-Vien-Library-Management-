@@ -7,10 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import DTO.SachDTO;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -95,12 +101,36 @@ public class TableSach extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				int i = table.getSelectedRow();
+				if(i>=0) {
+					String masach =  dtmsach.getValueAt(i, 0).toString();
+					DesignLai.txtMaSachctpn.setText(masach);
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Chưa chọn vào table");
+				}
 				dispose();
 				
 			}
 		});
 		contentPane.add(btnLuu);
 		setLocationRelativeTo(null);
+		loadsach();
+	}
+	
+	public void loadsach() {
+		dtmsach.setRowCount(0);
+		for(SachDTO sachitem : DesignLai.sach) {
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(sachitem.getMasosach());
+			vec.add(sachitem.getTensach());
+			vec.add(sachitem.getMaloai());
+			vec.add(sachitem.getMaNXB());
+			vec.add(sachitem.getMatacgia());
+			vec.add(sachitem.getNamxb());
+			vec.add(sachitem.getSoluong());
+			vec.add(sachitem.getMake());
+			dtmsach.addRow(vec);
+		}
 	}
 }

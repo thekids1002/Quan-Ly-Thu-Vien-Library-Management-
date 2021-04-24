@@ -475,7 +475,7 @@ public class DesignLai extends JFrame {
 		lblchung.setForeground(Color.WHITE);
 		lblchung.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblchung.setBackground(Color.DARK_GRAY);
-		lblchung.setBounds(0, 592, 187, 46);
+		lblchung.setBounds(0, 601, 187, 46);
 		menuleft.add(lblchung);
 
 		lbldangxuat = new JLabel("Đăng Xuất");
@@ -493,7 +493,7 @@ public class DesignLai extends JFrame {
 		lblthongke.setForeground(Color.WHITE);
 		lblthongke.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblthongke.setBackground(Color.DARK_GRAY);
-		lblthongke.setBounds(0, 533, 187, 46);
+		lblthongke.setBounds(0, 542, 187, 46);
 		menuleft.add(lblthongke);
 
 		lblphieunhap = new JLabel("   Phiếu Nhập");
@@ -3645,7 +3645,7 @@ public class DesignLai extends JFrame {
 	private JTextField txtManhanvienphieunhap;
 	private JTextField txtManccPhieuNhap;
 	private JLabel lblNewLabel_12;
-	private JTextField txtMaSachctpn;
+	public static JTextField txtMaSachctpn;
 	private JButton btnmanvphieunhap_1;
 	private JLabel lblNewLabel_13;
 	private JTextField txtsoluongctpn;
