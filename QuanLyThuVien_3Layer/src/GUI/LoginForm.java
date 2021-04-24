@@ -220,8 +220,8 @@ public class LoginForm extends JFrame {
 		usr = pref.get("Email", usr);
 		String pass = null;
 		pass = pref.get("Password", pass);
-		//txtUser.setText(usr);
-		//txtPass.setText(pass);
+		txtUser.setText(usr);
+		txtPass.setText(pass);
 
 	}
 
