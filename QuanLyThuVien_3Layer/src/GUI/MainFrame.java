@@ -192,11 +192,9 @@ public class MainFrame extends JFrame {
 	private JLabel lblaCh_1;
 	private JLabel lbltennv_3;
 	private JLabel lbltennv_4;
-	private JLabel lbltennv_5;
 	private JTextField txttennv;
 	private JTextField txtnamsinhnv;
 	private JTextField txtdiachinv;
-	private JTextField txtngaybatdau;
 	private JTextField txtsodienthoainv;
 	private JTextField txtgioitinhnv;
 	private JButton btnthemnv;
@@ -288,6 +286,8 @@ public class MainFrame extends JFrame {
 	private JButton btnsuaphieunhap;
 	private JButton btnxoaphieunhap;
 	protected int mapn;
+	private JPopupMenu popupThemtaikhoanv;
+	private JMenuItem mnthemtaikhoan;
 	public static JLabel lblUser;
 
 	public static int idtaikhoan;
@@ -543,6 +543,11 @@ public class MainFrame extends JFrame {
 		PanelChinh.add(pndocgia, "name_890203323464100");
 		PanelChinh.add(pntacgia, "name_890226525489300");
 		PanelChinh.add(pnnhaxuatban, "name_890210577532500");
+		
+		JButton btnTimnxb = new JButton("Tìm");
+		btnTimnxb.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnTimnxb.setBounds(770, 415, 108, 47);
+		pnnhaxuatban.add(btnTimnxb);
 		PanelChinh.add(pnnhanvien, "name_890389477283600");
 
 		JLabel lblNewLabel_15 = new JLabel("");
@@ -584,6 +589,7 @@ public class MainFrame extends JFrame {
 		panel_3.add(lblNewLabel_7);
 
 		txtmapm = new JTextField();
+		txtmapm.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtmapm.setEditable(false);
 		txtmapm.setBounds(111, 14, 236, 36);
 		panel_3.add(txtmapm);
@@ -682,6 +688,7 @@ public class MainFrame extends JFrame {
 		pnPhieumuon.add(lbltimkiempm);
 
 		textField_9 = new JTextField();
+		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_9.setBounds(127, 340, 317, 30);
 		pnPhieumuon.add(textField_9);
 		textField_9.setColumns(10);
@@ -711,6 +718,7 @@ public class MainFrame extends JFrame {
 		panel.add(lblNewLabel_8);
 
 		txtmasachmuon = new JTextField();
+		txtmasachmuon.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtmasachmuon.setBounds(96, 21, 142, 35);
 		panel.add(txtmasachmuon);
 		txtmasachmuon.setColumns(10);
@@ -735,6 +743,7 @@ public class MainFrame extends JFrame {
 		panel.add(lblNewLabel_8_1_1);
 
 		txtghichuctpm = new JTextField();
+		txtghichuctpm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtghichuctpm.setColumns(10);
 		txtghichuctpm.setBounds(96, 148, 142, 35);
 		panel.add(txtghichuctpm);
@@ -776,7 +785,7 @@ public class MainFrame extends JFrame {
 
 		btnthemphieuphat = new JButton("Phạt");
 		btnthemphieuphat.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnthemphieuphat.setBounds(540, 336, 117, 30);
+		btnthemphieuphat.setBounds(823, 335, 117, 30);
 		btnthemphieuphat.addActionListener(new ActionListener() {
 
 			@Override
@@ -793,8 +802,13 @@ public class MainFrame extends JFrame {
 			}
 		});
 		btndanhsachphat.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btndanhsachphat.setBounds(689, 335, 117, 30);
+		btndanhsachphat.setBounds(964, 335, 117, 30);
 		pnPhieumuon.add(btndanhsachphat);
+		
+		JButton btnTm = new JButton("Tìm");
+		btnTm.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnTm.setBounds(472, 340, 117, 30);
+		pnPhieumuon.add(btnTm);
 		PanelChinh.add(pnPhieuNhap, "name_901242535638200");
 		pnPhieuNhap.setLayout(null);
 
@@ -811,6 +825,7 @@ public class MainFrame extends JFrame {
 		panel_6.add(lblNewLabel_11);
 
 		txtManhanvienphieunhap = new JTextField();
+		txtManhanvienphieunhap.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtManhanvienphieunhap.setBounds(144, 43, 91, 33);
 		panel_6.add(txtManhanvienphieunhap);
 		txtManhanvienphieunhap.setColumns(10);
@@ -887,6 +902,7 @@ public class MainFrame extends JFrame {
 		panel_6_1.add(lblNewLabel_12);
 
 		txtMaSachctpn = new JTextField();
+		txtMaSachctpn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtMaSachctpn.setColumns(10);
 		txtMaSachctpn.setBounds(152, 60, 91, 33);
 		panel_6_1.add(txtMaSachctpn);
@@ -901,6 +917,7 @@ public class MainFrame extends JFrame {
 		panel_6_1.add(lblNewLabel_13);
 
 		txtsoluongctpn = new JTextField();
+		txtsoluongctpn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtsoluongctpn.setColumns(10);
 		txtsoluongctpn.setBounds(152, 122, 91, 33);
 		panel_6_1.add(txtsoluongctpn);
@@ -911,6 +928,7 @@ public class MainFrame extends JFrame {
 		panel_6_1.add(lblNewLabel_14);
 
 		txtgianhap = new JTextField();
+		txtgianhap.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtgianhap.setColumns(10);
 		txtgianhap.setBounds(152, 183, 91, 33);
 		panel_6_1.add(txtgianhap);
@@ -963,6 +981,7 @@ public class MainFrame extends JFrame {
 		panel_7.add(lblNewLabel_16);
 
 		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_4.setBounds(141, 13, 425, 42);
 		panel_7.add(textField_4);
 		textField_4.setColumns(10);
@@ -999,6 +1018,7 @@ public class MainFrame extends JFrame {
 		panel_4.add(lblNewLabel_9);
 
 		txttenloai = new JTextField();
+		txttenloai.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txttenloai.setBounds(120, 13, 225, 41);
 		panel_4.add(txttenloai);
 		txttenloai.setColumns(10);
@@ -1038,6 +1058,7 @@ public class MainFrame extends JFrame {
 		panel_4_1.add(lbltenncc);
 
 		txtNcc = new JTextField();
+		txtNcc.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtNcc.setColumns(10);
 		txtNcc.setBounds(120, 13, 225, 41);
 		panel_4_1.add(txtNcc);
@@ -1077,6 +1098,7 @@ public class MainFrame extends JFrame {
 		panel_4_2.add(lblNewLabel_10);
 
 		txtKeSach = new JTextField();
+		txtKeSach.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtKeSach.setColumns(10);
 		txtKeSach.setBounds(120, 23, 225, 41);
 		panel_4_2.add(txtKeSach);
@@ -1163,37 +1185,32 @@ public class MainFrame extends JFrame {
 		lbltennv_4.setBounds(472, 83, 138, 39);
 		panel_2.add(lbltennv_4);
 
-		lbltennv_5 = new JLabel("Ngày Bắt Đầu");
-		lbltennv_5.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lbltennv_5.setBounds(472, 158, 138, 39);
-		panel_2.add(lbltennv_5);
-
 		txttennv = new JTextField();
+		txttennv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txttennv.setBounds(162, 13, 199, 39);
 		panel_2.add(txttennv);
 		txttennv.setColumns(10);
 
 		txtnamsinhnv = new JTextField();
+		txtnamsinhnv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtnamsinhnv.setColumns(10);
 		txtnamsinhnv.setBounds(162, 83, 199, 39);
 		panel_2.add(txtnamsinhnv);
 
 		txtdiachinv = new JTextField();
+		txtdiachinv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtdiachinv.setColumns(10);
 		txtdiachinv.setBounds(162, 158, 199, 39);
 		panel_2.add(txtdiachinv);
 
-		txtngaybatdau = new JTextField();
-		txtngaybatdau.setColumns(10);
-		txtngaybatdau.setBounds(608, 158, 199, 39);
-		panel_2.add(txtngaybatdau);
-
 		txtsodienthoainv = new JTextField();
+		txtsodienthoainv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtsodienthoainv.setColumns(10);
 		txtsodienthoainv.setBounds(608, 83, 199, 39);
 		panel_2.add(txtsodienthoainv);
 
 		txtgioitinhnv = new JTextField();
+		txtgioitinhnv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtgioitinhnv.setColumns(10);
 		txtgioitinhnv.setBounds(608, 13, 199, 39);
 		panel_2.add(txtgioitinhnv);
@@ -1228,6 +1245,7 @@ public class MainFrame extends JFrame {
 		pnnhanvien.add(lbltimkiem);
 
 		txtTimKiemnv = new JTextField();
+		txtTimKiemnv.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTimKiemnv.setBorder(new EmptyBorder(0, 0, 0, 0));
 		txtTimKiemnv.setBackground(new Color(214, 217, 223));
 		txtTimKiemnv.setBounds(290, 399, 425, 39);
@@ -1247,6 +1265,27 @@ public class MainFrame extends JFrame {
 
 		tablenhanvien = new MyTable(dtmnhanvien);
 		scrollPane_4.setViewportView(tablenhanvien);
+		popupThemtaikhoanv = new JPopupMenu();
+		mnthemtaikhoan= new JMenuItem("Thêm Tài Khoản");
+		mnthemtaikhoan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int i = tablenhanvien.getSelectedRow();
+				if(i > -1) {
+					idtaikhoan = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
+					new TaiKhoan().setVisible(true);
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Bạn chưa chọn vào nhân viên để thêm tài khoản");
+				}
+				
+			}
+		});
+		mnthemtaikhoan.setBounds(0, 0, 113, 19);
+		popupThemtaikhoanv.add(mnthemtaikhoan);
+
+		addPopup(tablenhanvien, popupThemtaikhoanv);
 
 	}
 
@@ -1278,16 +1317,19 @@ public class MainFrame extends JFrame {
 		panel_1.add(lblTennhaxuatban_2);
 
 		txtTennhaxuatban = new JTextField();
+		txtTennhaxuatban.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTennhaxuatban.setBounds(321, 44, 282, 37);
 		panel_1.add(txtTennhaxuatban);
 		txtTennhaxuatban.setColumns(10);
 
 		txtdiachinxb = new JTextField();
+		txtdiachinxb.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtdiachinxb.setColumns(10);
 		txtdiachinxb.setBounds(321, 110, 282, 37);
 		panel_1.add(txtdiachinxb);
 
 		txtsdtnxb = new JTextField();
+		txtsdtnxb.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtsdtnxb.setColumns(10);
 		txtsdtnxb.setBounds(321, 172, 282, 37);
 		panel_1.add(txtsdtnxb);
@@ -1316,12 +1358,13 @@ public class MainFrame extends JFrame {
 		btnreloadnxb.setBounds(562, 252, 108, 47);
 		panel_1.add(btnreloadnxb);
 
-		lblTimKiemnxb = new JLabel("Số Điện Thoại");
+		lblTimKiemnxb = new JLabel("Tìm Kiếm");
 		lblTimKiemnxb.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTimKiemnxb.setBounds(260, 419, 145, 43);
 		pnnhaxuatban.add(lblTimKiemnxb);
 
 		textField_3 = new JTextField();
+		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_3.setColumns(10);
 		textField_3.setBounds(427, 419, 282, 37);
 		pnnhaxuatban.add(textField_3);
@@ -1371,21 +1414,25 @@ public class MainFrame extends JFrame {
 		panelthongtindocgia.add(lblSdtdocgia);
 
 		txtTendocgia = new JTextField();
+		txtTendocgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTendocgia.setBounds(192, 13, 208, 36);
 		panelthongtindocgia.add(txtTendocgia);
 		txtTendocgia.setColumns(10);
 
 		txtdiachidocgia = new JTextField();
+		txtdiachidocgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtdiachidocgia.setColumns(10);
 		txtdiachidocgia.setBounds(192, 119, 208, 36);
 		panelthongtindocgia.add(txtdiachidocgia);
 
 		txtgioitinhdocgia = new JTextField();
+		txtgioitinhdocgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtgioitinhdocgia.setColumns(10);
 		txtgioitinhdocgia.setBounds(569, 119, 208, 36);
 		panelthongtindocgia.add(txtgioitinhdocgia);
 
 		txtsdtdocgia = new JTextField();
+		txtsdtdocgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtsdtdocgia.setColumns(10);
 		txtsdtdocgia.setBounds(569, 13, 208, 36);
 		panelthongtindocgia.add(txtsdtdocgia);
@@ -1409,6 +1456,7 @@ public class MainFrame extends JFrame {
 		panelthongtindocgia.add(btnxoadocgia);
 
 		txtTimkiemdocgia = new JTextField();
+		txtTimkiemdocgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTimkiemdocgia.setBounds(251, 322, 442, 42);
 		pndocgia.add(txtTimkiemdocgia);
 		txtTimkiemdocgia.setColumns(10);
@@ -1455,6 +1503,7 @@ public class MainFrame extends JFrame {
 		pnthongtintacgia.add(lblTentacgia);
 
 		txtTentacgia = new JTextField();
+		txtTentacgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtTentacgia.setBounds(287, 51, 224, 37);
 		pnthongtintacgia.add(txtTentacgia);
 		txtTentacgia.setColumns(10);
@@ -1465,6 +1514,7 @@ public class MainFrame extends JFrame {
 		pnthongtintacgia.add(lblnamsinh);
 
 		txtnamsinhtacgia = new JTextField();
+		txtnamsinhtacgia.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtnamsinhtacgia.setColumns(10);
 		txtnamsinhtacgia.setBounds(287, 117, 224, 37);
 		pnthongtintacgia.add(txtnamsinhtacgia);
@@ -1475,6 +1525,7 @@ public class MainFrame extends JFrame {
 		pnthongtintacgia.add(lblTentacgia_2);
 
 		txtQueQuan = new JTextField();
+		txtQueQuan.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtQueQuan.setColumns(10);
 		txtQueQuan.setBounds(287, 189, 224, 37);
 		pnthongtintacgia.add(txtQueQuan);
@@ -1576,6 +1627,7 @@ public class MainFrame extends JFrame {
 		panel.add(lblMaKeSach);
 
 		txttensach = new JTextField();
+		txttensach.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txttensach.setBounds(156, 14, 203, 34);
 		panel.add(txttensach);
 		txttensach.setColumns(10);
@@ -1642,11 +1694,13 @@ public class MainFrame extends JFrame {
 		panel.add(cmbmakesach);
 
 		txtsoluongsach = new JTextField();
+		txtsoluongsach.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtsoluongsach.setBounds(522, 111, 207, 34);
 		panel.add(txtsoluongsach);
 		txtsoluongsach.setColumns(10);
 
 		txtnamxbsach = new JTextField();
+		txtnamxbsach.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txtnamxbsach.setColumns(10);
 		txtnamxbsach.setBounds(522, 64, 207, 34);
 		panel.add(txtnamxbsach);
@@ -2931,7 +2985,7 @@ public class MainFrame extends JFrame {
 						// TODO: handle exception
 						e2.printStackTrace();
 					}
-					new TaiKhoan().setVisible(true);
+					
 
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
 
