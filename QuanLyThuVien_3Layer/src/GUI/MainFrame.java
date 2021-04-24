@@ -35,11 +35,15 @@ import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.DefaultCategoryItemRenderer;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import BUS.ChiTietPhieuNhapBUS;
 import BUS.DocGiaBUS;
@@ -89,6 +93,9 @@ import javax.swing.JMenuItem;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.border.LineBorder;
 import javax.swing.JRadioButton;
+import java.awt.FlowLayout;
+import javax.swing.JTabbedPane;
+import com.toedter.components.JSpinField;
 
 public class MainFrame extends JFrame {
 	public static String Ma;
@@ -108,7 +115,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblthuviensgu;
 	private JPanel PanelChinh;
 	private JPanel CardLayout;
-
+	
 	private JPanel SachPanel;
 	private JPanel LoaiSach;
 	private JPanel Sach;
@@ -288,6 +295,8 @@ public class MainFrame extends JFrame {
 	protected int mapn;
 	private JPopupMenu popupThemtaikhoanv;
 	private JMenuItem mnthemtaikhoan;
+	private DefaultTableModel dtmthongkesachmuon;
+	private DefaultTableModel dtmthongkenhaphang;
 	public static JLabel lblUser;
 
 	public static int idtaikhoan;
@@ -371,18 +380,20 @@ public class MainFrame extends JFrame {
 		PanelChinh.setLayout(new CardLayout(0, 0));
 		pnsach();
 		/* PN ĐỘC GIẢ */
-
+		docgia();
 		/* PANEL NHÀ XUẤT BẢN */
-
+		nhaxuatban();
 		/* PANEL TÁC GIẢ */
-
+		pntacgia();
 		/*
 		 * // PANEL TRANG CHỦ
-		 */
+			*/
 		trangchu();
-		docgia();
-		pntacgia();
-		nhaxuatban();
+		 
+		
+		
+		
+		
 		nhanvien();
 
 		pnPhieumuon = new JPanel();
@@ -1001,6 +1012,12 @@ public class MainFrame extends JFrame {
 		btnnhapexcel.setBounds(873, 10, 97, 46);
 		panel_7.add(btnnhapexcel);
 
+		pnchung();
+
+		pnthongke();
+	}
+
+	private void pnchung() {
 		pnchung = new JPanel();
 		PanelChinh.add(pnchung, "name_903253398621700");
 		pnchung.setLayout(null);
@@ -1123,30 +1140,114 @@ public class MainFrame extends JFrame {
 		dtmke.addColumn("Tên Kệ");
 		tablekesach = new MyTable(dtmke);
 		scrollPane_8.setViewportView(tablekesach);
+		
+	}
 
-		panelThongKe = new JPanel();
-		PanelChinh.add(panelThongKe, "name_8485672922600");
-		panelThongKe.setLayout(null);
+	private void pnthongke() {
+panelThongKe = new JPanel();
+		
+		DefaultPieDataset p=new DefaultPieDataset();
 
-		JPanel barchart = new JPanel();
-		barchart.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		barchart.setBounds(62, 63, 553, 316);
-		/*
-		 * DefaultCategoryDataset dcd = new DefaultCategoryDataset() ;
-		 * dcd.setValue(78.8, "Marks", "Kiệt"); dcd.setValue(88.8, "Marks", "Long");
-		 * dcd.setValue(12.8, "Marks", "Phúc"); dcd.setValue(34.8, "Marks", "Khang");
-		 * dcd.setValue(45.8, "Marks", "Khanh");
-		 * 
-		 * JFreeChart jchart = ChartFactory.createBarChart("Student record",
-		 * "Student Name", "Student Mark ", dcd,
-		 * PlotOrientation.VERTICAL,true,true,false); CategoryPlot plot =
-		 * jchart.getCategoryPlot(); plot.setRangeGridlinePaint(Color.green); ChartFrame
-		 * chartFm = new ChartFrame("Student record",jchart , true) ; \
-		 */
+	    // Ratio of fruits
+	    // Apple:Orange:Mango:Guava = 20:30:40:10
+	    p.setValue("Sách Đã Mượn",60);
+	    p.setValue("Sách Còn Lại",40);
+	   
+	    
+	    
+	    JFreeChart chart=ChartFactory.createPieChart3D("Thống Kê Sách Đã Mượn",p);
 
-		panelThongKe.add(barchart);
-		barchart.setLayout(null);
+	    
+	    TextTitle tt=new TextTitle("Thống Kê Sách Đã Mượn",new Font("Arial",Font.BOLD,15));
 
+	   
+	    tt.setPadding(5,5,5,5);
+	    chart.setTitle(tt);
+
+	  
+	    final PiePlot3D plot = (PiePlot3D) chart.getPlot();
+	    plot.setLabelFont(new Font("Arial",Font.PLAIN,12));
+	    PanelChinh.add(panelThongKe, "name_8485672922600");
+	    panelThongKe.setLayout(null);
+	    
+	    btnthongkesachmuon = new JButton("Danh Sách ");
+	    btnthongkesachmuon.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    btnthongkesachmuon.setBounds(155, 347, 138, 36);
+	    panelThongKe.add(btnthongkesachmuon);
+	    
+	    JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	    tabbedPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+	    tabbedPane.setBounds(397, 13, 684, 709);
+	    panelThongKe.add(tabbedPane);
+	    
+	    JPanel panel = new JPanel();
+	    tabbedPane.addTab("Nhập Hàng", null, panel, null);
+	    panel.setLayout(null);
+	    dtmthongkenhaphang = new DefaultTableModel();
+	    dtmthongkenhaphang.addColumn("Mã CTPN");
+	    dtmthongkenhaphang.addColumn("Sách");
+	    dtmthongkenhaphang.addColumn("Giá Nhập");
+	    dtmthongkenhaphang.addColumn("Số Lượng");
+	    dtmthongkenhaphang.addColumn("Ngày Nhập");
+	    JScrollPane scrollPane = new JScrollPane();
+	    scrollPane.setBounds(12, 13, 651, 418);
+	    panel.add(scrollPane);
+	    
+	    table = new MyTable(dtmthongkenhaphang);
+	    scrollPane.setViewportView(table);
+	    
+	    lblNewLabel_18 = new JLabel("Lọc Theo");
+	    lblNewLabel_18.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_18.setForeground(new Color(0, 0, 0));
+	    lblNewLabel_18.setBounds(27, 487, 76, 16);
+	    panel.add(lblNewLabel_18);
+	    
+	    lblNewLabel_19 = new JLabel("Năm");
+	    lblNewLabel_19.setForeground(Color.BLACK);
+	    lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_19.setBounds(128, 484, 76, 23);
+	    panel.add(lblNewLabel_19);
+	    
+	    JSpinField spinField = new JSpinField();
+	    spinField.setBounds(230, 484, 52, 22);
+	    panel.add(spinField);
+	    
+	    JButton btnNewButton_1 = new JButton("Lọc");
+	    btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    btnNewButton_1.setBounds(321, 484, 64, 23);
+	    panel.add(btnNewButton_1);
+	    
+	    JLabel lblNewLabel_20 = new JLabel("Số Sách Đã Nhập");
+	    lblNewLabel_20.setForeground(Color.RED);
+	    lblNewLabel_20.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_20.setBounds(410, 487, 149, 20);
+	    panel.add(lblNewLabel_20);
+	    
+	    lblsosachdanhap = new JLabel("");
+	    lblsosachdanhap.setBounds(552, 487, 64, 20);
+	    panel.add(lblsosachdanhap);
+	    
+	    JLabel lblNewLabel_20_1 = new JLabel("Tổng Tiền");
+	    lblNewLabel_20_1.setForeground(Color.RED);
+	    lblNewLabel_20_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+	    lblNewLabel_20_1.setBounds(410, 537, 149, 20);
+	    panel.add(lblNewLabel_20_1);
+	    
+	    JLabel lbltongtien = new JLabel("");
+	    lbltongtien.setBounds(552, 537, 64, 20);
+	    panel.add(lbltongtien);
+	    
+	    JPanel panel_4 = new JPanel();
+	    tabbedPane.addTab("Chưa Biết", null, panel_4, null);
+	    
+	    ChartPanel panel1=new ChartPanel(chart);
+	    panel1.setBounds(12, 25, 385, 302);
+	    panelThongKe.add(panel1);
+	    
+	  
+	    panel1.setPreferredSize(new Dimension(311,302));
+	    panel1.setBackground(new Color(0,0,0,0));
+		
 	}
 
 	private void nhanvien() {
@@ -4075,6 +4176,11 @@ public class MainFrame extends JFrame {
 	        }
 	    }
 	 File fileAnhSP;
+	 private JButton btnthongkesachmuon;
+	 private JTable table;
+	 private JLabel lblNewLabel_18;
+	 private JLabel lblNewLabel_19;
+	 private JLabel lblsosachdanhap;
 	 private ImageIcon getAnhSP(String src) {
 	        src = src.trim().equals("") ? "default.png" : src;
 	        //Xử lý ảnh
