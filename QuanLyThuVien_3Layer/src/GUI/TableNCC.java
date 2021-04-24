@@ -7,13 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import BUS.NhaCungcapbus;
+import DTO.NhaCungCapDTO;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class TableNCC extends JFrame {
@@ -82,12 +89,36 @@ public class TableNCC extends JFrame {
 		JButton btnluu = new JButton("Lưu");
 		btnluu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				int i = table.getSelectedRow();
+				if(i>=0) {
+					String masach =  dtmncc.getValueAt(i, 0).toString();
+					DesignLai.txtManccPhieuNhap.setText(masach);
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Chưa chọn vào table");
+				}
+				
 			}
 		});
 		btnluu.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnluu.setBounds(591, 397, 116, 38);
 		contentPane.add(btnluu);
+		loadnhacungcap();
+		setLocationRelativeTo(null);
 	}
+	public void loadnhacungcap() {
+		DesignLai.ncc = null;
+		NhaCungcapbus nccbus = new NhaCungcapbus();
+		DesignLai.ncc = nccbus.getdanhsachncc();
+		dtmncc.setRowCount(0);
+		for (NhaCungCapDTO nhaCungCapDTO : DesignLai.ncc) {
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(nhaCungCapDTO.getMaNCC());
 
+			vec.add(nhaCungCapDTO.getTenNCC());
+			dtmncc.addRow(vec);
+		}
+
+	}
 }

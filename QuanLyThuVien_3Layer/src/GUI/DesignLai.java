@@ -280,6 +280,9 @@ public class DesignLai extends JFrame {
 	private JRadioButton rdtra;
 	private JButton btnthemphieuphat;
 	private JButton btndanhsachphat;
+	private JButton btnthemphieunhap;
+	private JButton btnsuaphieunhap;
+	private JButton btnxoaphieunhap;
 
 	public static int idtaikhoan;
 
@@ -820,17 +823,17 @@ public class DesignLai extends JFrame {
 		lblNewLabel_11_1_1.setBounds(12, 174, 102, 33);
 		panel_6.add(lblNewLabel_11_1_1);
 
-		JButton btnthemphieunhap = new JButton("Thêm");
+		 btnthemphieunhap = new JButton("Thêm");
 		btnthemphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnthemphieunhap.setBounds(12, 242, 97, 46);
 		panel_6.add(btnthemphieunhap);
 
-		JButton btnsuaphieunhap = new JButton("Sửa");
+		 btnsuaphieunhap = new JButton("Sửa");
 		btnsuaphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnsuaphieunhap.setBounds(138, 242, 97, 46);
 		panel_6.add(btnsuaphieunhap);
 
-		JButton btnxoaphieunhap = new JButton("Xoá");
+		 btnxoaphieunhap = new JButton("Xoá");
 		btnxoaphieunhap.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnxoaphieunhap.setBounds(261, 242, 97, 46);
 		panel_6.add(btnxoaphieunhap);
@@ -1842,8 +1845,17 @@ public class DesignLai extends JFrame {
 				if (i >= 0) {
 					txtManhanvienphieunhap.setText(dtmphieunhap.getValueAt(i, 0).toString());
 					txtManccPhieuNhap.setText(dtmphieunhap.getValueAt(i, 1).toString());
-
+					Date date2;
+					try {
+						date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String) dtmphieunhap.getValueAt(i, 3).toString());
+						NgayNhapPhieuNhap.setDate(date2);
+						
+					} catch (ParseException ex) {
+						// TODO Auto-generated catch block
+						ex.printStackTrace();
+					}
 				}
+				
 			}
 		});
 
@@ -3366,6 +3378,89 @@ public class DesignLai extends JFrame {
 				}
 			}
 		});
+		///////////////////////////////////////////////////////////////////////////////////////////////
+		/////////THÊM SỬA XOÁ PHIẾU NHẬP/////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////
+		
+		btnthemphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				// String ngaymuon = ((JTextField)
+				// dateChooser.getDateEditor().getUiComponent()).getText();
+				String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
+				int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
+				int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
+				PhieuNhap pn = new PhieuNhap(0, Mancc, Manv, ngaynhap) ;
+				if(PhieuNhapBUS.gI().thempm(pn) > 0) {
+					loadphieunhap();
+					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thành Công");
+
+				}else {
+					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thất Bại");
+
+				}
+				
+			}
+		});
+		btnsuaphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int i = tablephieunhap.getSelectedRow();
+				if (i >= 0) {
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()); 
+					String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
+					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
+					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
+					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap) ;
+					if(PhieuNhapBUS.gI().suapm(pn) > 0) {
+						loadphieunhap();
+						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thành Công");
+
+					}else {
+						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thất Bại");
+
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
+				}
+				
+			}
+		});
+		
+		btnxoaphieunhap.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int i = tablephieunhap.getSelectedRow();
+				if (i >= 0) {
+					
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()); 
+					String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
+					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
+					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
+					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap) ;
+					if(PhieuNhapBUS.gI().xoapm(pn) > 0) {
+						loadphieunhap();
+						JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thành Công");
+
+					}else {
+						JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thất Bại");
+
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
+				}
+			}
+		});
 	}
 
 	private void moveFrame(int x, int y) {
@@ -3642,8 +3737,8 @@ public class DesignLai extends JFrame {
 	private JPanel panelThongKe;
 	private JTable table_1;
 	private JTable tablechitietphieunhap;
-	private JTextField txtManhanvienphieunhap;
-	private JTextField txtManccPhieuNhap;
+	public static JTextField txtManhanvienphieunhap;
+	public static JTextField txtManccPhieuNhap;
 	private JLabel lblNewLabel_12;
 	public static JTextField txtMaSachctpn;
 	private JButton btnmanvphieunhap_1;

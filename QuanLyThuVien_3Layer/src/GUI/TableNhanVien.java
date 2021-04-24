@@ -7,13 +7,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+
+import BUS.NhanVienBus;
+import DTO.NhanVien;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 
 public class TableNhanVien extends JFrame {
@@ -92,12 +99,44 @@ public class TableNhanVien extends JFrame {
 		JButton btnNewButton = new JButton("Lưu");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				int i = tablenhanvien.getSelectedRow();
+				if(i>=0) {
+					String masach =  dtmnhanvien.getValueAt(i, 0).toString();
+					DesignLai.txtManhanvienphieunhap.setText(masach);
+					dispose();
+				}
+				else {
+					JOptionPane.showMessageDialog(contentPane, "Chưa chọn vào table");
+				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(686, 411, 124, 38);
 		contentPane.add(btnNewButton);
+		loadnhanvien();
 		setLocationRelativeTo(null);
+		
+	}
+	
+	public void loadnhanvien() {
+		DesignLai.nv = null;
+		NhanVienBus nvbuss = new NhanVienBus();
+		DesignLai.nv = nvbuss.getdanhsachnv();
+		dtmnhanvien.setRowCount(0);
+		for (NhanVien nv : DesignLai.nv) {
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(nv.getMaNV());
+			vec.add(nv.getTenNV());
+			vec.add(nv.getNamSinh());
+			vec.add(nv.getGioiTinh());
+			vec.add(nv.getDiaChi());
+			vec.add(nv.getSdt());
+			dtmnhanvien.addRow(vec);
+		
+		}
+		/*
+		 * for (NhaCungCap ncc1 : ncc) { Vector<Object> vec = new Vector<Object>();
+		 * vec.add(ncc1.getMaNCC()); vec.add(ncc1.getTenNCC()); dtmncc.addRow(vec); }
+		 */
 	}
 }
