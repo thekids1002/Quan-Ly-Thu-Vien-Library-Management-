@@ -177,4 +177,43 @@ public class chitietpmDAL {
 		}
 	}
 	
+	public static ArrayList<ChiTieuPMDTO> thongkephieumuon() {
+		try {
+			String sql = "SELECT chitietphieumuon.* , phieumuon.NgayMuon FROM chitietphieumuon INNER JOIN phieumuon ON phieumuon.MaPM= chitietphieumuon.MaPM";
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<ChiTieuPMDTO> dsl = new ArrayList<ChiTieuPMDTO>();
+			while (rs.next()) {
+				ChiTieuPMDTO ctpm = new ChiTieuPMDTO();
+				ctpm.setMaChiTietPhieuMuon(rs.getInt("MaCTPM"));
+				ctpm.setMaPhieuMuon(rs.getInt("MaPM"));
+				ctpm.setMaSach(rs.getInt("MaSach"));
+				String ngaytra = rs.getString("NgayTra");
+				ctpm.setNgayTra(ngaytra);
+				String ghichu = null ;
+				
+				if(CompareTwoDatesTest(ngaytra) == -1) {
+					ghichu = "Đã Hết Hạn" ;
+				}
+				else if(CompareTwoDatesTest(ngaytra) == 1) {
+					ghichu ="Chưa hết hạn" ;
+				}
+				else {
+					ghichu ="Hôm nay là hạn cuối"; 
+				}
+				ctpm.setGhichu(ghichu);
+				ctpm.setNgayMuon(rs.getString("NgayMuon"));
+				dsl.add(ctpm);
+
+			}
+
+			return dsl;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
 }

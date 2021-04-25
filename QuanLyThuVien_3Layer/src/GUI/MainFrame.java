@@ -1149,8 +1149,6 @@ public class MainFrame extends JFrame {
 		
 		DefaultPieDataset p=new DefaultPieDataset();
 
-	    // Ratio of fruits
-	    // Apple:Orange:Mango:Guava = 20:30:40:10
 		int tongsach = SachBus.gI().soluongsach() + chitietpmbus.gI().getsoluongsachdamuon();
 		System.out.println("Tổng Sách" + tongsach);
 		System.out.println("Sách Đã Mượn "+ chitietpmbus.gI().getsoluongsachdamuon());
@@ -1898,6 +1896,14 @@ public class MainFrame extends JFrame {
 	}
 
 	public void addEvent() {
+		btnthongkesachmuon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new TableThongKePhieuMuon().setVisible(true);
+				
+			}
+		});
 		tablectpm.addMouseListener(new MouseListener() {
 
 			@Override
@@ -4078,6 +4084,7 @@ public class MainFrame extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
+	
 	
 	public static ArrayList<PhieuNhap> phieunhap = new ArrayList<PhieuNhap>();
 

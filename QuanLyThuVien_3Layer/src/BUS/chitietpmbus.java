@@ -16,6 +16,10 @@ public class chitietpmbus {
 
 		return chitietpmDAL.getdanhsachphieumuon();
 	}
+	public ArrayList<ChiTieuPMDTO> thongkephieumuon() {
+
+		return chitietpmDAL.thongkephieumuon();
+	}
 
 	public int thempm(ChiTieuPMDTO pm) {
 		return chitietpmDAL.themctpm(pm);
@@ -33,7 +37,7 @@ public class chitietpmbus {
 		return chitietpmDAL.getsoluongsachdamuon();
 		
 	}
-
+	
 	public static chitietpmbus iBus = null;
 
 	public static chitietpmbus gI() {
