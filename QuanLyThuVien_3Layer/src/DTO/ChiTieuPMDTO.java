@@ -6,6 +6,7 @@ public class ChiTieuPMDTO {
 	private int MaChiTietPhieuMuon;
 	private int MaPhieuMuon;
 	private int MaSach;
+	private String NgayMuon;
 	private String NgayTra;
 	private String ghichu;
 	public int getMaChiTietPhieuMuon() {
@@ -26,6 +27,12 @@ public class ChiTieuPMDTO {
 	public void setMaSach(int maSach) {
 		MaSach = maSach;
 	}
+	public String getNgayMuon() {
+		return NgayMuon;
+	}
+	public void setNgayMuon(String ngayMuon) {
+		NgayMuon = ngayMuon;
+	}
 	public String getNgayTra() {
 		return NgayTra;
 	}
@@ -38,7 +45,13 @@ public class ChiTieuPMDTO {
 	public void setGhichu(String ghichu) {
 		this.ghichu = ghichu;
 	}
-	public ChiTieuPMDTO(int maChiTietPhieuMuon, int maPhieuMuon, int maSach, String ngayTra, String ghichu) {
+	@Override
+	public String toString() {
+		return "ChiTieuPMDTO [MaChiTietPhieuMuon=" + MaChiTietPhieuMuon + ", MaPhieuMuon=" + MaPhieuMuon + ", MaSach="
+				+ MaSach + ", NgayMuon=" + NgayMuon + ", NgayTra=" + NgayTra + ", ghichu=" + ghichu + "]";
+	}
+	public ChiTieuPMDTO(int maChiTietPhieuMuon, int maPhieuMuon, int maSach, String ngayTra,
+			String ghichu) {
 		super();
 		MaChiTietPhieuMuon = maChiTietPhieuMuon;
 		MaPhieuMuon = maPhieuMuon;
@@ -46,15 +59,22 @@ public class ChiTieuPMDTO {
 		NgayTra = ngayTra;
 		this.ghichu = ghichu;
 	}
+	 
+	public ChiTieuPMDTO(int maChiTietPhieuMuon, int maPhieuMuon, int maSach, String ngayMuon, String ngayTra,
+			String ghichu) {
+		super();
+		MaChiTietPhieuMuon = maChiTietPhieuMuon;
+		MaPhieuMuon = maPhieuMuon;
+		MaSach = maSach;
+		NgayMuon = ngayMuon;
+		NgayTra = ngayTra;
+		this.ghichu = ghichu;
+	}
 	public ChiTieuPMDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "ChiTieuPMDTO [MaChiTietPhieuMuon=" + MaChiTietPhieuMuon + ", MaPhieuMuon=" + MaPhieuMuon + ", MaSach="
-				+ MaSach + ", NgayTra=" + NgayTra + ", ghichu=" + ghichu + "]";
-	}
+	
 
 	
 }

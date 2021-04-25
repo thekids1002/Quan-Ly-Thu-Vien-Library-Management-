@@ -52,6 +52,14 @@ public class ChiTietPhieuNhapDAL {
 			pstm.setInt(5, ke.getThanhTien());
 			
 			i = pstm.executeUpdate();
+			if(i>0) {
+				String sql2 = "update sach set soluong  = ? where masach = ?";
+				PreparedStatement stm2 = conn.prepareStatement(sql2);
+				stm2.setInt(1, SachDAL.getsoluongsach(ke.getMaSach()) + ke.getSoLuong());
+				stm2.setInt(2, ke.getMaSach());
+				stm2.executeUpdate();
+				System.out.println("Cập nhật số lượng sách sau khi nhập thành công");
+			}
 			conn.close();
 
 		} catch (Exception e) {
