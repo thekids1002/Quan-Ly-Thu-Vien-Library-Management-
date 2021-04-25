@@ -344,6 +344,7 @@ public class MainFrame extends JFrame {
 		loadctphieumuon();
 		loadphieunhap();
 		loadctphieunhap();
+		loadthongkephieunhap();
 	}
 
 	public void thanhtitle() {
@@ -1144,14 +1145,22 @@ public class MainFrame extends JFrame {
 	}
 
 	private void pnthongke() {
-panelThongKe = new JPanel();
+		panelThongKe = new JPanel();
 		
 		DefaultPieDataset p=new DefaultPieDataset();
 
 	    // Ratio of fruits
 	    // Apple:Orange:Mango:Guava = 20:30:40:10
-	    p.setValue("Sách Đã Mượn",60);
-	    p.setValue("Sách Còn Lại",40);
+		int tongsach = SachBus.gI().soluongsach() + chitietpmbus.gI().getsoluongsachdamuon();
+		System.out.println("Tổng Sách" + tongsach);
+		System.out.println("Sách Đã Mượn "+ chitietpmbus.gI().getsoluongsachdamuon());
+		int sachdamuon = chitietpmbus.gI().getsoluongsachdamuon();
+		System.out.println(sachdamuon);
+		float phantramsachdamuon = (float) (sachdamuon *1.0/ tongsach * 100) ;
+		System.out.println("Phần Trăm Sách đã mươn :" + phantramsachdamuon);
+		
+	    p.setValue("Sách Đã Mượn",phantramsachdamuon);
+	    p.setValue("Sách Còn Lại",100-phantramsachdamuon);
 	   
 	    
 	    
@@ -1185,16 +1194,22 @@ panelThongKe = new JPanel();
 	    panel.setLayout(null);
 	    dtmthongkenhaphang = new DefaultTableModel();
 	    dtmthongkenhaphang.addColumn("Mã CTPN");
-	    dtmthongkenhaphang.addColumn("Sách");
+	    dtmthongkenhaphang.addColumn("Mã PN");
+	    dtmthongkenhaphang.addColumn("Mã Sách");
+	   
 	    dtmthongkenhaphang.addColumn("Giá Nhập");
 	    dtmthongkenhaphang.addColumn("Số Lượng");
+	    dtmthongkenhaphang.addColumn("Thành Tiền");
 	    dtmthongkenhaphang.addColumn("Ngày Nhập");
+	    dtmthongkenhaphang.addColumn("Tên Sách");
 	    JScrollPane scrollPane = new JScrollPane();
+	    
 	    scrollPane.setBounds(12, 13, 651, 418);
 	    panel.add(scrollPane);
 	    
-	    table = new MyTable(dtmthongkenhaphang);
-	    scrollPane.setViewportView(table);
+	    tablethongkenhaphang = new MyTable(dtmthongkenhaphang);
+	    
+	    scrollPane.setViewportView(tablethongkenhaphang);
 	    
 	    lblNewLabel_18 = new JLabel("Lọc Theo");
 	    lblNewLabel_18.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -4063,7 +4078,7 @@ panelThongKe = new JPanel();
 			// dtmctpm.addRow(vec);
 		}
 	}
-
+	
 	public static ArrayList<PhieuNhap> phieunhap = new ArrayList<PhieuNhap>();
 
 	public void loadphieunhap() {
@@ -4084,7 +4099,32 @@ panelThongKe = new JPanel();
 			// dtmctpm.addRow(vec);
 		}
 	}
+	public static ArrayList<ChiTietPhieuNhap> thongkectphieunhap = new ArrayList<ChiTietPhieuNhap>();
 
+	public void loadthongkephieunhap() {
+		thongkectphieunhap = null;
+		thongkectphieunhap = ChiTietPhieuNhapBUS.gI().thongkephieunhap();
+		
+
+		dtmthongkenhaphang.setRowCount(0);
+
+		for (ChiTietPhieuNhap pn : thongkectphieunhap) {
+
+			Vector<Object> vec = new Vector<Object>();
+			vec.add(pn.getMaCTPN());
+			vec.add(pn.getMaPhieuNhap());
+			vec.add(pn.getMaSach());
+			vec.add(pn.getGia());
+			vec.add(pn.getSoLuong());
+			vec.add(pn.getThanhTien());
+			vec.add(pn.getNgaynhap());
+			vec.add(pn.getTensach());
+			dtmthongkenhaphang.addRow(vec);
+
+			// dtmctpm.addRow(vec);
+		}
+	}
+	
 	public static ArrayList<ChiTietPhieuNhap> ctphieunhap = new ArrayList<ChiTietPhieuNhap>();
 
 	public void loadctphieunhap() {
@@ -4177,7 +4217,7 @@ panelThongKe = new JPanel();
 	    }
 	 File fileAnhSP;
 	 private JButton btnthongkesachmuon;
-	 private JTable table;
+	 private JTable tablethongkenhaphang;
 	 private JLabel lblNewLabel_18;
 	 private JLabel lblNewLabel_19;
 	 private JLabel lblsosachdanhap;

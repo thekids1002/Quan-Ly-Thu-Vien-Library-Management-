@@ -3,6 +3,7 @@ package DAL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -158,6 +159,22 @@ public class chitietpmDAL {
 		}
 		return 0;
 
+	}
+	
+	public static int getsoluongsachdamuon() {
+		try {
+			int soluong  = 0 ;
+			String sql = "select masach from chitietphieumuon";
+			Connection conn = DBConnect.getConnection();
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()) {
+				soluong++;
+			}
+			return soluong; 
+		} catch (Exception e) {
+			return -1 ;
+		}
 	}
 	
 }

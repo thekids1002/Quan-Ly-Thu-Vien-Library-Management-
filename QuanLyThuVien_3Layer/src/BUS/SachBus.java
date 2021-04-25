@@ -27,7 +27,9 @@ public class SachBus {
 	public int xoapm(SachDTO pm) {
 		return SachDAL.xoanxb(pm); 
 	}
-
+	public  int soluongsach() {
+		return SachDAL.getsoluongallsach();
+	}
 	public static SachBus iBus = null;
 
 	public static SachBus gI() {

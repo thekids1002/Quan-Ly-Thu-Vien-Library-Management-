@@ -3,6 +3,7 @@ package DAL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import DTO.ChiTietPhieuNhap;
@@ -117,5 +118,32 @@ public class ChiTietPhieuNhapDAL {
 		}
 
 		return i;
+	}
+	
+	public static ArrayList<ChiTietPhieuNhap> getthongke(){
+		ArrayList<ChiTietPhieuNhap> list = new ArrayList<ChiTietPhieuNhap>();
+		try {
+			String sql = "SELECT chitietphieunhap.*, phieunhap.NgayNhap, sach.TenSach FROM chitietphieunhap INNER JOIN phieunhap ON chitietphieunhap.MaPN = phieunhap.MaPhieuNhap INNER JOIN sach ON chitietphieunhap.MaSach = sach.MaSach";
+			Connection conn = DBConnect.getConnection();
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql); 
+			while(rs.next()) {
+				ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
+				ct.setMaCTPN(rs.getInt("MaCTPN"));
+				ct.setMaPhieuNhap(rs.getInt("MaPN"));
+				ct.setMaSach(rs.getInt("MaSach"));
+				ct.setGia(rs.getInt("Gia"));
+				ct.setSoLuong(rs.getInt("Soluong"));
+				ct.setThanhTien(rs.getInt("ThanhTien"));
+				ct.setTensach(rs.getString("Tensach"));
+				ct.setNgaynhap(rs.getString("Ngaynhap"));
+				list.add(ct);
+			}
+			conn.close();
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 }

@@ -28,6 +28,11 @@ public class chitietpmbus {
 	public int xoapm(ChiTieuPMDTO pm) {
 		return chitietpmDAL.xoactpm(pm);
 	}
+	
+	public int getsoluongsachdamuon() {
+		return chitietpmDAL.getsoluongsachdamuon();
+		
+	}
 
 	public static chitietpmbus iBus = null;
 

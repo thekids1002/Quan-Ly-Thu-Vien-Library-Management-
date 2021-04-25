@@ -7,6 +7,21 @@ public class ChiTietPhieuNhap {
 	private int Gia;
 	private int SoLuong;
 	private int ThanhTien;
+	private String tensach;
+	public String getTensach() {
+		return tensach;
+	}
+	public void setTensach(String tensach) {
+		this.tensach = tensach;
+	}
+	public String getNgaynhap() {
+		return ngaynhap;
+	}
+	public void setNgaynhap(String ngaynhap) {
+		this.ngaynhap = ngaynhap;
+	}
+	private String ngaynhap;
+	
 	public int getMaCTPN() {
 		return MaCTPN;
 	}

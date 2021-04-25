@@ -142,5 +142,24 @@ public class SachDAL {
 		}
 
 	}
+	
+	
+	public static int getsoluongallsach() {
+		try {
+			int soluong = 0 ;
+			Connection conn = DBConnect.getConnection();
+			String sql = "select soluong from sach" ;
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()) {
+				soluong += rs.getInt("soluong"); 
+				
+			}
+			conn.close();
+			return soluong ;
+		} catch (Exception e) {
+			return -1 ;
+		}
+	}
 
 }

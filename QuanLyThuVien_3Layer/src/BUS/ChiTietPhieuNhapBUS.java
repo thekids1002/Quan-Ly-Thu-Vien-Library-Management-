@@ -16,6 +16,11 @@ public class ChiTietPhieuNhapBUS {
 
 		return listpm = ChiTietPhieuNhapDAL.getdanhsachctphieunhap();
 	}
+	
+	public ArrayList<ChiTietPhieuNhap> thongkephieunhap() {
+
+		return ChiTietPhieuNhapDAL.getthongke();
+	}
 
 	public int thempm(ChiTietPhieuNhap pm) {
 		return ChiTietPhieuNhapDAL.Themctpn(pm); 
