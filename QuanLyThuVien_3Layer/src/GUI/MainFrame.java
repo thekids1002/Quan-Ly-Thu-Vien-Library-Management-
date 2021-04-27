@@ -297,6 +297,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem mnthemtaikhoan;
 	private DefaultTableModel dtmthongkesachmuon;
 	private DefaultTableModel dtmthongkenhaphang;
+	private ButtonGroup g;
 	public static JLabel lblUser;
 
 	public static int idtaikhoan;
@@ -673,7 +674,7 @@ public class MainFrame extends JFrame {
 		rdtra.setFont(new Font("Tahoma", Font.BOLD, 15));
 		rdtra.setBounds(245, 233, 127, 25);
 		panel_3.add(rdtra);
-		ButtonGroup g = new ButtonGroup();
+		g = new ButtonGroup();
 		g.add(rdmuon);
 		g.add(rdtra);
 
@@ -3669,6 +3670,15 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (dateChooser.getDate() == null) {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn ngày");
+					return;
+				}
+				if (!rdmuon.isSelected() && !rdtra.isSelected()) {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn tình trạng");
+					return;
+				}
+
 				int manv = nvsl.getMaNV();
 				int madocgia = dgsl.getMaDocGia();
 				String tinhtrang = "Đã Trả";
@@ -3698,6 +3708,14 @@ public class MainFrame extends JFrame {
 
 				int i = tablemuon.getSelectedRow();
 				if (i >= 0) {
+					if (dateChooser.getDate() == null) {
+						JOptionPane.showMessageDialog(null, "Bạn chưa chọn ngày");
+						return;
+					}
+					if (!rdmuon.isSelected() && !rdtra.isSelected()) {
+						JOptionPane.showMessageDialog(null, "Bạn chưa chọn tình trạng");
+						return;
+					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					// String ngaymuon = ((JTextField)
 					// dateChooser.getDateEditor().getUiComponent()).getText();
@@ -3752,10 +3770,16 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if(txtmasachmuon.getText().isEmpty()) {
+					thongbao("Mã Sách");
+					return; 
+				}
+				if(dateChooser_ngaytra.getDate() == null) {
+					thongbao("Ngày Trả") ;
+					return ;
+				}
+				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				// String ngaymuon = ((JTextField)
-				// dateChooser.getDateEditor().getUiComponent()).getText();
 				String ngaytra = sdf.format(dateChooser_ngaytra.getDate());
 
 				ChiTieuPMDTO ctpm = new ChiTieuPMDTO(0, Integer.parseInt(txtmapm.getText()),
@@ -3776,6 +3800,14 @@ public class MainFrame extends JFrame {
 				// TODO Auto-generated method stub
 				int i = tablectpm.getSelectedRow();
 				if (i >= 0) {
+					if(txtmasachmuon.getText().isEmpty()) {
+						thongbao("Mã Sách");
+						return; 
+					}
+					if(dateChooser_ngaytra.getDate() == null) {
+						thongbao("Ngày Trả") ;
+						return ;
+					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					// String ngaymuon = ((JTextField)
 					// dateChooser.getDateEditor().getUiComponent()).getText();
@@ -3833,9 +3865,20 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				
+				if(txtManhanvienphieunhap.getText().isEmpty()) {
+					thongbao("Mã nhân viên");
+					return ;
+				}
+				if(txtManccPhieuNhap.getText().isEmpty()) {
+					thongbao("Mã NCC") ;
+					return ;
+				}
+				if(NgayNhapPhieuNhap.getDate() == null) {
+					thongbao("Ngày Nhập");
+					return ;
+				}
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				// String ngaymuon = ((JTextField)
-				// dateChooser.getDateEditor().getUiComponent()).getText();
 				String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
 				int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
 				int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
@@ -3857,7 +3900,18 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablephieunhap.getSelectedRow();
 				if (i >= 0) {
-
+					if(txtManhanvienphieunhap.getText().isEmpty()) {
+						thongbao("Mã nhân viên");
+						return ;
+					}
+					if(txtManccPhieuNhap.getText().isEmpty()) {
+						thongbao("Mã NCC") ;
+						return ;
+					}
+					if(NgayNhapPhieuNhap.getDate() == null) {
+						thongbao("Ngày Nhập");
+						return ;
+					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString());
 					String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
@@ -3914,7 +3968,27 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
+				if(txtMaSachctpn.getText().isEmpty()) {
+					thongbao("Mã sách") ;
+					return; 
+				}
+				if(!isNumber(txtsoluongctpn.getText())) {
+					JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
+					return ;
+				}
+				if(txtsoluongctpn.getText().isEmpty()) {
+					thongbao("Số lượng");
+					return ;
+				}
+				if(!isNumber(txtgianhap.getText())) {
+					JOptionPane.showMessageDialog(null, "Giá nhập phải là số");
+					return ;
+				}
+				if(txtgianhap.getText().isEmpty()) {
+					thongbao("Giá nhập");
+					return ;
+				}
+				
 				int masach = Integer.parseInt(txtMaSachctpn.getText());
 				int sl = Integer.parseInt(txtsoluongctpn.getText());
 				int gia = Integer.parseInt(txtgianhap.getText());
@@ -3962,7 +4036,26 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablechitietphieunhap.getSelectedRow();
 				if (i >= 0) {
-
+					if(txtMaSachctpn.getText().isEmpty()) {
+						thongbao("Mã sách") ;
+						return; 
+					}
+					if(!isNumber(txtsoluongctpn.getText())) {
+						JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
+						return ;
+					}
+					if(txtsoluongctpn.getText().isEmpty()) {
+						thongbao("Số lượng");
+						return ;
+					}
+					if(!isNumber(txtgianhap.getText())) {
+						JOptionPane.showMessageDialog(null, "Giá nhập phải là số");
+						return ;
+					}
+					if(txtgianhap.getText().isEmpty()) {
+						thongbao("Giá nhập");
+						return ;
+					}
 					int masach = Integer.parseInt(txtMaSachctpn.getText());
 					int sl = Integer.parseInt(txtsoluongctpn.getText());
 					int gia = Integer.parseInt(txtgianhap.getText());
