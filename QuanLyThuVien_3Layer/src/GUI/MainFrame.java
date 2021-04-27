@@ -115,7 +115,7 @@ public class MainFrame extends JFrame {
 	private JLabel lblthuviensgu;
 	private JPanel PanelChinh;
 	private JPanel CardLayout;
-	
+
 	private JPanel SachPanel;
 	private JPanel LoaiSach;
 	private JPanel Sach;
@@ -388,13 +388,9 @@ public class MainFrame extends JFrame {
 		pntacgia();
 		/*
 		 * // PANEL TRANG CHỦ
-			*/
+		 */
 		trangchu();
-		 
-		
-		
-		
-		
+
 		nhanvien();
 
 		pnPhieumuon = new JPanel();
@@ -526,18 +522,19 @@ public class MainFrame extends JFrame {
 		lblphieunhap.setBounds(0, 487, 187, 46);
 		menuleft.add(lblphieunhap);
 		PanelChinh.add(pnTrangChu, "name_890335498390600");
-		
+
 		JLabel lblNewLabel_17 = new JLabel("");
-		lblNewLabel_17.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\iconsgu 3.png"));
+		lblNewLabel_17
+				.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\iconsgu 3.png"));
 		lblNewLabel_17.setBounds(346, 177, 401, 397);
 		pnTrangChu.add(lblNewLabel_17);
-		
-		 lblUser = new JLabel("");
+
+		lblUser = new JLabel("");
 		lblUser.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		lblUser.setForeground(Color.RED);
 		lblUser.setBounds(458, 594, 159, 83);
 		pnTrangChu.add(lblUser);
-		lblUser.setText("Hi  "+LoginForm.username);
+		lblUser.setText("Hi  " + LoginForm.username);
 		PanelChinh.add(pnSach, "name_890193837575500");
 
 		JPanel panel_5 = new JPanel();
@@ -555,7 +552,7 @@ public class MainFrame extends JFrame {
 		PanelChinh.add(pndocgia, "name_890203323464100");
 		PanelChinh.add(pntacgia, "name_890226525489300");
 		PanelChinh.add(pnnhaxuatban, "name_890210577532500");
-		
+
 		JButton btnTimnxb = new JButton("Tìm");
 		btnTimnxb.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnTimnxb.setBounds(770, 415, 108, 47);
@@ -790,8 +787,7 @@ public class MainFrame extends JFrame {
 
 		dateChooser_ngaytra = new JDateChooser();
 		dateChooser_ngaytra.setDateFormatString("yyyy-MM-dd");
-		
-			
+
 		dateChooser_ngaytra.setBounds(96, 79, 142, 35);
 		panel.add(dateChooser_ngaytra);
 
@@ -816,7 +812,7 @@ public class MainFrame extends JFrame {
 		btndanhsachphat.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btndanhsachphat.setBounds(964, 335, 117, 30);
 		pnPhieumuon.add(btndanhsachphat);
-		
+
 		JButton btnTm = new JButton("Tìm");
 		btnTm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnTm.setBounds(472, 340, 117, 30);
@@ -1141,126 +1137,120 @@ public class MainFrame extends JFrame {
 		dtmke.addColumn("Tên Kệ");
 		tablekesach = new MyTable(dtmke);
 		scrollPane_8.setViewportView(tablekesach);
-		
+
 	}
 
 	private void pnthongke() {
 		panelThongKe = new JPanel();
-		
-		DefaultPieDataset p=new DefaultPieDataset();
+
+		DefaultPieDataset p = new DefaultPieDataset();
 
 		int tongsach = SachBus.gI().soluongsach() + chitietpmbus.gI().getsoluongsachdamuon();
 		System.out.println("Tổng Sách" + tongsach);
-		System.out.println("Sách Đã Mượn "+ chitietpmbus.gI().getsoluongsachdamuon());
+		System.out.println("Sách Đã Mượn " + chitietpmbus.gI().getsoluongsachdamuon());
 		int sachdamuon = chitietpmbus.gI().getsoluongsachdamuon();
 		System.out.println(sachdamuon);
-		float phantramsachdamuon = (float) (sachdamuon *1.0/ tongsach * 100) ;
+		float phantramsachdamuon = (float) (sachdamuon * 1.0 / tongsach * 100);
 		System.out.println("Phần Trăm Sách đã mươn :" + phantramsachdamuon);
-		
-	    p.setValue("Sách Đã Mượn",phantramsachdamuon);
-	    p.setValue("Sách Còn Lại",100-phantramsachdamuon);
-	   
-	    
-	    
-	    JFreeChart chart=ChartFactory.createPieChart3D("Thống Kê Sách Đã Mượn",p);
 
-	    
-	    TextTitle tt=new TextTitle("Thống Kê Sách Đã Mượn",new Font("Arial",Font.BOLD,15));
+		p.setValue("Sách Đã Mượn", phantramsachdamuon);
+		p.setValue("Sách Còn Lại", 100 - phantramsachdamuon);
 
-	   
-	    tt.setPadding(5,5,5,5);
-	    chart.setTitle(tt);
+		JFreeChart chart = ChartFactory.createPieChart3D("Thống Kê Sách Đã Mượn", p);
 
-	  
-	    final PiePlot3D plot = (PiePlot3D) chart.getPlot();
-	    plot.setLabelFont(new Font("Arial",Font.PLAIN,12));
-	    PanelChinh.add(panelThongKe, "name_8485672922600");
-	    panelThongKe.setLayout(null);
-	    
-	    btnthongkesachmuon = new JButton("Danh Sách ");
-	    btnthongkesachmuon.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    btnthongkesachmuon.setBounds(155, 347, 138, 36);
-	    panelThongKe.add(btnthongkesachmuon);
-	    
-	    JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-	    tabbedPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-	    tabbedPane.setBounds(397, 13, 684, 709);
-	    panelThongKe.add(tabbedPane);
-	    
-	    JPanel panel = new JPanel();
-	    tabbedPane.addTab("Nhập Hàng", null, panel, null);
-	    panel.setLayout(null);
-	    dtmthongkenhaphang = new DefaultTableModel();
-	    dtmthongkenhaphang.addColumn("Mã CTPN");
-	    dtmthongkenhaphang.addColumn("Mã PN");
-	    dtmthongkenhaphang.addColumn("Mã Sách");
-	   
-	    dtmthongkenhaphang.addColumn("Giá Nhập");
-	    dtmthongkenhaphang.addColumn("Số Lượng");
-	    dtmthongkenhaphang.addColumn("Thành Tiền");
-	    dtmthongkenhaphang.addColumn("Ngày Nhập");
-	    dtmthongkenhaphang.addColumn("Tên Sách");
-	    JScrollPane scrollPane = new JScrollPane();
-	    
-	    scrollPane.setBounds(12, 13, 651, 418);
-	    panel.add(scrollPane);
-	    
-	    tablethongkenhaphang = new MyTable(dtmthongkenhaphang);
-	    
-	    scrollPane.setViewportView(tablethongkenhaphang);
-	    
-	    lblNewLabel_18 = new JLabel("Lọc Theo");
-	    lblNewLabel_18.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    lblNewLabel_18.setForeground(new Color(0, 0, 0));
-	    lblNewLabel_18.setBounds(27, 487, 76, 16);
-	    panel.add(lblNewLabel_18);
-	    
-	    lblNewLabel_19 = new JLabel("Năm");
-	    lblNewLabel_19.setForeground(Color.BLACK);
-	    lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    lblNewLabel_19.setBounds(128, 484, 76, 23);
-	    panel.add(lblNewLabel_19);
-	    
-	    JSpinField spinField = new JSpinField();
-	    spinField.setBounds(230, 484, 52, 22);
-	    panel.add(spinField);
-	    
-	    JButton btnNewButton_1 = new JButton("Lọc");
-	    btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    btnNewButton_1.setBounds(321, 484, 64, 23);
-	    panel.add(btnNewButton_1);
-	    
-	    JLabel lblNewLabel_20 = new JLabel("Số Sách Đã Nhập");
-	    lblNewLabel_20.setForeground(Color.RED);
-	    lblNewLabel_20.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    lblNewLabel_20.setBounds(410, 487, 149, 20);
-	    panel.add(lblNewLabel_20);
-	    
-	    lblsosachdanhap = new JLabel("");
-	    lblsosachdanhap.setBounds(552, 487, 64, 20);
-	    panel.add(lblsosachdanhap);
-	    
-	    JLabel lblNewLabel_20_1 = new JLabel("Tổng Tiền");
-	    lblNewLabel_20_1.setForeground(Color.RED);
-	    lblNewLabel_20_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-	    lblNewLabel_20_1.setBounds(410, 537, 149, 20);
-	    panel.add(lblNewLabel_20_1);
-	    
-	    JLabel lbltongtien = new JLabel("");
-	    lbltongtien.setBounds(552, 537, 64, 20);
-	    panel.add(lbltongtien);
-	    
-	    JPanel panel_4 = new JPanel();
-	    tabbedPane.addTab("Chưa Biết", null, panel_4, null);
-	    
-	    ChartPanel panel1=new ChartPanel(chart);
-	    panel1.setBounds(12, 25, 385, 302);
-	    panelThongKe.add(panel1);
-	    
-	  
-	    panel1.setPreferredSize(new Dimension(311,302));
-	    panel1.setBackground(new Color(0,0,0,0));
-		
+		TextTitle tt = new TextTitle("Thống Kê Sách Đã Mượn", new Font("Arial", Font.BOLD, 15));
+
+		tt.setPadding(5, 5, 5, 5);
+		chart.setTitle(tt);
+
+		final PiePlot3D plot = (PiePlot3D) chart.getPlot();
+		plot.setLabelFont(new Font("Arial", Font.PLAIN, 12));
+		PanelChinh.add(panelThongKe, "name_8485672922600");
+		panelThongKe.setLayout(null);
+
+		btnthongkesachmuon = new JButton("Danh Sách ");
+		btnthongkesachmuon.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnthongkesachmuon.setBounds(155, 347, 138, 36);
+		panelThongKe.add(btnthongkesachmuon);
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		tabbedPane.setBounds(397, 13, 684, 709);
+		panelThongKe.add(tabbedPane);
+
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("Nhập Hàng", null, panel, null);
+		panel.setLayout(null);
+		dtmthongkenhaphang = new DefaultTableModel();
+		dtmthongkenhaphang.addColumn("Mã CTPN");
+		dtmthongkenhaphang.addColumn("Mã PN");
+		dtmthongkenhaphang.addColumn("Mã Sách");
+
+		dtmthongkenhaphang.addColumn("Giá Nhập");
+		dtmthongkenhaphang.addColumn("Số Lượng");
+		dtmthongkenhaphang.addColumn("Thành Tiền");
+		dtmthongkenhaphang.addColumn("Ngày Nhập");
+		dtmthongkenhaphang.addColumn("Tên Sách");
+		JScrollPane scrollPane = new JScrollPane();
+
+		scrollPane.setBounds(12, 13, 651, 418);
+		panel.add(scrollPane);
+
+		tablethongkenhaphang = new MyTable(dtmthongkenhaphang);
+
+		scrollPane.setViewportView(tablethongkenhaphang);
+
+		lblNewLabel_18 = new JLabel("Lọc Theo");
+		lblNewLabel_18.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_18.setForeground(new Color(0, 0, 0));
+		lblNewLabel_18.setBounds(27, 487, 76, 16);
+		panel.add(lblNewLabel_18);
+
+		lblNewLabel_19 = new JLabel("Năm");
+		lblNewLabel_19.setForeground(Color.BLACK);
+		lblNewLabel_19.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_19.setBounds(128, 484, 76, 23);
+		panel.add(lblNewLabel_19);
+
+		JSpinField spinField = new JSpinField();
+		spinField.setBounds(230, 484, 52, 22);
+		panel.add(spinField);
+
+		JButton btnNewButton_1 = new JButton("Lọc");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btnNewButton_1.setBounds(321, 484, 64, 23);
+		panel.add(btnNewButton_1);
+
+		JLabel lblNewLabel_20 = new JLabel("Số Sách Đã Nhập");
+		lblNewLabel_20.setForeground(Color.RED);
+		lblNewLabel_20.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_20.setBounds(410, 487, 149, 20);
+		panel.add(lblNewLabel_20);
+
+		lblsosachdanhap = new JLabel("");
+		lblsosachdanhap.setBounds(552, 487, 64, 20);
+		panel.add(lblsosachdanhap);
+
+		JLabel lblNewLabel_20_1 = new JLabel("Tổng Tiền");
+		lblNewLabel_20_1.setForeground(Color.RED);
+		lblNewLabel_20_1.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_20_1.setBounds(410, 537, 149, 20);
+		panel.add(lblNewLabel_20_1);
+
+		JLabel lbltongtien = new JLabel("");
+		lbltongtien.setBounds(552, 537, 64, 20);
+		panel.add(lbltongtien);
+
+		JPanel panel_4 = new JPanel();
+		tabbedPane.addTab("Chưa Biết", null, panel_4, null);
+
+		ChartPanel panel1 = new ChartPanel(chart);
+		panel1.setBounds(12, 25, 385, 302);
+		panelThongKe.add(panel1);
+
+		panel1.setPreferredSize(new Dimension(311, 302));
+		panel1.setBackground(new Color(0, 0, 0, 0));
+
 	}
 
 	private void nhanvien() {
@@ -1380,20 +1370,19 @@ public class MainFrame extends JFrame {
 		tablenhanvien = new MyTable(dtmnhanvien);
 		scrollPane_4.setViewportView(tablenhanvien);
 		popupThemtaikhoanv = new JPopupMenu();
-		mnthemtaikhoan= new JMenuItem("Thêm Tài Khoản");
+		mnthemtaikhoan = new JMenuItem("Thêm Tài Khoản");
 		mnthemtaikhoan.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablenhanvien.getSelectedRow();
-				if(i > -1) {
+				if (i > -1) {
 					idtaikhoan = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
 					new TaiKhoan().setVisible(true);
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn chưa chọn vào nhân viên để thêm tài khoản");
 				}
-				
+
 			}
 		});
 		mnthemtaikhoan.setBounds(0, 0, 113, 19);
@@ -1877,9 +1866,6 @@ public class MainFrame extends JFrame {
 
 	}
 
-	  
-
-
 	private void trangchu() {
 
 		pnTrangChu = new JPanel();
@@ -1897,19 +1883,19 @@ public class MainFrame extends JFrame {
 
 	public void addEvent() {
 		btnloadlaitrang.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				loadsach();
-				
+
 			}
 		});
 		btnthongkesachmuon.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				new TableThongKePhieuMuon().setVisible(true);
-				
+
 			}
 		});
 		tablectpm.addMouseListener(new MouseListener() {
@@ -1961,17 +1947,16 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int i = tablephieunhap.getSelectedRow();
-				if(i>-1) {
-					int ma = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()) ; 
-					
+				if (i > -1) {
+					int ma = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString());
+
 					Export.WritePDF wpdf = new WritePDF();
 					wpdf.xuatPDFPhieuNhap(tablechitietphieunhap, ma);
 
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Click Vào Table Để Xuất Hoá Đơn");
 				}
-				
+
 			}
 		});
 		btnxuatexcel.addActionListener(new ActionListener() {
@@ -2020,8 +2005,6 @@ public class MainFrame extends JFrame {
 		});
 		tablephieunhap.addMouseListener(new MouseListener() {
 
-		
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -2051,25 +2034,26 @@ public class MainFrame extends JFrame {
 				// TODO Auto-generated method stub
 				int i = tablephieunhap.getSelectedRow();
 				if (i >= 0) {
-					mapn = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()); 
+					mapn = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString());
 					lblmaphieunhap.setText("Mã Phiếu Nhập " + mapn);
 					txtManhanvienphieunhap.setText(dtmphieunhap.getValueAt(i, 0).toString());
 					txtManccPhieuNhap.setText(dtmphieunhap.getValueAt(i, 1).toString());
 					Date date2;
 					try {
-						date2 = new SimpleDateFormat("yyyy-MM-dd").parse((String) dtmphieunhap.getValueAt(i, 3).toString());
+						date2 = new SimpleDateFormat("yyyy-MM-dd")
+								.parse((String) dtmphieunhap.getValueAt(i, 3).toString());
 						NgayNhapPhieuNhap.setDate(date2);
-					
+
 					} catch (ParseException ex) {
 						// TODO Auto-generated catch block
 						ex.printStackTrace();
 					}
 					int maphieunhap = mapn;
 					dtmchitietphieunhap.setRowCount(0);
-					for(ChiTietPhieuNhap ct : ctphieunhap) {
-					
-						if(ct.getMaPhieuNhap() == maphieunhap ) {
-							Vector vec  = new Vector();
+					for (ChiTietPhieuNhap ct : ctphieunhap) {
+
+						if (ct.getMaPhieuNhap() == maphieunhap) {
+							Vector vec = new Vector();
 							vec.add(ct.getMaCTPN());
 							vec.add(ct.getMaPhieuNhap());
 							vec.add(ct.getMaSach());
@@ -2077,10 +2061,10 @@ public class MainFrame extends JFrame {
 							vec.add(ct.getSoLuong());
 							vec.add(ct.getThanhTien());
 							dtmchitietphieunhap.addRow(vec);
- 						}
+						}
 					}
 				}
-				
+
 			}
 		});
 
@@ -2119,11 +2103,9 @@ public class MainFrame extends JFrame {
 					txtMaSachctpn.setText(dtmchitietphieunhap.getValueAt(i, 2).toString());
 					txtsoluongctpn.setText(dtmchitietphieunhap.getValueAt(i, 3).toString());
 					txtgianhap.setText(dtmchitietphieunhap.getValueAt(i, 4).toString());
-					
+
 				}
-				
-				
-				
+
 			}
 		});
 		tablemuon.addMouseListener(new MouseListener() {
@@ -2204,8 +2186,7 @@ public class MainFrame extends JFrame {
 						txtmasachmuon.setText(dtmctpm.getValueAt(0, 2).toString());
 						txtghichuctpm.setText(dtmctpm.getValueAt(0, 3).toString());
 					} catch (Exception e) {
-						
-						
+
 					}
 				}
 
@@ -2782,46 +2763,46 @@ public class MainFrame extends JFrame {
 		});
 		;
 		tablesach.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				int i = tablesach.getSelectedRow();
-				if(i>-1) {
+				if (i > -1) {
 					txttensach.setText(dtmsach.getValueAt(i, 1).toString());
 					int maloai = Integer.parseInt(dtmsach.getValueAt(i, 2).toString());
-					int manxb = Integer.parseInt(dtmsach.getValueAt(i, 3).toString()) ;
+					int manxb = Integer.parseInt(dtmsach.getValueAt(i, 3).toString());
 					int matg = Integer.parseInt(dtmsach.getValueAt(i, 4).toString());
 					int make = Integer.parseInt(dtmsach.getValueAt(i, 7).toString());
 					txtnamxbsach.setText(dtmsach.getValueAt(i, 5).toString());
 					txtsoluongsach.setText(dtmsach.getValueAt(i, 6).toString());
-					hinhanh= dtmsach.getValueAt(i,8).toString();
+					hinhanh = dtmsach.getValueAt(i, 8).toString();
 					lblhinhanhpre.setIcon(getAnhSP(hinhanh));
 				}
-				
+
 			}
 		});
 		tablencc.addMouseListener(new MouseListener() {
@@ -3107,7 +3088,26 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				if (txttennv.getText().isEmpty()) {
+					thongbao("Tên tác giả");
+					return;
+				}
+				if (txtnamsinhnv.getText().isEmpty() || !isNumber(txtnamsinhnv.getText())) {
+					thongbao("Năm sinh tác giả");
+					return;
+				}
+				if (txtgioitinhnv.getText().isEmpty()) {
+					thongbao("Giới tính");
+					return;
+				}
+				if (txtsodienthoainv.getText().isEmpty()) {
+					thongbao("SĐT");
+					return;
+				}
+				if (txtdiachinv.getText().isEmpty()) {
+					thongbao("Địa chỉ");
+					return;
+				}
 				NhanVien nv;
 				nv = new NhanVien(0, txttennv.getText(), txtnamsinhnv.getText(), txtgioitinhnv.getText(),
 						txtsodienthoainv.getText(), txtdiachinv.getText());
@@ -3124,7 +3124,6 @@ public class MainFrame extends JFrame {
 						// TODO: handle exception
 						e2.printStackTrace();
 					}
-					
 
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
 
@@ -3245,14 +3244,27 @@ public class MainFrame extends JFrame {
 
 			}
 		});
+		///////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////// THEM SUA XOA NHÀ XUẤT
+		/////////////////////////////////////////////////////////////////////////////////////// BẢN////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
 
 		btnThemnxb.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// int i = tablenhanvien.getSelectedRow();
-				// int vitri = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
+				if (txtTennhaxuatban.getText().isEmpty()) {
+					thongbao("Tên nhà xuất bản");
+					return;
+				}
+				if (txtdiachinxb.getText().isEmpty()) {
+					thongbao("Địa chỉ nxb");
+					return;
+				}
+				if (txtsdtnxb.getText().isEmpty()) {
+					thongbao("SĐT NXB ");
+					return;
+				}
 				NhaXuatBan nxb = new NhaXuatBan(0, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
 						txtsdtnxb.getText());
 
@@ -3272,17 +3284,33 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tablenhaxuatban.getSelectedRow();
-				int vitri = Integer.parseInt(dtmnhaxuatban.getValueAt(i, 0).toString());
-				// JOptionPane.showMessageDialog(contentPane, vitri);
-				NhaXuatBan nxb = new NhaXuatBan(vitri, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
-						txtsdtnxb.getText());
+				if (i > -1) {
+					if (txtTennhaxuatban.getText().isEmpty()) {
+						thongbao("Tên nhà xuất bản");
+						return;
+					}
+					if (txtdiachinxb.getText().isEmpty()) {
+						thongbao("Địa chỉ nxb");
+						return;
+					}
+					if (txtsdtnxb.getText().isEmpty()) {
+						thongbao("SĐT NXB ");
+						return;
+					}
+					int vitri = Integer.parseInt(dtmnhaxuatban.getValueAt(i, 0).toString());
+					// JOptionPane.showMessageDialog(contentPane, vitri);
+					NhaXuatBan nxb = new NhaXuatBan(vitri, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
+							txtsdtnxb.getText());
 
-				if (NhaXuatBanBUS.gI().suanxb(nxb) >= 0) {
-					loadnxb();
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
+					if (NhaXuatBanBUS.gI().suanxb(nxb) >= 0) {
+						loadnxb();
+						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
 
+					} else {
+						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					}
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn vào table");
 				}
 
 			}
@@ -3320,9 +3348,18 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				// int i = tablenhanvien.getSelectedRow();
-				// int vitri = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
+				if (txtTentacgia.getText().isEmpty()) {
+					thongbao("Tên tác giả");
+					return;
+				}
+				if (txtnamsinhtacgia.getText().isEmpty()) {
+					thongbao("Năm sinh tác giả");
+					return;
+				}
+				if (txtQueQuan.getText().isEmpty()) {
+					thongbao("Quê Qua tác giả");
+					return;
+				}
 				TacGiaDTO tg = new TacGiaDTO(0, txtTentacgia.getText(), txtnamsinhtacgia.getText(),
 						txtQueQuan.getText());
 
@@ -3343,6 +3380,18 @@ public class MainFrame extends JFrame {
 
 				int i = tabletacgia.getSelectedRow();
 				if (i >= 0) {
+					if (txtTentacgia.getText().isEmpty()) {
+						thongbao("Tên tác giả");
+						return;
+					}
+					if (txtnamsinhtacgia.getText().isEmpty()) {
+						thongbao("Năm sinh tác giả");
+						return;
+					}
+					if (txtQueQuan.getText().isEmpty()) {
+						thongbao("Quê Qua tác giả");
+						return;
+					}
 					int vitri = Integer.parseInt(dtmtacgia.getValueAt(i, 0).toString());
 					TacGiaDTO tg = new TacGiaDTO(vitri, txtTentacgia.getText(), txtnamsinhtacgia.getText(),
 							txtQueQuan.getText());
@@ -3392,8 +3441,22 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				int i = tabledocgia.getRowCount();
-
+				if (txtTendocgia.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Tên đọc giả không được bỏ trống");
+					return;
+				}
+				if (txtsdtdocgia.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "SĐT đọc giả không được bỏ trống");
+					return;
+				}
+				if (txtdiachidocgia.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Địa chỉ không được bỏ trống");
+					return;
+				}
+				if (txtgioitinhdocgia.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Giới tính không được bỏ trống");
+					return;
+				}
 				DocGia docgia = new DocGia(0, txtTendocgia.getText(), txtgioitinhdocgia.getText(),
 						txtdiachidocgia.getText(), txtsdtdocgia.getText());
 				DocGiaBUS docgiabus = new DocGiaBUS();
@@ -3415,6 +3478,22 @@ public class MainFrame extends JFrame {
 
 				int i = tabledocgia.getSelectedRow();
 				if (i >= 0) {
+					if (txtTendocgia.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Tên đọc giả không được bỏ trống");
+						return;
+					}
+					if (txtsdtdocgia.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "SĐT đọc giả không được bỏ trống");
+						return;
+					}
+					if (txtdiachidocgia.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Địa chỉ không được bỏ trống");
+						return;
+					}
+					if (txtgioitinhdocgia.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Giới tính không được bỏ trống");
+						return;
+					}
 					int vitri = Integer.parseInt(dtmdocgia.getValueAt(i, 0).toString());
 					DocGia docgia = new DocGia(vitri, txtTendocgia.getText(), txtgioitinhdocgia.getText(),
 							txtdiachidocgia.getText(), txtsdtdocgia.getText());
@@ -3463,17 +3542,34 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+
+				// Bắt sự kiện khi nhập không đúng;
+
+				if (txttensach.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Tên sách không được để trống hoặc là số");
+					return;
+
+				}
+				if (!isNumber(txtsoluongsach.getText()) || txtsoluongsach.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
+					return;
+				}
+				if (!isNumber(txtnamxbsach.getText()) || txtnamxbsach.getText().isEmpty()
+						|| txtnamxbsach.getText().length() != 4) {
+					JOptionPane.showMessageDialog(null, "Không được bỏ trống, năm xuất bản phải là số");
+					return;
+				}
+
 				int makesach = kesl.getMaKeSach();
 				int manxb = nxbsl.getMaNXB();
 				int matg = tacgiasl.getMaTacGia();
 				int loai = loaisl.getMaloai();
-			  
+
 				String tensach = txttensach.getText();
 				int namxb = Integer.parseInt(txtnamxbsach.getText());
 				int soluong = Integer.parseInt(txtsoluongsach.getText());
 
-				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong,"",   hinhanh, makesach);
+				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh, makesach);
 
 				if (SachDAL.themsach(sach) >= 0) {
 					loadsach();
@@ -3485,23 +3581,39 @@ public class MainFrame extends JFrame {
 
 			}
 		});
-		
+
 		btnsuasach.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablesach.getSelectedRow();
-				if(i>-1) {
+				if (i > -1) {
+					if (txttensach.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Tên sách không được để trống hoặc là số");
+						return;
+
+					}
+					if (!isNumber(txtsoluongsach.getText()) || txtsoluongsach.getText().isEmpty()) {
+						JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
+						return;
+					}
+					if (!isNumber(txtnamxbsach.getText()) || txtnamxbsach.getText().isEmpty()
+							|| txtnamxbsach.getText().length() != 4) {
+						JOptionPane.showMessageDialog(null, "Không được bỏ trống, năm xuất bản phải là số");
+						return;
+					}
+
 					int makesach = kesl.getMaKeSach();
 					int manxb = nxbsl.getMaNXB();
 					int matg = tacgiasl.getMaTacGia();
 					int loai = loaisl.getMaloai();
-				  
+
 					String tensach = txttensach.getText();
 					int namxb = Integer.parseInt(txtnamxbsach.getText());
 					int soluong = Integer.parseInt(txtsoluongsach.getText());
 					int masach = Integer.parseInt(dtmsach.getValueAt(i, 0).toString());
-					SachDTO sach = new SachDTO(masach, tensach, matg, manxb, loai, namxb, soluong,"",   hinhanh, makesach);
+					SachDTO sach = new SachDTO(masach, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh,
+							makesach);
 
 					if (SachBus.gI().suapm(sach) > 0) {
 						loadsach();
@@ -3510,30 +3622,30 @@ public class MainFrame extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Vào Bảng");
 				}
-				
+
 			}
 		});
-		
+
 		btnxoasach.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablesach.getSelectedRow();
-				if(i>-1) {
+				if (i > -1) {
 					int makesach = kesl.getMaKeSach();
 					int manxb = nxbsl.getMaNXB();
 					int matg = tacgiasl.getMaTacGia();
 					int loai = loaisl.getMaloai();
-				  
+
 					String tensach = txttensach.getText();
 					int namxb = Integer.parseInt(txtnamxbsach.getText());
 					int soluong = Integer.parseInt(txtsoluongsach.getText());
 					int masach = Integer.parseInt(dtmsach.getValueAt(i, 0).toString());
-					SachDTO sach = new SachDTO(masach, tensach, matg, manxb, loai, namxb, soluong,"",   hinhanh, makesach);
+					SachDTO sach = new SachDTO(masach, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh,
+							makesach);
 
 					if (SachBus.gI().xoapm(sach) > 0) {
 						loadsach();
@@ -3542,11 +3654,10 @@ public class MainFrame extends JFrame {
 					} else {
 						JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Vào Bảng");
 				}
-				
+
 			}
 		});
 
@@ -3714,162 +3825,158 @@ public class MainFrame extends JFrame {
 			}
 		});
 		///////////////////////////////////////////////////////////////////////////////////////////////
-		/////////THÊM SỬA XOÁ PHIẾU NHẬP/////////////////////////////////////////////////
+		///////// THÊM SỬA XOÁ PHIẾU
+		/////////////////////////////////////////////////////////////////////////////////////////////// NHẬP/////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////
-		
+
 		btnthemphieunhap.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				// String ngaymuon = ((JTextField)
 				// dateChooser.getDateEditor().getUiComponent()).getText();
 				String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
-				int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
-				int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
-				PhieuNhap pn = new PhieuNhap(0, Mancc, Manv, ngaynhap) ;
-				if(PhieuNhapBUS.gI().thempm(pn) > 0) {
+				int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
+				int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
+				PhieuNhap pn = new PhieuNhap(0, Mancc, Manv, ngaynhap);
+				if (PhieuNhapBUS.gI().thempm(pn) > 0) {
 					loadphieunhap();
 					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thành Công");
 
-				}else {
+				} else {
 					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thất Bại");
 
 				}
-				
+
 			}
 		});
 		btnsuaphieunhap.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablephieunhap.getSelectedRow();
 				if (i >= 0) {
-					
+
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()); 
+					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString());
 					String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
-					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
-					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
-					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap) ;
-					if(PhieuNhapBUS.gI().suapm(pn) > 0) {
+					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
+					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
+					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap);
+					if (PhieuNhapBUS.gI().suapm(pn) > 0) {
 						loadphieunhap();
 						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thành Công");
 
-						
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thất Bại");
 
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
-				
+
 			}
 		});
-		
+
 		btnxoaphieunhap.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				int i = tablephieunhap.getSelectedRow();
 				if (i >= 0) {
-					
+
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()); 
+					int vitri = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString());
 					String ngaynhap = sdf.format(NgayNhapPhieuNhap.getDate());
-					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText()) ;
-					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText()) ;
-					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap) ;
-					if(PhieuNhapBUS.gI().xoapm(pn) > 0) {
+					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
+					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
+					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap);
+					if (PhieuNhapBUS.gI().xoapm(pn) > 0) {
 						loadphieunhap();
 						JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thành Công");
 
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thất Bại");
 
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
 			}
 		});
 		////////////////////////////////////////////////////////////////////////////////////////////////
-		//////////////////////THÊM SỬA XOÁ CHI TIẾT PHIẾU NHẬP/////////////////////////////////////////
+		////////////////////// THÊM SỬA XOÁ CHI TIẾT PHIẾU
+		//////////////////////////////////////////////////////////////////////////////////////////////// NHẬP/////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////////
 		btnthemchitietphieunhap.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-				int masach = Integer.parseInt(txtMaSachctpn.getText()) ; 
+
+				int masach = Integer.parseInt(txtMaSachctpn.getText());
 				int sl = Integer.parseInt(txtsoluongctpn.getText());
 				int gia = Integer.parseInt(txtgianhap.getText());
-				ChiTietPhieuNhap ct = new ChiTietPhieuNhap(0, mapn, masach, gia, sl, sl*gia) ;
-				if(ChiTietPhieuNhapBUS.gI().thempm(ct) >= 0) {
+				ChiTietPhieuNhap ct = new ChiTietPhieuNhap(0, mapn, masach, gia, sl, sl * gia);
+				if (ChiTietPhieuNhapBUS.gI().thempm(ct) >= 0) {
 					loadctphieunhap();
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thất Bại");
 
 				}
 			}
 		});
-		
+
 		btnxoactpn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				int i = tablechitietphieunhap.getSelectedRow();
 				if (i >= 0) {
-					
-					int masach = Integer.parseInt(txtMaSachctpn.getText()) ; 
+
+					int masach = Integer.parseInt(txtMaSachctpn.getText());
 					int sl = Integer.parseInt(txtsoluongctpn.getText());
 					int gia = Integer.parseInt(txtgianhap.getText());
-					int mactpn = Integer.parseInt(dtmchitietphieunhap.getValueAt(i, 0).toString()) ;
-					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl*gia) ;
-					if(ChiTietPhieuNhapBUS.gI().xoapm(ct) > 0) {
+					int mactpn = Integer.parseInt(dtmchitietphieunhap.getValueAt(i, 0).toString());
+					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl * gia);
+					if (ChiTietPhieuNhapBUS.gI().xoapm(ct) > 0) {
 						loadctphieunhap();
 						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thành Công");
 
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thất Bại");
 
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
 			}
 		});
-		
+
 		btnsuactpn.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablechitietphieunhap.getSelectedRow();
 				if (i >= 0) {
-					
-					int masach = Integer.parseInt(txtMaSachctpn.getText()) ; 
+
+					int masach = Integer.parseInt(txtMaSachctpn.getText());
 					int sl = Integer.parseInt(txtsoluongctpn.getText());
 					int gia = Integer.parseInt(txtgianhap.getText());
-					int mactpn = Integer.parseInt(dtmchitietphieunhap.getValueAt(i, 0).toString()) ;
-					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl*gia) ;
-					if(ChiTietPhieuNhapBUS.gI().suapm(ct) > 0) {
+					int mactpn = Integer.parseInt(dtmchitietphieunhap.getValueAt(i, 0).toString());
+					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl * gia);
+					if (ChiTietPhieuNhapBUS.gI().suapm(ct) > 0) {
 						loadctphieunhap();
 						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thành Công");
 
-					}else {
+					} else {
 						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thất Bại");
 
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
 			}
@@ -4101,8 +4208,7 @@ public class MainFrame extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
-	
-	
+
 	public static ArrayList<PhieuNhap> phieunhap = new ArrayList<PhieuNhap>();
 
 	public void loadphieunhap() {
@@ -4123,12 +4229,12 @@ public class MainFrame extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
+
 	public static ArrayList<ChiTietPhieuNhap> thongkectphieunhap = new ArrayList<ChiTietPhieuNhap>();
 
 	public void loadthongkephieunhap() {
 		thongkectphieunhap = null;
 		thongkectphieunhap = ChiTietPhieuNhapBUS.gI().thongkephieunhap();
-		
 
 		dtmthongkenhaphang.setRowCount(0);
 
@@ -4148,7 +4254,7 @@ public class MainFrame extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
-	
+
 	public static ArrayList<ChiTietPhieuNhap> ctphieunhap = new ArrayList<ChiTietPhieuNhap>();
 
 	public void loadctphieunhap() {
@@ -4223,51 +4329,64 @@ public class MainFrame extends JFrame {
 			}
 		});
 	}
-	
-	
-	 private void xuLyChonAnh() {
-	        JFileChooser fileChooser = new JFileChooser("img/sach/");
-	        FileNameExtensionFilter filter = new FileNameExtensionFilter(
-	                "Tệp hình ảnh", "jpg", "png", "jpeg");
-	        fileChooser.setFileFilter(filter);
-	        int returnVal = fileChooser.showOpenDialog(null);
 
-	        if (returnVal == JFileChooser.APPROVE_OPTION) {
-	            String name = fileChooser.getSelectedFile().getName();
-	            hinhanh = name ;
-	            lblhinhanhpre.setIcon(getAnhSP(name));
-	            System.out.println(name);
-	        }
-	    }
-	 File fileAnhSP;
-	 private JButton btnthongkesachmuon;
-	 private JTable tablethongkenhaphang;
-	 private JLabel lblNewLabel_18;
-	 private JLabel lblNewLabel_19;
-	 private JLabel lblsosachdanhap;
-	 private ImageIcon getAnhSP(String src) {
-	        src = src.trim().equals("") ? "default.png" : src;
-	        //Xử lý ảnh
-	        BufferedImage img = null;
-	        File fileImg = new File("img/sach/" + src);
+	private void xuLyChonAnh() {
+		JFileChooser fileChooser = new JFileChooser("img/sach/");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Tệp hình ảnh", "jpg", "png", "jpeg");
+		fileChooser.setFileFilter(filter);
+		int returnVal = fileChooser.showOpenDialog(null);
 
-	        if (!fileImg.exists()) {
-	            src = "default.png";
-	            fileImg = new File("img/sach/" + src);
-	        }
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			String name = fileChooser.getSelectedFile().getName();
+			hinhanh = name;
+			lblhinhanhpre.setIcon(getAnhSP(name));
+			System.out.println(name);
+		}
+	}
 
-	        try {
-	            img = ImageIO.read(fileImg);
-	            fileAnhSP = new File("img/sach/" + src);
-	        } catch (IOException e) {
-	            fileAnhSP = new File("img/sach/default.png");
-	        }
+	File fileAnhSP;
+	private JButton btnthongkesachmuon;
+	private JTable tablethongkenhaphang;
+	private JLabel lblNewLabel_18;
+	private JLabel lblNewLabel_19;
+	private JLabel lblsosachdanhap;
 
-	        if (img != null) {
-	            Image dimg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+	private ImageIcon getAnhSP(String src) {
+		src = src.trim().equals("") ? "default.png" : src;
+		// Xử lý ảnh
+		BufferedImage img = null;
+		File fileImg = new File("img/sach/" + src);
 
-	            return new ImageIcon(dimg);
-	        }
-	        return null;
-	    }
+		if (!fileImg.exists()) {
+			src = "default.png";
+			fileImg = new File("img/sach/" + src);
+		}
+
+		try {
+			img = ImageIO.read(fileImg);
+			fileAnhSP = new File("img/sach/" + src);
+		} catch (IOException e) {
+			fileAnhSP = new File("img/sach/default.png");
+		}
+
+		if (img != null) {
+			Image dimg = img.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+
+			return new ImageIcon(dimg);
+		}
+		return null;
+	}
+
+	public static void thongbao(String s) {
+		JOptionPane.showMessageDialog(null, s + " không được bỏ trống");
+	}
+
+	public static boolean isNumber(String s) {
+		try {
+			Double.parseDouble(s);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }
