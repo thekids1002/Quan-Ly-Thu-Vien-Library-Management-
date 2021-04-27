@@ -1896,6 +1896,14 @@ public class MainFrame extends JFrame {
 	}
 
 	public void addEvent() {
+		btnloadlaitrang.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				loadsach();
+				
+			}
+		});
 		btnthongkesachmuon.addActionListener(new ActionListener() {
 			
 			@Override
@@ -1952,9 +1960,18 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Export.WritePDF wpdf = new WritePDF();
-				wpdf.xuatPDF(tablenhanvien);
+				int i = tablephieunhap.getSelectedRow();
+				if(i>-1) {
+					int ma = Integer.parseInt(dtmphieunhap.getValueAt(i, 0).toString()) ; 
+					
+					Export.WritePDF wpdf = new WritePDF();
+					wpdf.xuatPDFPhieuNhap(tablechitietphieunhap, ma);
 
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Bạn Chưa Click Vào Table Để Xuất Hoá Đơn");
+				}
+				
 			}
 		});
 		btnxuatexcel.addActionListener(new ActionListener() {

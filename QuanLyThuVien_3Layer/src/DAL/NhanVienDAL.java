@@ -114,4 +114,23 @@ public class NhanVienDAL {
 		}
 
 	}
+	public static NhanVien getnhanvien(int ma) {
+		try {
+			String sql ="select tennv from nhanvien where manv = ?" ;
+			NhanVien nv = new NhanVien();
+			Connection conn = DBConnect.getConnection(); 
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ma);
+			ResultSet rs = pstm.executeQuery(); 
+			if(rs.next()) {
+				nv.setTenNV(rs.getString("tennv"));
+			}
+			
+			return nv ;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

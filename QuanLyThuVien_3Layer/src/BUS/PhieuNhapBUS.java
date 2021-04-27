@@ -37,4 +37,9 @@ public class PhieuNhapBUS {
 
 		return iBus;
 	}
+
+	public PhieuNhap getPhieuNhap(String mapn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

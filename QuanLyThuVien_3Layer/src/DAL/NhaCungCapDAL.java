@@ -100,5 +100,26 @@ public class NhaCungCapDAL {
 		}
 
 	}
+	
+	public static NhaCungCapDTO getNhacungcap(int ma) {
+		try {
+			NhaCungCapDTO ncc = new NhaCungCapDTO();
+			String sql = "select tenncc from nhacungcap where mancc = ?"; 
+			Connection conn = DBConnect.getConnection(); 
+			
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ma);
+			ResultSet rs = pstm.executeQuery(); 
+			if(rs.next()) {
+				ncc.setTenNCC(rs.getString("tenncc"));;
+			}
+			System.out.println(ncc);
+			return ncc; 
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 }

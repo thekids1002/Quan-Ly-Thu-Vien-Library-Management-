@@ -102,4 +102,26 @@ public class PhieuNhapDAL {
 
 		return i;
 	}
+	
+	public static PhieuNhap getphieunhap(int ma) {
+		try {
+			String sql = "select * from phieunhap where MaPhieuNhap =?" ;
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1,ma);
+			ResultSet rs = pstm.executeQuery();
+			PhieuNhap pn = new PhieuNhap();
+			if(rs.next()) {
+				pn.setMaNhanVien(rs.getInt("MaNV"));
+				pn.setMaPhieuNhap(rs.getInt("MaPhieuNhap"));
+				pn.setMaNhaCung(rs.getInt("MaNCC"));
+				pn.setNgayNhap(rs.getString("NgayNhap"));
+				
+			}
+			System.out.println(pn);
+			return pn;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }
