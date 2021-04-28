@@ -143,6 +143,33 @@ public class SachDAL {
 
 	}
 	
+	public SachDTO timsach(int ma) {
+		SachDTO sach = new SachDTO();
+		String sql ="select * from sach where masach = ? ";
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ma);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				sach.setMasosach(rs.getInt("Masach"));
+				sach.setTensach(rs.getString("Tensach"));
+				sach.setMaloai(rs.getInt("Maloai"));
+				sach.setMaNXB(rs.getInt("Manxb"));
+				sach.setMatacgia(rs.getInt("Matacgia"));
+				sach.setNamxb(rs.getInt("Namxb"));
+				sach.setSoluong(rs.getInt("soluong"));
+				sach.setMake(rs.getInt("Make"));
+				sach.setHinhanh(rs.getString("hinhanh"));
+				sach.setGhichu(rs.getString("ghichu"));
+			}
+			return sach ;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null ;
+		}
+		
+	}
 	
 	public static int getsoluongallsach() {
 		try {

@@ -118,10 +118,11 @@ public class PhieuNhapDAL {
 				pn.setNgayNhap(rs.getString("NgayNhap"));
 				
 			}
-			System.out.println(pn);
 			return pn;
 		} catch (Exception e) {
 			return null;
 		}
 	}
+	
+	
 }

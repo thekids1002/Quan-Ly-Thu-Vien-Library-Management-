@@ -5,11 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import DTO.ChiTieuPMDTO;
 import DTO.KeSachDTO;
 import DTO.Phat;
 
 public class PhatDAL {
-	public static ArrayList<Phat> getdanhsachle(){
+	public static ArrayList<Phat> getdanhsachphieuphat(){
 		try {
 			String sql = "select * from phat";
 			Connection conn = DBConnect.getConnection();
@@ -38,12 +39,12 @@ public class PhatDAL {
 	}
 	
 	//@SuppressWarnings("null")
-	public static int themkesach(Phat ke) {
+	public static int themphieuphat(Phat ke) {
 		int i  = -1 ;
 		String sql = "insert into phat (mapm,lydo,tien) values(?,?,?)";
 		
 			try {
-				System.out.println("Oke");
+				
 				Connection conn = DBConnect.getConnection(); 
 				PreparedStatement pstm = conn.prepareStatement(sql);
 				pstm.setInt(1, ke.getMapm());
@@ -60,7 +61,7 @@ public class PhatDAL {
 		return i ; 
 	}
 	
-	public static int suakesach(Phat ke) {
+	public static int suaphieuphat(Phat ke) {
 		int i  = -1 ;
 		String sql = "update phat set mapm = ? , lydo =? , tien = ? where mapp = ?";
 		 
@@ -83,7 +84,7 @@ public class PhatDAL {
 		
 		return i ; 
 	}
-	public static int xoakesach(Phat ke) {
+	public static int xoaphieuphat(Phat ke) {
 		int i  = -1 ;
 		String sql = "delete from phat where mapp = ?";
 		 

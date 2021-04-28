@@ -103,4 +103,29 @@ public class NhaXuatBanDAL {
 
 		return i;
 	}
+
+	public NhaXuatBan timnxb(int ma) {
+		String sql = "select * from nhaxuatban where manxb = ?";
+		NhaXuatBan nxb = new NhaXuatBan();
+		try {
+
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ma);
+			// System.out.println(ke.getViTri());
+			ResultSet rs = pstm.executeQuery();
+			if (rs.next()) {
+				nxb.setMaNXB(rs.getInt(1));
+				nxb.setTenNXB(rs.getString(2));
+				nxb.setDiaChi(rs.getString(3));
+				nxb.setSdt(rs.getString(4));
+			}
+			conn.close();
+			return nxb;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

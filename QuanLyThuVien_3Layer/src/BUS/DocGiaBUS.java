@@ -37,6 +37,8 @@ public class DocGiaBUS {
 	
 	}
 	
-	
+	public DocGia timdocgia(int ma) {
+		return docgia.timdocgia(ma); 
+	}
 	
 }

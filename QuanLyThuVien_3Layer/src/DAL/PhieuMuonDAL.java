@@ -106,4 +106,29 @@ public class PhieuMuonDAL {
 
 		return i;
 	}
+
+	public PhieuMuon timphieumuon(int ma) {
+		String sql = "select * from phieumuon where mapm = ?";
+
+		try {
+
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, ma);
+			PhieuMuon pm = new PhieuMuon();
+			ResultSet rs = pstm.executeQuery();
+			if (rs.next()) {
+				pm.setMaPhieuMuon(rs.getInt(1));
+				pm.setMaNV(rs.getInt(2));
+				pm.setMaDocGia(rs.getInt(3));
+				pm.setNgayMuon(rs.getString(4));
+				pm.setTinhtrang(rs.getString(5));
+			}
+			conn.close();
+			return pm;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

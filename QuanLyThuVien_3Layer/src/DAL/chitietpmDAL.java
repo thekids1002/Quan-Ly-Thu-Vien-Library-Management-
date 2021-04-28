@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import DTO.ChiTieuPMDTO;
+import DTO.SachDTO;
 
 public class chitietpmDAL {
 	public static ArrayList<ChiTieuPMDTO> getdanhsachphieumuon() {
@@ -214,6 +215,23 @@ public class chitietpmDAL {
 			return null;
 		}
 
+	}
+	
+	public static ChiTieuPMDTO getmasach(int ma) {
+		String sql = "select MaSach from chitietphieumuon where mactpm = ?" ;
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement pstm = conn.prepareStatement(sql);
+			ResultSet rs = pstm.executeQuery();
+			ChiTieuPMDTO ct = new ChiTieuPMDTO();
+			if(rs.next()) {
+				ct.setMaSach(rs.getInt(1));
+			}
+			conn.close();
+			return ct; 
+		} catch (Exception e) {
+			return null;
+		}
 	}
 	
 }

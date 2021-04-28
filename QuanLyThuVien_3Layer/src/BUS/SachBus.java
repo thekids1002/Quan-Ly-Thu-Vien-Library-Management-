@@ -32,6 +32,11 @@ public class SachBus {
 	public  int soluongsach() {
 		return SachDAL.getsoluongallsach();
 	}
+	
+	public SachDTO timsach(int ma) {
+		return SachDAL.timsach(ma); 
+		
+	}
 	public static SachBus iBus = null;
 
 	public static SachBus gI() {
@@ -41,4 +46,5 @@ public class SachBus {
 
 		return iBus;
 	}
+	
 }

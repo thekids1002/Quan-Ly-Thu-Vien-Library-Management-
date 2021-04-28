@@ -26,6 +26,10 @@ public class PhieuMuonBus {
 	public int xoapm(PhieuMuon pm) {
 		return pmdal.xoanxb(pm);
 	}
+	
+	public PhieuMuon timphieumuon(int ma) {
+		return pmdal.timphieumuon(ma);
+	}
 
 	public static PhieuMuonBus iBus = null;
 

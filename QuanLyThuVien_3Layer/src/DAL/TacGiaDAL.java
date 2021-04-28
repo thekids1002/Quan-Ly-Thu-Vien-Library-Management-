@@ -102,5 +102,26 @@ public class TacGiaDAL {
 
 		return i;
 	}
+	
+	public TacGiaDTO timtacgia(int ma) {
+		
+		String sql = "select * from tacgia where matacgia = ?";
+		try {
+			TacGiaDTO tg = new TacGiaDTO(); 
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement ps  = conn.prepareStatement(sql);
+			ps.setInt(1, ma);
+			ResultSet rs = ps.executeQuery() ;
+			if(rs.next()) {
+				tg.setMaTacGia(rs.getInt(1));
+				tg.setTenTacGia(rs.getString("tentacgia"));
+				tg.setQueQuan(rs.getString("quequan"));
+				tg.setNamSinh(rs.getString("namsinh")) ; 
+			}
+			return tg ;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
 }

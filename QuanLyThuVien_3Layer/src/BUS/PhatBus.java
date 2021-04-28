@@ -2,29 +2,29 @@ package BUS;
 
 import java.util.ArrayList;
 
-import DAL.KeSachDAL;
+
 import DAL.PhatDAL;
-import DTO.KeSachDTO;
+
 import DTO.Phat;
 
 public class PhatBus {
-	Phat keSachDAL = new Phat();
+	Phat phatDAL = new Phat();
 
 	public ArrayList<Phat> getdanhsachphat() {
 
-		return PhatDAL.getdanhsachle();
+		return PhatDAL.getdanhsachphieuphat();
 	}
 
-	public int themke(Phat kesach) {
-		return PhatDAL.themkesach(kesach);
+	public int themke(Phat phat) {
+		return PhatDAL.themphieuphat(phat);
 	}
 
-	public int suake(Phat kesach) {
-		return PhatDAL.suakesach(kesach);
+	public int suake(Phat phat) {
+		return PhatDAL.suaphieuphat(phat);
 	}
 
-	public int xoake(Phat kesach) {
-		return PhatDAL.xoakesach(kesach);
+	public int xoake(Phat phat) {
+		return PhatDAL.xoaphieuphat(phat);
 	}
 	
 	public static PhatBus gI() {

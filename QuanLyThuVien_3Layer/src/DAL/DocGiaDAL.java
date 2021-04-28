@@ -113,5 +113,26 @@ public class DocGiaDAL {
 
 		return i;
 	}
-	
+	public DocGia timdocgia(int ma) {
+		String sql = "select * from docgia where madocgia = ?";
+		DocGia docgia = new DocGia();
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, ma);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				docgia.setMaDocGia(rs.getInt(1));
+				docgia.setDiachi(rs.getString(4));
+				docgia.setTenDocGia(rs.getString(2));
+				docgia.setGioiTinh(rs.getString(3));
+				docgia.setSdt(rs.getString(5));
+			}
+			return docgia; 
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null ; 
+		}
+		
+	}
 }

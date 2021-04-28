@@ -8,7 +8,7 @@ import DTO.TacGiaDTO;
 
 public class TacGiaBUS {
 	private ArrayList<TacGiaDTO> listncc = new ArrayList<TacGiaDTO>();
-
+	TacGiaDAL tg = new TacGiaDAL(); 
 	public ArrayList<TacGiaDTO> getdanhsachtacgia() {
 
 		return TacGiaDAL.getdanhsachtacgia();
@@ -25,7 +25,10 @@ public class TacGiaBUS {
 	public int xoatacgia(TacGiaDTO tacgia) {
 		return TacGiaDAL.xoanxb(tacgia);
 	}
-
+	public TacGiaDTO timtacgia(int ma) {
+		return tg.timtacgia(ma); 
+		
+	}
 	public static TacGiaBUS iBus = null;
 
 	public static TacGiaBUS gI() {

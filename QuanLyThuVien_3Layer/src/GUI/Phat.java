@@ -102,7 +102,7 @@ public class Phat extends JFrame {
 					lydo ="Mất Sách" ;
 				}
 				else if(chckbxNewCheckBox_2.isSelected()) {
-					lydo = "Không Đúng Sách Đã Mượn"; 
+					lydo = "Quá Thời Hạn"; 
 				}
 				else if(chckbxNewCheckBox_3.isSelected()) {
 					lydo = "Khác" ;

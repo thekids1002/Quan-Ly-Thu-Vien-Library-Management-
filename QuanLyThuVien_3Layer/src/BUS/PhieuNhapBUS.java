@@ -38,8 +38,8 @@ public class PhieuNhapBUS {
 		return iBus;
 	}
 
-	public PhieuNhap getPhieuNhap(String mapn) {
+	public PhieuNhap getPhieuNhap(int mapn) {
 		// TODO Auto-generated method stub
-		return null;
+		return PhieuNhapDAL.getphieunhap(mapn);
 	}
 }
