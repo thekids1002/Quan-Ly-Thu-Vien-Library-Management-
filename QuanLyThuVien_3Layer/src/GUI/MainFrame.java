@@ -912,6 +912,10 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				if(Ma == null || Ma.isEmpty() || Ma.equals("")) {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn mã phiếu mượn");
+					return;
+				}
 				new Phat().setVisible(true);
 			}
 		});
