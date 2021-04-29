@@ -30,6 +30,8 @@ import BUS.TheThuVienBUS;
 import DAL.TheThuVienDAL;
 import DTO.ChiTietPhieuNhap;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 
@@ -80,15 +82,125 @@ public class TheThuVien extends JFrame {
 		dtmthetv.addColumn("Ngày Bắt Đầu");
 		dtmthetv.addColumn("Ngày Kết Thúc");
 		
+
+		JDateChooser ngaybatdau = new JDateChooser();
+		ngaybatdau.setDateFormatString("yyyy-MM-dd");
+		ngaybatdau.setBounds(534, 67, 153, 32);
+		contentPane.add(ngaybatdau);
 		
+		JDateChooser ngayketthuc = new JDateChooser();
+		ngayketthuc.setDateFormatString("yyyy-MM-dd");
+		ngayketthuc.setBounds(534, 142, 153, 32);
+		contentPane.add(ngayketthuc);
 		table = new MyTable(dtmthetv);
+		table.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				int i = table.getSelectedRow(); 
+				if(i>-1) {
+					try {
+						txtmadocgia.setText(dtmthetv.getValueAt(i, 0) +"");
+						txtmathe.setText(dtmthetv.getValueAt(i, 1) + "");
+						txttendocgia.setText(dtmthetv.getValueAt(i, 2) + "");
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") ;
+						Date date = sdf.parse(dtmthetv.getValueAt(i, 3) + "");
+						Date date2 = sdf.parse(dtmthetv.getValueAt(i, 4) + "");
+						ngaybatdau.setDate(date);
+						ngayketthuc.setDate(date2);
+					} catch (Exception e) {
+						
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọnvào bảng");
+				}
+				
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		JButton btnNewButton = new JButton("Sửa");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int i = table.getSelectedRow();
+				if(i>-1) {
+					int ma = Integer.parseInt(txtmathe.getText()); 
+					int madocgia = Integer.parseInt(txtmadocgia.getText()) ;
+					String tendoc = txttendocgia.getText() ;
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+					Date date = ngaybatdau.getDate();
+					String ngaybatdau = sdf.format(date); 
+					Date date2 = ngayketthuc.getDate();
+					String ketthuc = sdf.format(date2);
+					DTO.TheThuVien the = new DTO.TheThuVien(ma,madocgia,tendoc,ngaybatdau,ketthuc); 
+					if(TheThuVienBUS.gI().suatacgia(the) > 0 ) {
+						JOptionPane.showMessageDialog(null, "sửa Thẻ thành công");
+						loadctphieunhap();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "sửa thẻ thất bại");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa click vào table");
+				}
+			}
+		});
 		btnNewButton.setBounds(208, 304, 97, 25);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Xoá");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = table.getSelectedRow();
+				if(i>-1) {
+					int ma = Integer.parseInt(txtmathe.getText()); 
+					int madocgia = Integer.parseInt(txtmadocgia.getText()) ;
+					String tendoc = txttendocgia.getText() ;
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+					Date date = ngaybatdau.getDate();
+					String ngaybatdau = sdf.format(date); 
+					Date date2 = ngayketthuc.getDate();
+					String ketthuc = sdf.format(date2);
+					DTO.TheThuVien the = new DTO.TheThuVien(ma,madocgia,tendoc,ngaybatdau,ketthuc); 
+					if(TheThuVienBUS.gI().xoatacgia(the) > 0 ) {
+						JOptionPane.showMessageDialog(null, "xoá Thẻ thành công");
+						loadctphieunhap();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "xoá thẻ thất bại");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa click vào table");
+				}
+			}
+		});
 		btnNewButton_1.setBounds(341, 304, 97, 25);
 		contentPane.add(btnNewButton_1);
 		
@@ -97,6 +209,12 @@ public class TheThuVien extends JFrame {
 		contentPane.add(btnNewButton_1_1);
 		
 		JButton btnNewButton_1_2 = new JButton("Tải Lại");
+		btnNewButton_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				loadctphieunhap();
+				
+			}
+		});
 		btnNewButton_1_2.setBounds(603, 304, 97, 25);
 		contentPane.add(btnNewButton_1_2);
 		
@@ -135,15 +253,6 @@ public class TheThuVien extends JFrame {
 		lblNewLabel_1_1_1_1.setBounds(402, 142, 120, 32);
 		contentPane.add(lblNewLabel_1_1_1_1);
 		
-		JDateChooser ngaybatdau = new JDateChooser();
-		ngaybatdau.setDateFormatString("yyyy-MM-dd");
-		ngaybatdau.setBounds(534, 67, 153, 32);
-		contentPane.add(ngaybatdau);
-		
-		JDateChooser ngayketthuc = new JDateChooser();
-		ngayketthuc.setDateFormatString("yyyy-MM-dd");
-		ngayketthuc.setBounds(534, 142, 153, 32);
-		contentPane.add(ngayketthuc);
 		
 		JButton btnThm = new JButton("Thêm");
 		btnThm.addActionListener(new ActionListener() {

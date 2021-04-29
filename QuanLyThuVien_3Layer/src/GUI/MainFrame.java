@@ -3936,6 +3936,10 @@ public class MainFrame extends JFrame {
 
 				int manv = nvsl.getMaNV();
 				int madocgia = dgsl.getMaDocGia();
+				if(!TheThuVienDAL.check(madocgia)) {
+					JOptionPane.showMessageDialog(null, "Đọc giả chưa có thẻ thư viện, vui lòng đăng kí thẻ thư viện");
+					return ;
+				}
 				String tinhtrang = "Đã Trả";
 
 				if (rdmuon.isSelected()) {

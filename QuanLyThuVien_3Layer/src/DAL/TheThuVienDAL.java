@@ -172,5 +172,21 @@ public class TheThuVienDAL {
 			return null;
 		}
 	}
+		
+	public static boolean check(int mathe) {
+		try {
+			String sql = "SELECT thethuvien.MaTheThuVien,docgia.madocgia FROM thethuvien INNER JOIN docgia ON thethuvien.MaTheThuVien = ?" ;
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, mathe);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+		return false;
+	}
 	
 }
