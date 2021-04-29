@@ -34,7 +34,6 @@ public class TableSach extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
 
 	/**
 	 * Create the frame.
@@ -82,39 +81,37 @@ public class TableSach extends JFrame {
 		dtmsach.addColumn("Mã Kệ");
 		table = new MyTable(dtmsach);
 		scrollPane.setViewportView(table);
-		
-		 btnLuu = new JButton("Lưu");
+
+		btnLuu = new JButton("Lưu");
 		btnLuu.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnLuu.setBounds(664, 389, 132, 33);
 		btnLuu.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int i = table.getSelectedRow();
-				if(i>=0) {
-					String masach =  dtmsach.getValueAt(i, 0).toString();
-					if(MainFrame.pnPhieumuon.isShowing()) {
+				if (i >= 0) {
+					String masach = dtmsach.getValueAt(i, 0).toString();
+					if (MainFrame.pnPhieumuon.isShowing()) {
 						MainFrame.txtmasachmuon.setText(masach);
-					}
-					else {
+					} else {
 						MainFrame.txtMaSachctpn.setText(masach);
 					}
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Chưa chọn vào table");
 				}
 				dispose();
-				
+
 			}
 		});
 		contentPane.add(btnLuu);
 		setLocationRelativeTo(null);
 		loadsach();
 	}
-	
+
 	public void loadsach() {
 		dtmsach.setRowCount(0);
-		for(SachDTO sachitem : MainFrame.sach) {
+		for (SachDTO sachitem : MainFrame.sach) {
 			Vector<Object> vec = new Vector<Object>();
 			vec.add(sachitem.getMasosach());
 			vec.add(sachitem.getTensach());

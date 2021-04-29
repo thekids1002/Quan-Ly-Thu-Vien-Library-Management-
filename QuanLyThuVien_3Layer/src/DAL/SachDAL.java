@@ -59,7 +59,7 @@ public class SachDAL {
 			pstm.setInt(2, sach.getMaloai());
 			pstm.setInt(3, sach.getMaNXB());
 			pstm.setInt(4, sach.getMatacgia());
-			pstm.setInt(5, sach.getMaNXB());
+			pstm.setInt(5, sach.getNamxb());
 			pstm.setInt(6, sach.getSoluong());
 			pstm.setString(7, String.valueOf(sach.getMake()));
 			pstm.setString(8, sach.getHinhanh());
@@ -87,7 +87,7 @@ public class SachDAL {
 			pstm.setInt(2, sach.getMaloai());
 			pstm.setInt(3, sach.getMaNXB());
 			pstm.setInt(4, sach.getMatacgia());
-			pstm.setInt(5, sach.getMaNXB());
+			pstm.setInt(5, sach.getNamxb());
 			pstm.setInt(6, sach.getSoluong());
 			pstm.setString(7, String.valueOf(sach.getMake()));
 			pstm.setString(8, sach.getHinhanh());

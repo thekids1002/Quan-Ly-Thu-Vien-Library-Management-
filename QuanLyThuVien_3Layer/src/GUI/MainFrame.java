@@ -60,6 +60,7 @@ import BUS.TaiKhoanBus;
 import BUS.chitietpmbus;
 import DAL.PhieuMuonDAL;
 import DAL.SachDAL;
+import DAL.TheThuVienDAL;
 import DTO.ChiTietPhieuNhap;
 import DTO.ChiTieuPMDTO;
 import DTO.DocGia;
@@ -73,6 +74,7 @@ import DTO.PhieuMuon;
 import DTO.PhieuNhap;
 import DTO.SachDTO;
 import DTO.TacGiaDTO;
+import DTO.TheThuVien;
 import Export.ExportExcel;
 import Export.ImportExcel;
 import Export.WritePDF;
@@ -105,6 +107,8 @@ public class MainFrame extends JFrame {
 	KeSachDTO kesl;
 	NhanVien nvsl;
 	DocGia dgsl;
+	public static TheThuVien tv;
+	
 	private JPanel contentPane;
 	private JLabel iconsgu;
 	private JLabel exit;
@@ -1801,6 +1805,27 @@ public class MainFrame extends JFrame {
 		dtmdocgia.addColumn("Địa Chỉ");
 		tabledocgia = new MyTable(dtmdocgia);
 		scrollPane_1.setViewportView(tabledocgia);
+		JPopupMenu popupMenu = new JPopupMenu();
+		mntmNewMenuItem = new JMenuItem("Thẻ Thư Viện");
+		mntmNewMenuItem.setBounds(0, 0, 113, 19);
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int i = tabledocgia.getSelectedRow();
+				if(i>-1) {
+					int ma = Integer.parseInt(dtmdocgia.getValueAt(i, 0).toString());
+					 tv =  TheThuVienDAL.thongtinthe(ma) ;
+					System.out.println(tv);
+					GUI.TheThuVien the = new GUI.TheThuVien(); 
+					the.setVisible(true);
+				}
+				
+			}
+		});
+		popupMenu.add(mntmNewMenuItem);
+		
+		addPopup(tabledocgia, popupMenu);
 
 	}
 
@@ -3797,6 +3822,7 @@ public class MainFrame extends JFrame {
 
 				String tensach = txttensach.getText();
 				int namxb = Integer.parseInt(txtnamxbsach.getText());
+				System.out.println(namxb);
 				int soluong = Integer.parseInt(txtsoluongsach.getText());
 
 				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh, makesach);

@@ -78,7 +78,7 @@ public class WritePDF {
 			PdfWriter.getInstance(doc, new FileOutputStream(path + ".pdf"));
 			doc.open();
 
-			Paragraph pdfTitle = new Paragraph(new Phrase("THÔNG TIN PHIẾU NHẬP", fontData));
+			Paragraph pdfTitle = new Paragraph(new Phrase("THÔNG TIN PHIẾU NHẬP", fontData2));
 			// set title
 			pdfTitle.setAlignment(Element.ALIGN_CENTER);
 			// căn giữa
