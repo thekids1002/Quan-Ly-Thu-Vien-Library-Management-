@@ -172,7 +172,9 @@ public class LoginForm extends JFrame {
 						dangnhap = true;
 						setVisible(false);
 						username = taiKhoan2.getUsername();
-						
+						if(MainFrame.isdangxuat) {
+							new MainFrame().setVisible(true);
+						}
 						return;
 					}
 

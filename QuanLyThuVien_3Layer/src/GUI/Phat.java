@@ -92,7 +92,10 @@ public class Phat extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(textField_1.getText().isEmpty() || textField.getText().isEmpty() ) {
+					JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
+					return; 
+				}
 				int mapm = Integer.parseInt(textField.getText());
 				String lydo = "" ;
 				if(chckbxNewCheckBox.isSelected()) {

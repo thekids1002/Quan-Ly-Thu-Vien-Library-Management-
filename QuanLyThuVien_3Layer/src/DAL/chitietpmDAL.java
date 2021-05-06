@@ -126,6 +126,7 @@ public class chitietpmDAL {
 			conn.close();
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 			// dreturn null;
 		}

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import BUS.SachBus;
 import DTO.SachDTO;
 
 import javax.swing.JLabel;
@@ -51,7 +52,7 @@ public class TableSach extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(391, 13, 53, 35);
 		contentPane.add(lblNewLabel);
-
+		dtmsach = new DefaultTableModel();
 		JLabel lblTm = new JLabel("Tìm");
 		lblTm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblTm.setBounds(85, 88, 53, 35);
@@ -63,6 +64,31 @@ public class TableSach extends JFrame {
 		textField.setColumns(10);
 
 		JButton btnNewButton = new JButton("Tìm");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Tìm theo mã");
+				if (!MainFrame.isNumber(textField.getText())) {
+					JOptionPane.showMessageDialog(null, "Tìm Kiếm Theo Mã Sách");
+					return;
+				}
+				int masach = Integer.parseInt(textField.getText());
+				SachDTO sach = SachBus.gI().timsach(masach);
+				dtmsach.setRowCount(0);
+				if (sach != null) {
+					Vector<Object> vec = new Vector<Object>();
+					vec.add(sach.getMasosach());
+					vec.add(sach.getTensach());
+					vec.add(sach.getMaloai());
+					vec.add(sach.getMaNXB());
+					vec.add(sach.getMatacgia());
+					vec.add(sach.getNamxb());
+					vec.add(sach.getSoluong());
+					vec.add(sach.getMake());
+					vec.add(sach.getHinhanh());
+					dtmsach.addRow(vec);
+				}
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btnNewButton.setBounds(669, 88, 118, 35);
 		contentPane.add(btnNewButton);
@@ -70,7 +96,7 @@ public class TableSach extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(46, 165, 750, 211);
 		contentPane.add(scrollPane);
-		dtmsach = new DefaultTableModel();
+		
 		dtmsach.addColumn("Mã Sách");
 		dtmsach.addColumn("Tên Sách");
 		dtmsach.addColumn("Mã Loại");

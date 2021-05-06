@@ -39,4 +39,8 @@ public class TheThuVienBUS {
 
 		return iBus;
 	}
+	public int giahanthe(int mathe, String ngayketthuc) {
+		return tg.giahanthe(mathe, ngayketthuc);
+		
+	}
 }

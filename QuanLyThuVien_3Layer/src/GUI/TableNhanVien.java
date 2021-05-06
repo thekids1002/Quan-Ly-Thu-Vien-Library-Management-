@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import BUS.NhanVienBus;
@@ -42,7 +44,7 @@ public class TableNhanVien extends JFrame {
 	 */
 	public TableNhanVien() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 863, 497);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,6 +75,57 @@ public class TableNhanVien extends JFrame {
 		txttim.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		txttim.setBounds(122, 72, 581, 48);
 		contentPane.add(txttim);
+		txttim.getDocument().addDocumentListener(new DocumentListener() {
+			// text field tìm kiếm nhân viên
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				// text field thay đổi gọi lại search
+				searchNv();
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				// text field thay đổi gọi lại search
+				searchNv();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				// text field thay đổi gọi lại search
+				searchNv();
+			}
+
+			public void searchNv() {
+				// JOptionPane.showMessageDialog(contentPane, "Chạy tới đáy");
+				try {
+					dtmnhanvien.setRowCount(0);
+					////// mỗi lần gọi lại xoá mịa cái table đi
+					if (txttim.getText().isEmpty()) {
+						// nếu txtfield rỗng thì hiển thị lại cái bảng đầy đủ
+						loadnhanvien(); // hàm đẩy từ csdl vào bảng //
+						return;
+					}
+					String s = txttim.getText().toLowerCase(); // chuyển chữ trong txtfield về chữ thường
+					// nhờ v mà seach chữ thường chữ hoa gì cũng ra hết
+					for (NhanVien nv : MainFrame.nv) {
+						if (nv.getTenNV().toLowerCase().contains(s)) {
+							// đúng điều kiện thì đẩy nó vào table
+							Vector<Object> vec = new Vector<Object>();
+							vec.add(nv.getMaNV());
+							vec.add(nv.getTenNV());
+							vec.add(nv.getNamSinh());
+							vec.add(nv.getGioiTinh());
+							vec.add(nv.getDiaChi());
+							vec.add(nv.getSdt());
+							dtmnhanvien.addRow(vec);
+						}
+						// .DesignLai.dtm.addRow(vec);
+					}
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+		});
 		txttim.setColumns(10);
 
 		lblNewLabel_1 = new JLabel("Tìm");

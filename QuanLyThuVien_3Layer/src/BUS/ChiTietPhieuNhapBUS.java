@@ -16,7 +16,18 @@ public class ChiTietPhieuNhapBUS {
 
 		return listpm = ChiTietPhieuNhapDAL.getdanhsachctphieunhap();
 	}
-	
+	public ArrayList<ChiTietPhieuNhap> getthongkenam(int nam) {
+		// thống kê theo năm
+
+		return ChiTietPhieuNhapDAL.getthongketheonam(nam); 
+		
+	}
+	public ArrayList<ChiTietPhieuNhap> getthongketheongay(String date1, String date2 ) {
+		// thống kê theo năm
+
+		return ChiTietPhieuNhapDAL.getthongketheongay(date1,date2); 
+		
+	}
 	public ArrayList<ChiTietPhieuNhap> thongkephieunhap() {
 
 		return ChiTietPhieuNhapDAL.getthongke();
@@ -45,6 +56,7 @@ public class ChiTietPhieuNhapBUS {
 		}
 		return null ;
 	}
+	
 	public static ChiTietPhieuNhapBUS gI() {
 		if (iBus == null) {
 			iBus = new ChiTietPhieuNhapBUS();

@@ -11,11 +11,14 @@ import javax.swing.table.DefaultTableModel;
 import BUS.ChiTietPhieuNhapBUS;
 import BUS.PhatBus;
 import DTO.ChiTietPhieuNhap;
+import Export.ExportExcel;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -63,6 +66,14 @@ public class DanhSachPhat extends JFrame {
 		JButton btnNewButton = new JButton("In danh sách");
 		btnNewButton.setBounds(525, 293, 103, 40);
 		contentPane.add(btnNewButton);
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				new ExportExcel().xuatExcel(table);
+				
+			}
+		});
 		setLocationRelativeTo(null);
 		loadphat();
 	}

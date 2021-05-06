@@ -51,9 +51,9 @@ public class ChiTietPhieuNhapDAL {
 			pstm.setInt(3, ke.getGia());
 			pstm.setInt(4, ke.getSoLuong());
 			pstm.setInt(5, ke.getThanhTien());
-			
+
 			i = pstm.executeUpdate();
-			if(i>0) {
+			if (i > 0) {
 				String sql2 = "update sach set soluong  = ? where masach = ?";
 				PreparedStatement stm2 = conn.prepareStatement(sql2);
 				stm2.setInt(1, SachDAL.getsoluongsach(ke.getMaSach()) + ke.getSoLuong());
@@ -85,7 +85,6 @@ public class ChiTietPhieuNhapDAL {
 			pstm.setInt(4, ke.getSoLuong());
 			pstm.setInt(5, ke.getThanhTien());
 			pstm.setInt(6, ke.getMaCTPN());
-			
 
 			// System.out.println(ke.getViTri());
 			i = pstm.executeUpdate();
@@ -119,15 +118,15 @@ public class ChiTietPhieuNhapDAL {
 
 		return i;
 	}
-	
-	public static ArrayList<ChiTietPhieuNhap> getthongke(){
+
+	public static ArrayList<ChiTietPhieuNhap> getthongke() {
 		ArrayList<ChiTietPhieuNhap> list = new ArrayList<ChiTietPhieuNhap>();
 		try {
 			String sql = "SELECT chitietphieunhap.*, phieunhap.NgayNhap, sach.TenSach FROM chitietphieunhap INNER JOIN phieunhap ON chitietphieunhap.MaPN = phieunhap.MaPhieuNhap INNER JOIN sach ON chitietphieunhap.MaSach = sach.MaSach";
 			Connection conn = DBConnect.getConnection();
 			Statement stm = conn.createStatement();
-			ResultSet rs = stm.executeQuery(sql); 
-			while(rs.next()) {
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
 				ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
 				ct.setMaCTPN(rs.getInt("MaCTPN"));
 				ct.setMaPhieuNhap(rs.getInt("MaPN"));
@@ -144,6 +143,62 @@ public class ChiTietPhieuNhapDAL {
 		} catch (Exception e) {
 			return null;
 		}
-		
+
+	}
+
+	public static ArrayList<ChiTietPhieuNhap> getthongketheonam(int nam) {
+		ArrayList<ChiTietPhieuNhap> list = new ArrayList<ChiTietPhieuNhap>();
+		try {
+			String sql = "SELECT chitietphieunhap.*, phieunhap.NgayNhap, sach.TenSach FROM chitietphieunhap INNER JOIN phieunhap ON chitietphieunhap.MaPN = phieunhap.MaPhieuNhap INNER JOIN sach ON chitietphieunhap.MaSach = sach.MaSach WHERE phieunhap.NgayNhap BETWEEN '"
+					+ nam + "-01-01' AND '" + nam + "-12-31'";
+			Connection conn = DBConnect.getConnection();
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
+				ct.setMaCTPN(rs.getInt("MaCTPN"));
+				ct.setMaPhieuNhap(rs.getInt("MaPN"));
+				ct.setMaSach(rs.getInt("MaSach"));
+				ct.setGia(rs.getInt("Gia"));
+				ct.setSoLuong(rs.getInt("Soluong"));
+				ct.setThanhTien(rs.getInt("ThanhTien"));
+				ct.setTensach(rs.getString("Tensach"));
+				ct.setNgaynhap(rs.getString("Ngaynhap"));
+				list.add(ct);
+			}
+			conn.close();
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	public static ArrayList<ChiTietPhieuNhap> getthongketheongay(String date1, String date2) {
+		ArrayList<ChiTietPhieuNhap> list = new ArrayList<ChiTietPhieuNhap>();
+		try {
+			String sql = "SELECT chitietphieunhap.*, phieunhap.NgayNhap, sach.TenSach FROM chitietphieunhap INNER JOIN phieunhap ON chitietphieunhap.MaPN = phieunhap.MaPhieuNhap INNER JOIN sach ON chitietphieunhap.MaSach = sach.MaSach WHERE phieunhap.NgayNhap BETWEEN '"
+					+ date1 + "' AND '" + date2 + "'";
+			Connection conn = DBConnect.getConnection();
+			Statement stm = conn.createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				ChiTietPhieuNhap ct = new ChiTietPhieuNhap();
+				ct.setMaCTPN(rs.getInt("MaCTPN"));
+				ct.setMaPhieuNhap(rs.getInt("MaPN"));
+				ct.setMaSach(rs.getInt("MaSach"));
+				ct.setGia(rs.getInt("Gia"));
+				ct.setSoLuong(rs.getInt("Soluong"));
+				ct.setThanhTien(rs.getInt("ThanhTien"));
+				ct.setTensach(rs.getString("Tensach"));
+				ct.setNgaynhap(rs.getString("Ngaynhap"));
+				list.add(ct);
+			}
+			conn.close();
+			return list;
+		} catch (Exception e) {
+			return null;
+		}
+
 	}
 }
