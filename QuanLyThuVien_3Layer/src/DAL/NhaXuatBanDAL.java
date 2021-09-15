@@ -12,7 +12,7 @@ import DTO.KeSachDTO;
 public class NhaXuatBanDAL {
 	public static ArrayList<NhaXuatBan> getdanhnxb() {
 		try {
-			String sql = "select * from nhaxuatban";
+			String sql = "select * from nhaxuatban where trangthai = 1";
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -38,7 +38,7 @@ public class NhaXuatBanDAL {
 	// @SuppressWarnings("null")
 	public static int themnxb(NhaXuatBan ke) {
 		int i = -1;
-		String sql = "insert into nhaxuatban (tennxb,diachi,sdt) values(?,?,?)";
+		String sql = "insert into nhaxuatban (tennxb,diachi,sdt,trangthai) values(?,?,?,?)";
 
 		try {
 
@@ -47,6 +47,7 @@ public class NhaXuatBanDAL {
 			pstm.setString(1, ke.getTenNXB());
 			pstm.setString(2, ke.getDiaChi());
 			pstm.setString(3, ke.getSdt());
+			pstm.setInt(4, 1);
 			i = pstm.executeUpdate();
 			conn.close();
 
@@ -85,7 +86,7 @@ public class NhaXuatBanDAL {
 
 	public static int xoanxb(NhaXuatBan ke) {
 		int i = -1;
-		String sql = "delete from nhaxuatban where manxb = ?";
+		String sql = "update nhaxuatban set trangthai = 0  where manxb = ?";
 
 		try {
 

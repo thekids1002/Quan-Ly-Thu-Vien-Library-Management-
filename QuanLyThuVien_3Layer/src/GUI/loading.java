@@ -42,7 +42,7 @@ public class loading extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel
-				.setIcon(new ImageIcon("C:\\Users\\asus\\eclipse-workspace\\QuanLyThuVien_3Layer\\img\\unnamed.gif"));
+				.setIcon(new ImageIcon("img\\unnamed.gif"));
 		lblNewLabel.setBounds(230, 73, 294, 272);
 		contentPane.add(lblNewLabel);
 		contentPane.setBackground(new Color(0, 0, 0, 0));

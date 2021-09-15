@@ -13,6 +13,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.JobAttributes;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -366,13 +367,13 @@ public class MainFrame extends JFrame {
 
 	public void thanhtitle() {
 		iconsgu = new JLabel("");
-		iconsgu.setIcon(new ImageIcon("C:\\Users\\asus\\Desktop\\img_javaswing\\iconsgu.png"));
+		iconsgu.setIcon(null);
 		iconsgu.setBounds(0, 0, 30, 34);
 		contentPane.add(iconsgu);
 
 		exit = new JLabel("");
 
-		exit.setIcon(new ImageIcon("C:\\Users\\asus\\Desktop\\img_javaswing\\exit.png"));
+		exit.setIcon(new ImageIcon("C:\\Users\\ASUS\\eclipse-workspace\\QuanLyThuVien\\img\\exiticon.png"));
 		exit.setBounds(1244, 7, 24, 24);
 		contentPane.add(exit);
 
@@ -423,7 +424,7 @@ public class MainFrame extends JFrame {
 		lblthuviensgu = new JLabel("Th\u01B0 Vi\u1EC7n SGU");
 		lblthuviensgu.setForeground(Color.WHITE);
 		lblthuviensgu.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblthuviensgu.setIcon(new ImageIcon("C:\\Users\\asus\\Desktop\\img_javaswing\\iconthuvien.png"));
+		lblthuviensgu.setIcon(new ImageIcon("img\\iconthuvien.png"));
 		lblthuviensgu.setBounds(0, 13, 187, 40);
 		menuleft.add(lblthuviensgu);
 
@@ -438,7 +439,8 @@ public class MainFrame extends JFrame {
 		lblTrangchu.setBackground(new Color(64, 64, 64));
 		lblTrangchu.setOpaque(true);
 		lblTrangchu.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTrangchu.setIcon(new ImageIcon("C:\\Users\\asus\\Desktop\\img_javaswing\\catory 1.png"));
+		lblTrangchu.setIcon(new ImageIcon(
+				"C:\\Users\\ASUS\\Pictures\\14-145167_home-icon-home-icon-png-green-removebg-preview.png"));
 		lblTrangchu.setForeground(Color.WHITE);
 		lblTrangchu.setBounds(0, 74, 187, 46);
 
@@ -1446,7 +1448,8 @@ public class MainFrame extends JFrame {
 		panel.add(comboBox);
 
 		JButton btnNewButton_2 = new JButton("");
-		btnNewButton_2.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnNewButton_2
+				.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\update.png"));
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -2598,9 +2601,8 @@ public class MainFrame extends JFrame {
 				if (i >= 0) {
 					txtTendocgia.setText(dtmdocgia.getValueAt(i, 1).toString());
 					txtgioitinhdocgia.setText(dtmdocgia.getValueAt(i, 2).toString());
-
-					txtdiachidocgia.setText(dtmdocgia.getValueAt(i, 3).toString());
-					txtsdtdocgia.setText(dtmdocgia.getValueAt(i, 4).toString());
+					txtdiachidocgia.setText(dtmdocgia.getValueAt(i, 4).toString());
+					txtsdtdocgia.setText(dtmdocgia.getValueAt(i, 3).toString());
 				}
 
 			}
@@ -3240,16 +3242,9 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				KeSachDTO ke = new KeSachDTO(2, txtKeSach.getText());
-				for (KeSachDTO ke2 : MainFrame.ke) {
-					if(ke2.getViTri().equals(txtKeSach.getText())) {
-						JOptionPane.showMessageDialog(null, "Kệ đã có");
-						return ;
-					}
-				}
 				if (KeSachBus.gI().themke(ke) >= 0) {
 					loadkesach();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
+					// JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
@@ -3261,14 +3256,16 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tablekesach.getSelectedRow();
-				int vitri = Integer.parseInt(dtmke.getValueAt(i, 0).toString());
-				KeSachDTO ke = new KeSachDTO(vitri, txtKeSach.getText());
-				if (KeSachBus.gI().suake(ke) >= 0) {
-					loadkesach();
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
+				if (i > -1) {
+					int vitri = Integer.parseInt(dtmke.getValueAt(i, 0).toString());
+					KeSachDTO ke = new KeSachDTO(vitri, txtKeSach.getText());
+					if (KeSachBus.gI().suake(ke) >= 0) {
+						loadkesach();
+					} else {
+						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					}
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn kệ nào.");
 				}
 			}
 		});
@@ -3276,19 +3273,20 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int i = tablekesach.getSelectedRow();
-				int vitri = Integer.parseInt(dtmke.getValueAt(i, 0).toString());
-				KeSachDTO ke = new KeSachDTO(vitri, txtKeSach.getText());
-				int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
-				if (a == JOptionPane.YES_OPTION) {
-					if (KeSachBus.gI().xoake(ke) >= 0) {
-						loadkesach();
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
+				if (i > -1) {
+					int vitri = Integer.parseInt(dtmke.getValueAt(i, 0).toString());
+					KeSachDTO ke = new KeSachDTO(vitri, txtKeSach.getText());
+					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
+					if (a == JOptionPane.YES_OPTION) {
+						if (KeSachBus.gI().xoake(ke) >= 0) {
+							loadkesach();
+						} else {
+							JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
+						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn kệ nào.");
 				}
 
 			}
@@ -3304,12 +3302,9 @@ public class MainFrame extends JFrame {
 				LoaisachDTO ke = new LoaisachDTO(vitri, txttenloai.getText());
 				int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 				if (a == JOptionPane.YES_OPTION) {
-					if (LoaiBUS.gI().xoaloai(ke) >= 0) {
+					int j = LoaiBUS.gI().xoaloai(ke);
+					if (j > 0) {
 						loadloaisach();
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 					}
 				}
 
@@ -3319,21 +3314,9 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				LoaisachDTO ke = new LoaisachDTO(2, txttenloai.getText());
-				for (LoaisachDTO loai : loaisacharr) {
-					if(loai.getTenloai().equals(txttenloai.getText())) {
-						JOptionPane.showMessageDialog(null, "Loại đã có");
-						return ;
-					}
-					
-				}
-				if (LoaiBUS.gI().themloai(ke) >= 0) {
+				LoaisachDTO loaisach = new LoaisachDTO(2, txttenloai.getText());
+				if (LoaiBUS.gI().themloai(loaisach) >= 0) {
 					loadloaisach();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 			}
 		});
@@ -3342,19 +3325,18 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int i = tableloai.getSelectedRow();
-				int vitri = Integer.parseInt(dtmloai.getValueAt(i, 0).toString());
-				LoaisachDTO ke = new LoaisachDTO(vitri, txttenloai.getText());
-				int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
-				if (a == JOptionPane.YES_OPTION) {
-					if (LoaiBUS.gI().sualoai(ke) >= 0) {
-						loadloaisach();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+				if (i >= 0) {
+					int vitri = Integer.parseInt(dtmloai.getValueAt(i, 0).toString());
+					LoaisachDTO ke = new LoaisachDTO(vitri, txttenloai.getText());
+					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn sửa", "", JOptionPane.YES_NO_OPTION);
+					if (a == JOptionPane.YES_OPTION) {
+						if (LoaiBUS.gI().sualoai(ke) >= 0) {
+							loadloaisach();
+						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn loại nào");
 				}
 
 			}
@@ -3366,17 +3348,18 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tablencc.getSelectedRow();
-				int vitri = Integer.parseInt(dtmncc.getValueAt(i, 0).toString());
-				NhaCungCapDTO ke = new NhaCungCapDTO(vitri, txtNcc.getText());
-				int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
-				if (a == JOptionPane.YES_OPTION) {
-					if (NhaCungcapbus.gI().xoancc(ke) >= 0) {
-						loadnhacungcap();
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
+				if (i >= 0) {
+					int vitri = Integer.parseInt(dtmncc.getValueAt(i, 0).toString());
+					NhaCungCapDTO ncc = new NhaCungCapDTO(vitri, txtNcc.getText());
+					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
+					if (a == JOptionPane.YES_OPTION) {
+						int j = NhaCungcapbus.gI().xoancc(ncc);
+						if (j > 0) {
+							loadnhacungcap();
+						}
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhà cung cấp nào.");
 				}
 
 			}
@@ -3386,19 +3369,10 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				NhaCungCapDTO ke = new NhaCungCapDTO(0, txtNcc.getText());
-				for (NhaCungCapDTO ncc : MainFrame.ncc) {
-					if(ncc.getTenNCC().equals(txtNcc.getText())) {
-						JOptionPane.showMessageDialog(null, "Nhà cung cấp đã có");
-						return ;
-					}
-				}
-				if (NhaCungcapbus.gI().themncc(ke) >= 0) {
+				NhaCungCapDTO ncc = new NhaCungCapDTO(0, txtNcc.getText());
+				int j = NhaCungcapbus.gI().themncc(ncc);
+				if (j > 0) {
 					loadnhacungcap();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 			}
 		});
@@ -3409,14 +3383,15 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tablencc.getSelectedRow();
-				int vitri = Integer.parseInt(dtmncc.getValueAt(i, 0).toString());
-				NhaCungCapDTO ke = new NhaCungCapDTO(vitri, txtNcc.getText());
-				if (NhaCungcapbus.gI().suancc(ke) >= 0) {
-					loadnhacungcap();
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
+				if (i > -1) {
+					int vitri = Integer.parseInt(dtmncc.getValueAt(i, 0).toString());
+					NhaCungCapDTO ncc = new NhaCungCapDTO(vitri, txtNcc.getText());
+					int j = NhaCungcapbus.gI().suancc(ncc);
+					if (j > 0) {
+						loadnhacungcap();
+					}
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					JOptionPane.showMessageDialog(null, "Bạn chưa chọn nhà cung cấp nào");
 				}
 			}
 		});
@@ -3464,21 +3439,22 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 
 				int i = tablenhanvien.getSelectedRow();
-				int vitri = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
-				// JOptionPane.showMessageDialog(contentPane, vitri);
-				SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
-				NhanVien nv;
-				nv = new NhanVien(vitri, txttennv.getText(), txtnamsinhnv.getText(), txtgioitinhnv.getText(),
-						txtsodienthoainv.getText(), txtdiachinv.getText());
+				if (i > -1) {
+					int vitri = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
+					// JOptionPane.showMessageDialog(contentPane, vitri);
+					SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
+					NhanVien nv;
+					nv = new NhanVien(vitri, txttennv.getText(), txtnamsinhnv.getText(), txtgioitinhnv.getText(),
+							txtsodienthoainv.getText(), txtdiachinv.getText());
 
-				if (NhanVienBus.gI().suanhanvien(nv) >= 0) {
-					loadnhanvien();
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
+					int j = NhanVienBus.gI().suanhanvien(nv);
+					if (j > 0) {
+						loadnhanvien();
+					}
 
 				} else {
-					JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
+					JOptionPane.showMessageDialog(null, "Bạn chưua chọn nhân viên nào hết");
 				}
-
 			}
 		});
 
@@ -3486,47 +3462,12 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (txttennv.getText().isEmpty()) {
-					thongbao("Tên tác giả");
-					return;
-				}
-				if (txtnamsinhnv.getText().isEmpty() || !isNumber(txtnamsinhnv.getText())) {
-					thongbao("Năm sinh tác giả");
-					return;
-				}
-				if (txtgioitinhnv.getText().isEmpty()) {
-					thongbao("Giới tính");
-					return;
-				}
-				if (txtsodienthoainv.getText().isEmpty()) {
-					thongbao("SĐT");
-					return;
-				}
-				if (txtdiachinv.getText().isEmpty()) {
-					thongbao("Địa chỉ");
-					return;
-				}
 				NhanVien nv;
 				nv = new NhanVien(0, txttennv.getText(), txtnamsinhnv.getText(), txtgioitinhnv.getText(),
 						txtsodienthoainv.getText(), txtdiachinv.getText());
-
-				if (NhanVienBus.gI().themnhanvien(nv) >= 0) {
+				int j = NhanVienBus.gI().themnhanvien(nv);
+				if (j > 0) {
 					loadnhanvien();
-
-					try {
-
-						idtaikhoan = Integer
-								.parseInt(dtmnhanvien.getValueAt(tablenhanvien.getRowCount() - 1, 0).toString());
-						System.out.println(idtaikhoan);
-					} catch (Exception e2) {
-						// TODO: handle exception
-						e2.printStackTrace();
-					}
-
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
 			}
@@ -3535,7 +3476,6 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int i = tablenhanvien.getSelectedRow();
 				if (i >= 0) {
 					int vitri = Integer.parseInt(dtmnhanvien.getValueAt(i, 0).toString());
@@ -3545,15 +3485,11 @@ public class MainFrame extends JFrame {
 							txtsodienthoainv.getText(), txtdiachinv.getText());
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (NhanVienBus.gI().xoanhanvien(nv) >= 0) {
+						int j = NhanVienBus.gI().xoanhanvien(nv);
+						if (j > 0) {
 							loadnhanvien();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 						}
 					}
-
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -3653,27 +3589,11 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (txtTennhaxuatban.getText().isEmpty()) {
-					thongbao("Tên nhà xuất bản");
-					return;
-				}
-				if (txtdiachinxb.getText().isEmpty()) {
-					thongbao("Địa chỉ nxb");
-					return;
-				}
-				if (txtsdtnxb.getText().isEmpty()) {
-					thongbao("SĐT NXB ");
-					return;
-				}
 				NhaXuatBan nxb = new NhaXuatBan(0, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
 						txtsdtnxb.getText());
-
-				if (NhaXuatBanBUS.gI().themnxb(nxb) >= 0) {
+				int j = NhaXuatBanBUS.gI().themnxb(nxb);
+				if (j > 0) {
 					loadnxb();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
 			}
@@ -3685,29 +3605,15 @@ public class MainFrame extends JFrame {
 
 				int i = tablenhaxuatban.getSelectedRow();
 				if (i > -1) {
-					if (txtTennhaxuatban.getText().isEmpty()) {
-						thongbao("Tên nhà xuất bản");
-						return;
-					}
-					if (txtdiachinxb.getText().isEmpty()) {
-						thongbao("Địa chỉ nxb");
-						return;
-					}
-					if (txtsdtnxb.getText().isEmpty()) {
-						thongbao("SĐT NXB ");
-						return;
-					}
+
 					int vitri = Integer.parseInt(dtmnhaxuatban.getValueAt(i, 0).toString());
-					// JOptionPane.showMessageDialog(contentPane, vitri);
+
 					NhaXuatBan nxb = new NhaXuatBan(vitri, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
 							txtsdtnxb.getText());
 
-					if (NhaXuatBanBUS.gI().suanxb(nxb) >= 0) {
+					int j = NhaXuatBanBUS.gI().suanxb(nxb);
+					if (j > 0) {
 						loadnxb();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Bạn chưa chọn vào table");
@@ -3728,12 +3634,9 @@ public class MainFrame extends JFrame {
 							txtsdtnxb.getText());
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (NhaXuatBanBUS.gI().xoanxb(nxb) > 0) {
+						int j = NhaXuatBanBUS.gI().xoanxb(nxb);
+						if (j > 0) {
 							loadnxb();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 						}
 					}
 
@@ -3751,27 +3654,12 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (txtTentacgia.getText().isEmpty()) {
-					thongbao("Tên tác giả");
-					return;
-				}
-				if (txtnamsinhtacgia.getText().isEmpty()) {
-					thongbao("Năm sinh tác giả");
-					return;
-				}
-				if (txtQueQuan.getText().isEmpty()) {
-					thongbao("Quê Qua tác giả");
-					return;
-				}
+
 				TacGiaDTO tg = new TacGiaDTO(0, txtTentacgia.getText(), txtnamsinhtacgia.getText(),
 						txtQueQuan.getText());
-
-				if (TacGiaBUS.gI().themtacgia(tg) >= 0) {
+				int j = TacGiaBUS.gI().themtacgia(tg);
+				if (j > 0) {
 					loadtacgia();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
 			}
@@ -3783,28 +3671,12 @@ public class MainFrame extends JFrame {
 
 				int i = tabletacgia.getSelectedRow();
 				if (i >= 0) {
-					if (txtTentacgia.getText().isEmpty()) {
-						thongbao("Tên tác giả");
-						return;
-					}
-					if (txtnamsinhtacgia.getText().isEmpty()) {
-						thongbao("Năm sinh tác giả");
-						return;
-					}
-					if (txtQueQuan.getText().isEmpty()) {
-						thongbao("Quê Qua tác giả");
-						return;
-					}
 					int vitri = Integer.parseInt(dtmtacgia.getValueAt(i, 0).toString());
 					TacGiaDTO tg = new TacGiaDTO(vitri, txtTentacgia.getText(), txtnamsinhtacgia.getText(),
 							txtQueQuan.getText());
-
-					if (TacGiaBUS.gI().suatacgia(tg) >= 0) {
+					int j = TacGiaBUS.gI().suatacgia(tg);
+					if (j > 0) {
 						loadtacgia();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
 					}
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn chưa chọn vào table");
@@ -3825,12 +3697,9 @@ public class MainFrame extends JFrame {
 							txtQueQuan.getText());
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (TacGiaBUS.gI().xoatacgia(tg) > 0) {
+						int j = TacGiaBUS.gI().xoatacgia(tg);
+						if (j > 0) {
 							loadtacgia();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 						}
 					}
 
@@ -3847,31 +3716,11 @@ public class MainFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 
-				if (txtTendocgia.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Tên đọc giả không được bỏ trống");
-					return;
-				}
-				if (txtsdtdocgia.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "SĐT đọc giả không được bỏ trống");
-					return;
-				}
-				if (txtdiachidocgia.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Địa chỉ không được bỏ trống");
-					return;
-				}
-				if (txtgioitinhdocgia.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Giới tính không được bỏ trống");
-					return;
-				}
 				DocGia docgia = new DocGia(0, txtTendocgia.getText(), txtgioitinhdocgia.getText(),
 						txtdiachidocgia.getText(), txtsdtdocgia.getText());
-				DocGiaBUS docgiabus = new DocGiaBUS();
-				if (docgiabus.themdocgia(docgia) >= 0) {
+				int j = DocGiaBUS.gI().themdocgia(docgia);
+				if (j > 0) {
 					loaddocgia();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
 			}
@@ -3884,33 +3733,13 @@ public class MainFrame extends JFrame {
 
 				int i = tabledocgia.getSelectedRow();
 				if (i >= 0) {
-					if (txtTendocgia.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Tên đọc giả không được bỏ trống");
-						return;
-					}
-					if (txtsdtdocgia.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "SĐT đọc giả không được bỏ trống");
-						return;
-					}
-					if (txtdiachidocgia.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Địa chỉ không được bỏ trống");
-						return;
-					}
-					if (txtgioitinhdocgia.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Giới tính không được bỏ trống");
-						return;
-					}
 					int vitri = Integer.parseInt(dtmdocgia.getValueAt(i, 0).toString());
 					DocGia docgia = new DocGia(vitri, txtTendocgia.getText(), txtgioitinhdocgia.getText(),
 							txtdiachidocgia.getText(), txtsdtdocgia.getText());
-					if (DocGiaBUS.gI().suadocgia(docgia) >= 0) {
+					int j = DocGiaBUS.gI().suadocgia(docgia);
+					if (j > 0) {
 						loaddocgia();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Sứa Thất bại");
 					}
-
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -3929,16 +3758,12 @@ public class MainFrame extends JFrame {
 							txtdiachidocgia.getText(), txtsdtdocgia.getText());
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (DocGiaBUS.gI().xoadocgia(docgia) > 0) {
+						int j = DocGiaBUS.gI().xoadocgia(docgia);
+						if (j > 0) {
 							loaddocgia();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thất Bại");
 						}
-
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -4068,7 +3893,7 @@ public class MainFrame extends JFrame {
 						}
 
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Vào Bảng");
 				}
@@ -4177,7 +4002,7 @@ public class MainFrame extends JFrame {
 							JOptionPane.showMessageDialog(contentPane, "Xoá Phiếu Mượn Không Thành Công");
 
 					}
-				
+
 				}
 
 				else {
@@ -4277,9 +4102,9 @@ public class MainFrame extends JFrame {
 
 						} else
 							JOptionPane.showMessageDialog(contentPane, "Xoá CT Phiếu Mượn Không Thành Công");
-		
+
 					}
-								}
+				}
 
 				else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
@@ -4388,7 +4213,7 @@ public class MainFrame extends JFrame {
 
 						}
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -4461,7 +4286,7 @@ public class MainFrame extends JFrame {
 
 						}
 					}
-					
+
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -4562,15 +4387,17 @@ public class MainFrame extends JFrame {
 		nxb = nxbbus.getdanhsachnxb();
 		dtmnhaxuatban.setRowCount(0);
 		cmbmanhaxuatban.removeAllItems();
-		for (NhaXuatBan nxb : nxb) {
-			Vector<Object> vec = new Vector<Object>();
-			vec.add(nxb.getMaNXB());
-			vec.add(nxb.getTenNXB());
-			vec.add(nxb.getDiaChi());
-			vec.add(nxb.getSdt());
-			cmbmanhaxuatban.addItem(nxb);
-			dtmnhaxuatban.addRow(vec);
+		if (nxb != null) {
+			for (NhaXuatBan nxb : nxb) {
+				Vector<Object> vec = new Vector<Object>();
+				vec.add(nxb.getMaNXB());
+				vec.add(nxb.getTenNXB());
+				vec.add(nxb.getDiaChi());
+				vec.add(nxb.getSdt());
+				cmbmanhaxuatban.addItem(nxb);
+				dtmnhaxuatban.addRow(vec);
 
+			}
 		}
 	}
 
@@ -4596,7 +4423,7 @@ public class MainFrame extends JFrame {
 	public void loadkesach() {
 		ke = null;
 		KeSachBus keSachBus = new KeSachBus();
-		ke = keSachBus.getdanhsachncc();
+		ke = keSachBus.getdanhsachke();
 		dtmke.setRowCount(0);
 		cmbmakesach.removeAllItems();
 		for (KeSachDTO kesach : ke) {
@@ -4649,16 +4476,17 @@ public class MainFrame extends JFrame {
 		tg = tgbus.getdanhsachtacgia();
 		dtmtacgia.setRowCount(0);
 		cmbmatg.removeAllItems();
-		for (TacGiaDTO tg : tg) {
-			Vector<Object> vec = new Vector<Object>();
-			vec.add(tg.getMaTacGia());
-			vec.add(tg.getTenTacGia());
-			vec.add(tg.getNamSinh());
-			vec.add(tg.getQueQuan());
-
-			dtmtacgia.addRow(vec);
-			cmbmatg.addItem(tg);
-			// .DesignLai.dtm.addRow(vec);
+		if (tg != null) {
+			for (TacGiaDTO tg : tg) {
+				Vector<Object> vec = new Vector<Object>();
+				vec.add(tg.getMaTacGia());
+				vec.add(tg.getTenTacGia());
+				vec.add(tg.getNamSinh());
+				vec.add(tg.getQueQuan());
+				dtmtacgia.addRow(vec);
+				cmbmatg.addItem(tg);
+				// .DesignLai.dtm.addRow(vec);
+			}
 		}
 
 	}
@@ -4674,20 +4502,20 @@ public class MainFrame extends JFrame {
 		dg = null;
 		DocGiaBUS dgbus = new DocGiaBUS();
 		dg = dgbus.getdanhsachdocgia();
-
 		dtmdocgia.setRowCount(0);
+		if(dg != null) {
+			for (DocGia dg1 : dg) {
+				Vector<Object> vec = new Vector<Object>();
+				vec.add(dg1.getMaDocGia());
+				vec.add(dg1.getTenDocGia());
+				vec.add(dg1.getGioiTinh());
+				vec.add(dg1.getSdt());
+				vec.add(dg1.getDiachi());
 
-		for (DocGia dg1 : dg) {
-			Vector<Object> vec = new Vector<Object>();
-			vec.add(dg1.getMaDocGia());
-			vec.add(dg1.getTenDocGia());
-			vec.add(dg1.getGioiTinh());
-			vec.add(dg1.getSdt());
-			vec.add(dg1.getDiachi());
-
-			dtmdocgia.addRow(vec);
-			cmbmadocgiaphieumuon.addItem(dg1);
-			// .DesignLai.dtm.addRow(vec);
+				dtmdocgia.addRow(vec);
+				cmbmadocgiaphieumuon.addItem(dg1);
+				// .DesignLai.dtm.addRow(vec);
+			}
 		}
 
 	}

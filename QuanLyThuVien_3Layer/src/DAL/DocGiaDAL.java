@@ -13,7 +13,7 @@ import DTO.LoaisachDTO;
 public class DocGiaDAL {
 	public static ArrayList<DocGia> getdanhsachdocgia() {
 		try {
-			String sql = "select * from docgia";
+			String sql = "select * from docgia where trangthai =1";
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -44,7 +44,7 @@ public class DocGiaDAL {
 	// @SuppressWarnings("null")
 	public static int themdocgia(DocGia ke) {
 		int i = -1;
-		String sql = "insert into docgia (tendocgia,gioitinh,diachi,sdt) values(?,?,?,?)";
+		String sql = "insert into docgia (tendocgia,gioitinh,diachi,sdt,trangthai) values(?,?,?,?,?)";
 
 		try {
 			
@@ -55,7 +55,7 @@ public class DocGiaDAL {
 
 			pstm.setString(3, ke.getDiachi());
 			pstm.setString(4, ke.getSdt());
-			
+			pstm.setInt(5, 1);
 			i = pstm.executeUpdate();
 			conn.close();
 
@@ -95,8 +95,8 @@ public class DocGiaDAL {
 
 	public static int xoadocgia(DocGia ke) {
 		int i = -1;
-		String sql = "delete from docgia where madocgia = ?";
-
+	//	String sql = "delete from docgia where madocgia = ?";
+		String sql = "update docgia set trangthai = 0 where madocgia = ?" ;
 		try {
 
 			Connection conn = DBConnect.getConnection();
@@ -114,7 +114,7 @@ public class DocGiaDAL {
 		return i;
 	}
 	public DocGia timdocgia(int ma) {
-		String sql = "select * from docgia where madocgia = ?";
+		String sql = "select * from docgia where madocgia = ? and trangthai = 1 ";
 		DocGia docgia = new DocGia();
 		try {
 			Connection conn = DBConnect.getConnection();

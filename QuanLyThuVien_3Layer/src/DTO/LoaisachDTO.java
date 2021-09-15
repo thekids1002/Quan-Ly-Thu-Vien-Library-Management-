@@ -3,6 +3,22 @@ package DTO;
 public class LoaisachDTO {
 	public int maloai;
 	public String tenloai;
+	public int TrangThai;
+
+	public LoaisachDTO(int maloai, String tenloai, int trangThai) {
+		super();
+		this.maloai = maloai;
+		this.tenloai = tenloai;
+		TrangThai = trangThai;
+	}
+
+	public int getTrangThai() {
+		return TrangThai;
+	}
+
+	public void setTrangThai(int trangThai) {
+		TrangThai = trangThai;
+	}
 
 	public LoaisachDTO(int maloai, String tenloai) {
 		super();
@@ -20,7 +36,7 @@ public class LoaisachDTO {
 
 	@Override
 	public String toString() {
-		return maloai + "-" + tenloai; 
+		return maloai + "-" + tenloai;
 	}
 
 	public LoaisachDTO() {

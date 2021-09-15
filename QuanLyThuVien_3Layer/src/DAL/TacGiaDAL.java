@@ -11,7 +11,7 @@ import DTO.TacGiaDTO;
 public class TacGiaDAL {
 	public static ArrayList<TacGiaDTO> getdanhsachtacgia() {
 		try {
-			String sql = "select * from tacgia";
+			String sql = "select * from tacgia where trangthai = 1 ";
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -35,9 +35,9 @@ public class TacGiaDAL {
 	}
 
 	// @SuppressWarnings("null")
-	public static int themnxb(TacGiaDTO ke) {
+	public static int themtacgia(TacGiaDTO ke) {
 		int i = -1;
-		String sql = "insert into tacgia (tentacgia,namsinh,quequan) values(?,?,?)";
+		String sql = "insert into tacgia (tentacgia,namsinh,quequan,trangthai) values(?,?,?,?)";
 
 		try {
 
@@ -46,6 +46,7 @@ public class TacGiaDAL {
 			pstm.setString(1, ke.getTenTacGia());
 			pstm.setString(2, ke.getNamSinh());
 			pstm.setString(3, ke.getQueQuan());
+			pstm.setInt(4, 1);
 			i = pstm.executeUpdate();
 			conn.close();
 
@@ -57,7 +58,7 @@ public class TacGiaDAL {
 		return i;
 	}
 
-	public static int suanxb(TacGiaDTO ke) {
+	public static int suatacgia(TacGiaDTO ke) {
 		int i = -1;
 		String sql = "update tacgia set tentacgia = ? , namsinh = ?, quequan = ?  where matacgia = ?";
 
@@ -82,10 +83,10 @@ public class TacGiaDAL {
 		return i;
 	}
 
-	public static int xoanxb(TacGiaDTO ke) {
+	public static int xoatacgia(TacGiaDTO ke) {
 		int i = -1;
-		String sql = "delete from tacgia where matacgia = ?";
-
+		//String sql = "delete from tacgia where matacgia = ?";
+		String sql = "update tacgia set trangthai = 0 where matacgia = ?";
 		try {
 
 			Connection conn = DBConnect.getConnection();

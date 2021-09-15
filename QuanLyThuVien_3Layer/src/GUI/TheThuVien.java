@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.bind.DataBindingException;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -19,7 +18,6 @@ import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
@@ -206,36 +204,6 @@ public class TheThuVien extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Gia Hạn");
-		btnNewButton_1_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				    Calendar cal = toCalendar(ngayketthuc.getDate());
-				    System.out.println("Thời gian hiện tại là " + cal.getTime());
-				    cal.add(Calendar.MONTH, 1);
-				    Date date = cal.getTime();
-				    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				    String ngayhethan = sdf.format(date) ;
-				    int ma = Integer.parseInt(txtmathe.getText()); 
-				    int i = table.getSelectedRow();
-				    if(i >= 0) {
-				    	if(TheThuVienBUS.gI().giahanthe(ma, ngayhethan) > 0) {
-					    	JOptionPane.showMessageDialog(contentPane, "Gia hạn thẻ thành công, bạn được cộng thêm 30 ngày");
-					    	try {
-					    		loadctphieunhap();
-								ngayketthuc.setDate(sdf.parse(ngayhethan));
-								
-							} catch (ParseException e) {
-								e.printStackTrace();
-							}
-					    }
-					    else {
-					    	JOptionPane.showMessageDialog(null, "Gia Hạn Thẻ Thất Bại");
-					    }
-				    }
-				    else {
-				    	JOptionPane.showMessageDialog(null, "Bạn chưa chọn thẻ để gia hạn");
-				    }
-			}
-		});
 		btnNewButton_1_1.setBounds(470, 304, 97, 25);
 		contentPane.add(btnNewButton_1_1);
 		
@@ -373,10 +341,4 @@ public class TheThuVien extends JFrame {
 			// dtmctpm.addRow(vec);
 		}
 	}
-	public static Calendar toCalendar(Date date){ 
-		  Calendar cal = Calendar.getInstance();
-		  cal.setTime(date);
-		  return cal;
-		}
-
 }

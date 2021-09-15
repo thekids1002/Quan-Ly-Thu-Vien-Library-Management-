@@ -10,15 +10,16 @@ import DTO.LoaisachDTO;
 import DTO.NhaCungCapDTO;
 
 public class NhaCungCapDAL {
-	public static int themloaisach(NhaCungCapDTO loai) {
+	public static int themncc(NhaCungCapDTO loai) {
 		int i = -1;
-		String sql = "insert into nhacungcap (TenNCC) values(?)";
+		String sql = "insert into nhacungcap (TenNCC,trangthai) values(?,?)";
 
 		try {
 			// System.out.println("Oloai");
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
 			pstm.setString(1, loai.getTenNCC());
+			pstm.setInt(2, 1);
 			// System.out.println(loai.getViTri());
 			i = pstm.executeUpdate();
 			conn.close();
@@ -31,7 +32,7 @@ public class NhaCungCapDAL {
 		return i;
 	}
 
-	public static int sualoaisach(NhaCungCapDTO loai) {
+	public static int suancc(NhaCungCapDTO loai) {
 		int i = -1;
 		String sql = "update nhacungcap set TenNCC = ? where MaNCC = ?";
 
@@ -53,19 +54,19 @@ public class NhaCungCapDAL {
 		return i;
 	}
 
-	public static int xoaloaisach(NhaCungCapDTO loai) {
+	public static int xoancc(NhaCungCapDTO loai) {
 		int i = -1;
-		String sql = "delete from nhacungcap where mancc = ?";
-
+		//String sql = "delete from nhacungcap where mancc = ?";
+		String sql = "update nhacungcap set trangthai = ? where MaNCC = ?";
 		try {
 
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement pstm = conn.prepareStatement(sql);
-			pstm.setInt(1, loai.getMaNCC());
+			pstm.setInt(1, 0);
+			pstm.setInt(2, loai.getMaNCC());
 			// System.out.println(loai.getMaloai());
 			i = pstm.executeUpdate();
 			conn.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			// dreturn null;
@@ -79,8 +80,7 @@ public class NhaCungCapDAL {
 			// String sql = "select * from loaisach";
 			Connection conn = DBConnect.getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from nhacungcap");
-
+			ResultSet rs = stmt.executeQuery("select * from nhacungcap where trangthai = 1");
 			ArrayList<NhaCungCapDTO> dsl = new ArrayList<>();
 			while (rs.next()) {
 				System.out.println("Db connect");
