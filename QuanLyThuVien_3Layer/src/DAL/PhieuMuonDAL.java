@@ -11,7 +11,7 @@ import DTO.PhieuMuon;
 public class PhieuMuonDAL {
 	public static ArrayList<PhieuMuon> getdanhsachphieumuon() {
 		try {
-			String sql = "select * from phieumuon";
+			String sql = "select * from phieumuon where trangthai = 1";
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -39,7 +39,7 @@ public class PhieuMuonDAL {
 	// @SuppressWarnings("null")
 	public static int thempm(PhieuMuon ke) {
 		int i = -1;
-		String sql = "insert into phieumuon (manv,MaDocGia,NgayMuon,TinhTrang) values(?,?,?,?)";
+		String sql = "insert into phieumuon (manv,MaDocGia,NgayMuon,TinhTrang,Trangthai) values(?,?,?,?,?)";
 
 		try {
 
@@ -49,6 +49,7 @@ public class PhieuMuonDAL {
 			pstm.setInt(2, ke.getMaDocGia());
 			pstm.setString(3, ke.getNgayMuon());
 			pstm.setString(4, ke.getTinhtrang());
+			pstm.setInt(5, 1);
 			i = pstm.executeUpdate();
 			conn.close();
 
@@ -60,7 +61,7 @@ public class PhieuMuonDAL {
 		return i;
 	}
 
-	public static int suanxb(PhieuMuon ke) {
+	public static int suapm(PhieuMuon ke) {
 		int i = -1;
 		String sql = "update phieumuon set manv = ? , MaDocGia = ?, NgayMuon =? , TinhTrang =?  where mapm = ?";
 
@@ -86,10 +87,10 @@ public class PhieuMuonDAL {
 		return i;
 	}
 
-	public static int xoanxb(PhieuMuon ke) {
+	public static int xoapm(PhieuMuon ke) {
 		int i = -1;
-		String sql = "delete from phieumuon where mapm = ?";
-
+	//	String sql = "delete from phieumuon where mapm = ?";
+		String sql = "update phieumuon set TrangThai = 0 where mapm = ?";
 		try {
 
 			Connection conn = DBConnect.getConnection();
@@ -108,7 +109,7 @@ public class PhieuMuonDAL {
 	}
 
 	public PhieuMuon timphieumuon(int ma) {
-		String sql = "select * from phieumuon where mapm = ?";
+		String sql = "select * from phieumuon where mapm = ? and trangthai = 1";
 
 		try {
 

@@ -19,7 +19,7 @@ public class SachDAL {
 
 			Connection conn = DBConnect.getConnection();
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from sach");
+			ResultSet rs = stmt.executeQuery("select * from sach where trangthai =1");
 
 			ArrayList<SachDTO> ds = new ArrayList<>();
 			while (rs.next()) {
@@ -32,7 +32,7 @@ public class SachDAL {
 				ls.setMaloai(rs.getInt(5));
 				ls.setNamxb(rs.getInt(6));
 				ls.setSoluong(rs.getInt(7));
-				ls.setGhichu(rs.getString("GhiChu"));
+				ls.setGhichu(rs.getString("trangthai"));
 				ls.setHinhanh(rs.getString("HinhAnh"));
 				ls.setMake(rs.getInt("Make"));
 
@@ -49,7 +49,7 @@ public class SachDAL {
 
 	public static int themsach(SachDTO sach) {
 		int i = -1;
-		String sql = "insert into sach (tensach,MaLoai,MaNXB,MaTacGia,NamXB,SoLuong,MaKe,HinhAnh) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into sach (tensach,MaLoai,MaNXB,MaTacGia,NamXB,SoLuong,MaKe,HinhAnh,TrangThai) values(?,?,?,?,?,?,?,?,?)";
 
 		try {
 
@@ -63,6 +63,7 @@ public class SachDAL {
 			pstm.setInt(6, sach.getSoluong());
 			pstm.setString(7, String.valueOf(sach.getMake()));
 			pstm.setString(8, sach.getHinhanh());
+			pstm.setInt(9, 1);
 
 			i = pstm.executeUpdate();
 			conn.close();
@@ -104,10 +105,10 @@ public class SachDAL {
 		return i;
 	}
 
-	public static int xoanxb(SachDTO ke) {
+	public static int xoasach(SachDTO ke) {
 		int i = -1;
-		String sql = "delete from sach where Masach = ?";
-
+	//	String sql = "delete from sach where Masach = ?";
+		String sql = "update sach set TrangThai = 0  where masach = ?";
 		try {
 
 			Connection conn = DBConnect.getConnection();
@@ -129,7 +130,7 @@ public class SachDAL {
 		try {
 			int soluong = 0;
 			Connection conn = DBConnect.getConnection();
-			String sql = "select soluong from sach where masach = ?";
+			String sql = "select soluong from sach where masach = ? and trangthai = 1";
 			PreparedStatement pstm = conn.prepareStatement(sql);
 			pstm.setInt(1, masach);
 			ResultSet rs = pstm.executeQuery();
@@ -142,16 +143,16 @@ public class SachDAL {
 		}
 
 	}
-	
+
 	public SachDTO timsach(int ma) {
 		SachDTO sach = new SachDTO();
-		String sql ="select * from sach where masach = ? ";
+		String sql = "select * from sach where masach = ? and trangthai =1";
 		try {
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, ma);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				sach.setMasosach(rs.getInt("Masach"));
 				sach.setTensach(rs.getString("Tensach"));
 				sach.setMaloai(rs.getInt("Maloai"));
@@ -161,31 +162,30 @@ public class SachDAL {
 				sach.setSoluong(rs.getInt("soluong"));
 				sach.setMake(rs.getInt("Make"));
 				sach.setHinhanh(rs.getString("hinhanh"));
-				sach.setGhichu(rs.getString("ghichu"));
+				sach.setGhichu(rs.getString("trangthai"));
 			}
-			return sach ;
+			return sach;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null ;
+			return null;
 		}
-		
+
 	}
-	
+
 	public static int getsoluongallsach() {
 		try {
-			int soluong = 0 ;
+			int soluong = 0;
 			Connection conn = DBConnect.getConnection();
-			String sql = "select soluong from sach" ;
+			String sql = "select soluong from sach where trangthai = 1";
 			Statement stm = conn.createStatement();
 			ResultSet rs = stm.executeQuery(sql);
-			while(rs.next()) {
-				soluong += rs.getInt("soluong"); 
-				
+			while (rs.next()) {
+				soluong += rs.getInt("soluong");
 			}
 			conn.close();
-			return soluong ;
+			return soluong;
 		} catch (Exception e) {
-			return -1 ;
+			return -1;
 		}
 	}
 

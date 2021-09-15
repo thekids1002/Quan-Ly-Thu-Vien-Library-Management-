@@ -3599,18 +3599,13 @@ public class MainFrame extends JFrame {
 			}
 		});
 		btnsuanxb.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				int i = tablenhaxuatban.getSelectedRow();
 				if (i > -1) {
-
 					int vitri = Integer.parseInt(dtmnhaxuatban.getValueAt(i, 0).toString());
-
 					NhaXuatBan nxb = new NhaXuatBan(vitri, txtTennhaxuatban.getText(), txtdiachinxb.getText(),
 							txtsdtnxb.getText());
-
 					int j = NhaXuatBanBUS.gI().suanxb(nxb);
 					if (j > 0) {
 						loadnxb();
@@ -3639,7 +3634,6 @@ public class MainFrame extends JFrame {
 							loadnxb();
 						}
 					}
-
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
@@ -3651,7 +3645,6 @@ public class MainFrame extends JFrame {
 		/////////////////////////////////
 
 		btnThemTacgia.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
@@ -3777,24 +3770,6 @@ public class MainFrame extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-
-				// Bắt sự kiện khi nhập không đúng;
-
-				if (txttensach.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Tên sách không được để trống hoặc là số");
-					return;
-
-				}
-				if (!isNumber(txtsoluongsach.getText()) || txtsoluongsach.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
-					return;
-				}
-				if (!isNumber(txtnamxbsach.getText()) || txtnamxbsach.getText().isEmpty()
-						|| txtnamxbsach.getText().length() != 4) {
-					JOptionPane.showMessageDialog(null, "Không được bỏ trống, năm xuất bản phải là số");
-					return;
-				}
-
 				int makesach = kesl.getMaKeSach();
 				int manxb = nxbsl.getMaNXB();
 				int matg = tacgiasl.getMaTacGia();
@@ -3805,14 +3780,10 @@ public class MainFrame extends JFrame {
 				System.out.println(namxb);
 				int soluong = Integer.parseInt(txtsoluongsach.getText());
 
-				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh, makesach);
-
-				if (SachDAL.themsach(sach) >= 0) {
+				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, "1", hinhanh, makesach);
+				int j = SachBus.gI().themsach(sach);
+				if (j > 0) {
 					loadsach();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất bại");
 				}
 
 			}
@@ -3824,21 +3795,6 @@ public class MainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int i = tablesach.getSelectedRow();
 				if (i > -1) {
-					if (txttensach.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Tên sách không được để trống hoặc là số");
-						return;
-
-					}
-					if (!isNumber(txtsoluongsach.getText()) || txtsoluongsach.getText().isEmpty()) {
-						JOptionPane.showMessageDialog(null, "Số lượng phải nhập số");
-						return;
-					}
-					if (!isNumber(txtnamxbsach.getText()) || txtnamxbsach.getText().isEmpty()
-							|| txtnamxbsach.getText().length() != 4) {
-						JOptionPane.showMessageDialog(null, "Không được bỏ trống, năm xuất bản phải là số");
-						return;
-					}
-
 					int makesach = kesl.getMaKeSach();
 					int manxb = nxbsl.getMaNXB();
 					int matg = tacgiasl.getMaTacGia();
@@ -3850,13 +3806,9 @@ public class MainFrame extends JFrame {
 					int masach = Integer.parseInt(dtmsach.getValueAt(i, 0).toString());
 					SachDTO sach = new SachDTO(masach, tensach, matg, manxb, loai, namxb, soluong, "", hinhanh,
 							makesach);
-
-					if (SachBus.gI().suapm(sach) > 0) {
+					int j = SachBus.gI().suasach(sach);
+					if (j > 0) {
 						loadsach();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(contentPane, "Sửa Thất bại");
 					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Bạn Chưa Chọn Vào Bảng");
@@ -3884,14 +3836,10 @@ public class MainFrame extends JFrame {
 							makesach);
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (SachBus.gI().xoapm(sach) > 0) {
+						int j = SachBus.gI().xoasach(sach);
+						if (j > 0) {
 							loadsach();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(contentPane, "Xoá Thất bại");
 						}
-
 					}
 
 				} else {
@@ -3935,12 +3883,10 @@ public class MainFrame extends JFrame {
 				// dateChooser.getDateEditor().getUiComponent()).getText();
 				String ngaymuon = sdf.format(dateChooser.getDate());
 				PhieuMuon pm = new PhieuMuon(0, manv, madocgia, ngaymuon, tinhtrang);
-				if (PhieuMuonBus.gI().thempm(pm) > 0) {
+				int j = PhieuMuonBus.gI().thempm(pm);
+				if (j > 0) {
 					loadphieumuon();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Thành Công");
-
-				} else
-					JOptionPane.showMessageDialog(contentPane, "Thêm Phiếu Mượn Không Thành Công");
+				}
 			}
 		});
 
@@ -3966,15 +3912,11 @@ public class MainFrame extends JFrame {
 					int vitri = Integer.parseInt(dtmmuon.getValueAt(i, 0).toString());
 					String tinhtrang = tinhtrangmuon();
 					PhieuMuon pm = new PhieuMuon(vitri, nvsl.getMaNV(), dgsl.getMaDocGia(), ngaymuon, tinhtrang);
-					if (PhieuMuonBus.gI().suapm(pm) >= 0) {
+					int j = PhieuMuonBus.gI().suapm(pm);
+					if (j > 0) {
 						loadphieumuon();
-						JOptionPane.showMessageDialog(contentPane, "Sửa Phiếu Mượn Thành Công");
-
-					} else
-						JOptionPane.showMessageDialog(contentPane, "Sửa Phiếu Mượn Không Thành Công");
-				}
-
-				else {
+					}
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
 			}
@@ -3994,15 +3936,11 @@ public class MainFrame extends JFrame {
 					PhieuMuon pm = new PhieuMuon(vitri, nvsl.getMaNV(), dgsl.getMaDocGia(), ngaymuon, tinhtrang);
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (PhieuMuonBus.gI().xoapm(pm) >= 0) {
+						int j = PhieuMuonBus.gI().xoapm(pm);
+						if (j > 0) {
 							loadphieumuon();
-							JOptionPane.showMessageDialog(contentPane, "Xoá Phiếu Mượn Thành Công");
-
-						} else
-							JOptionPane.showMessageDialog(contentPane, "Xoá Phiếu Mượn Không Thành Công");
-
+						}
 					}
-
 				}
 
 				else {
@@ -4016,31 +3954,42 @@ public class MainFrame extends JFrame {
 		///////////////////////////////////////////////////////////
 		btnthemctpm.addActionListener(new ActionListener() {
 
+			private String ngaymuon2;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (txtmasachmuon.getText().isEmpty()) {
-					thongbao("Mã Sách");
-					return;
-				}
-				if (dateChooser_ngaytra.getDate() == null) {
-					thongbao("Ngày Trả");
-					return;
-				}
-				if (!kiemtrasoluongphieumuon(Integer.parseInt(txtmapm.getText()))) {
-					JOptionPane.showMessageDialog(null, "Bạn không được mượn quá 5");
-					return;
-				}
+
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				String ngaytra = sdf.format(dateChooser_ngaytra.getDate());
+				String ngaymuon2;
+				String ngaytra;
+				try {
+					ngaytra = sdf.format(dateChooser_ngaytra.getDate());
+					ngaymuon2 = sdf.format(dateChooser.getDate());
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "Ngày sai");
+					return;
+				}
+				if (!isNumber(txtmapm.getText())) {
+					JOptionPane.showMessageDialog(null, "Mã phiếu mượn sai");
+					return;
+				}
+				if (!isNumber(txtmapm.getText())) {
+					JOptionPane.showMessageDialog(null, "Mã phiếu mượn sai");
+					return;
+				}
+				if (!isNumber(txtmasachmuon.getText())) {
+					JOptionPane.showMessageDialog(null, "Mã sách mượn sai");
+					return;
+				}
 
 				ChiTieuPMDTO ctpm = new ChiTieuPMDTO(0, Integer.parseInt(txtmapm.getText()),
-						Integer.parseInt(txtmasachmuon.getText()), ngaytra, txtghichuctpm.getText());
-				if (chitietpmbus.gI().thempm(ctpm) > 0) {
-					loadctphieumuon();
-					JOptionPane.showMessageDialog(contentPane, "Thêm CT Phiếu Mượn Thành Công");
+						Integer.parseInt(txtmasachmuon.getText()), ngaymuon2, ngaytra, txtghichuctpm.getText());
 
-				} else
-					JOptionPane.showMessageDialog(contentPane, "Thêm CT Phiếu Mượn Không Thành Công");
+				int j = chitietpmbus.gI().themctpm(ctpm);
+				if (j > 0) {
+					loadctphieumuon();
+				}
+
 			}
 
 		});
@@ -4051,30 +4000,25 @@ public class MainFrame extends JFrame {
 
 				int i = tablectpm.getSelectedRow();
 				if (i >= 0) {
-					if (txtmasachmuon.getText().isEmpty()) {
-						thongbao("Mã Sách");
-						return;
-					}
-					if (dateChooser_ngaytra.getDate() == null) {
-						thongbao("Ngày Trả");
-						return;
-					}
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					// String ngaymuon = ((JTextField)
-					// dateChooser.getDateEditor().getUiComponent()).getText();
-					String ngaytra = sdf.format(dateChooser_ngaytra.getDate());
+					String ngaymuon2;
+					String ngaytra;
+					try {
+						ngaytra = sdf.format(dateChooser_ngaytra.getDate());
+						ngaymuon2 = sdf.format(dateChooser.getDate());
+					} catch (Exception e2) {
+						JOptionPane.showMessageDialog(null, "Ngày sai");
+						return;
+					}
 					int mactpm = Integer.parseInt(dtmctpm.getValueAt(i, 0).toString());
-					ChiTieuPMDTO ctpm = new ChiTieuPMDTO(mactpm, Integer.parseInt(txtmapm.getText()),
-							Integer.parseInt(txtmasachmuon.getText()), ngaytra, txtghichuctpm.getText());
-					if (chitietpmbus.gI().suapm(ctpm) > 0) {
+					int mapm = Integer.parseInt(dtmctpm.getValueAt(i, 1).toString());
+					ChiTieuPMDTO ctpm = new ChiTieuPMDTO(mactpm,mapm,
+							Integer.parseInt(txtmasachmuon.getText()), ngaymuon2, ngaytra, txtghichuctpm.getText());
+					int j = chitietpmbus.gI().suactpm(ctpm);
+					if (j > 0) {
 						loadctphieumuon();
-						JOptionPane.showMessageDialog(contentPane, "Sửa CT Phiếu Mượn Thành Công");
-
-					} else
-						JOptionPane.showMessageDialog(contentPane, "Sửa CT Phiếu Mượn Không Thành Công");
-				}
-
-				else {
+					}
+				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
 				}
 			}
@@ -4096,13 +4040,10 @@ public class MainFrame extends JFrame {
 							Integer.parseInt(txtmasachmuon.getText()), ngaytra, txtghichuctpm.getText());
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (chitietpmbus.gI().xoapm(ctpm) > 0) {
+						int j = chitietpmbus.gI().xoactpm(ctpm);
+						if (j > 0) {
 							loadctphieumuon();
-							JOptionPane.showMessageDialog(contentPane, "Xoá CT Phiếu Mượn Thành Công");
-
-						} else
-							JOptionPane.showMessageDialog(contentPane, "Xoá CT Phiếu Mượn Không Thành Công");
-
+						}
 					}
 				}
 
@@ -4339,23 +4280,6 @@ public class MainFrame extends JFrame {
 		});
 	}
 
-	protected boolean kiemtrasoluongphieumuon(int PM) {
-		int i = 0;
-		for (ChiTieuPMDTO ctpm : MainFrame.ctpm) {
-			if (ctpm.getMaPhieuMuon() == PM) {
-				System.out.println(ctpm.getMaPhieuMuon());
-				i++;
-			}
-			if (i > 4) {
-				// JOptionPane.showMessageDialog(null, "Bạn không được mượn quá 5 ");
-				return false;
-
-			}
-
-		}
-		return true;
-	}
-
 	private void moveFrame(int x, int y) {
 
 		this.setLocation(x - x_mouse, y - y_mouse);
@@ -4503,7 +4427,7 @@ public class MainFrame extends JFrame {
 		DocGiaBUS dgbus = new DocGiaBUS();
 		dg = dgbus.getdanhsachdocgia();
 		dtmdocgia.setRowCount(0);
-		if(dg != null) {
+		if (dg != null) {
 			for (DocGia dg1 : dg) {
 				Vector<Object> vec = new Vector<Object>();
 				vec.add(dg1.getMaDocGia());
@@ -4528,18 +4452,20 @@ public class MainFrame extends JFrame {
 		sach = sachbus.getLoaisachLoai();
 
 		dtmsach.setRowCount(0);
-		for (SachDTO sachitem : sach) {
-			Vector<Object> vec = new Vector<Object>();
-			vec.add(sachitem.getMasosach());
-			vec.add(sachitem.getTensach());
-			vec.add(sachitem.getMaloai());
-			vec.add(sachitem.getMaNXB());
-			vec.add(sachitem.getMatacgia());
-			vec.add(sachitem.getNamxb());
-			vec.add(sachitem.getSoluong());
-			vec.add(sachitem.getMake());
-			vec.add(sachitem.getHinhanh());
-			dtmsach.addRow(vec);
+		if (sach != null) {
+			for (SachDTO sachitem : sach) {
+				Vector<Object> vec = new Vector<Object>();
+				vec.add(sachitem.getMasosach());
+				vec.add(sachitem.getTensach());
+				vec.add(sachitem.getMaloai());
+				vec.add(sachitem.getMaNXB());
+				vec.add(sachitem.getMatacgia());
+				vec.add(sachitem.getNamxb());
+				vec.add(sachitem.getSoluong());
+				vec.add(sachitem.getMake());
+				vec.add(sachitem.getHinhanh());
+				dtmsach.addRow(vec);
+			}
 		}
 	}
 
