@@ -2,6 +2,8 @@ package BUS;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import DAL.ChiTietPhieuNhapDAL;
 import DAL.chitietpmDAL;
 import DTO.ChiTietPhieuNhap;
@@ -33,16 +35,34 @@ public class ChiTietPhieuNhapBUS {
 		return ChiTietPhieuNhapDAL.getthongke();
 	}
 
-	public int thempm(ChiTietPhieuNhap pm) {
-		return ChiTietPhieuNhapDAL.Themctpn(pm); 
+	public int themctpn(ChiTietPhieuNhap pm) {
+		if(ChiTietPhieuNhapDAL.Themctpn(pm) > 0 ) {
+			JOptionPane.showMessageDialog(null, "Đã thêm chi tiết thành công");
+			return 1;
+		}
+		JOptionPane.showMessageDialog(null, "Đã thêm chi tiết thất bại");
+
+		return -1;
 	}
 
-	public int suapm(ChiTietPhieuNhap pm) {
-		return ChiTietPhieuNhapDAL.Suactpn(pm) ;
+	public int suactpn(ChiTietPhieuNhap pm) {
+		if(ChiTietPhieuNhapDAL.Suactpn(pm) > 0 ) {
+			JOptionPane.showMessageDialog(null, "Đã sửa chi tiết thành công");
+			return 1;
+		}
+		JOptionPane.showMessageDialog(null, "Đã sửa chi tiết thất bại");
+
+		return -1;
 	}
 
-	public int xoapm(ChiTietPhieuNhap pm) {
-		return ChiTietPhieuNhapDAL.xoactpn(pm) ;
+	public int xoactpn(ChiTietPhieuNhap pm) {
+		if(ChiTietPhieuNhapDAL.xoactpn(pm) > 0 ) {
+			JOptionPane.showMessageDialog(null, "Đã xoá chi tiết thành công");
+			return 1;
+		}
+		JOptionPane.showMessageDialog(null, "Đã xoá chi tiết thất bại");
+
+		return -1;
 	}
 
 	public static ChiTietPhieuNhapBUS iBus = null;

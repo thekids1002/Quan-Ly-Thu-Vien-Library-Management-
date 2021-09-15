@@ -2,6 +2,8 @@ package BUS;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import DAL.PhieuMuonDAL;
 import DAL.PhieuNhapDAL;
 import DTO.PhieuMuon;
@@ -16,16 +18,31 @@ public class PhieuNhapBUS {
 		return listpm = pmdal.getdanhsachphieunhap();
 	}
 
-	public int thempm(PhieuNhap pm) {
-		return pmdal.ThemPN(pm) ; 
+	public int thempn(PhieuNhap pm) {
+		 if(pmdal.ThemPN(pm) > 0) {
+			 JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thành công");
+			 return 1;
+		 }
+		 JOptionPane.showMessageDialog(null, "Thêm phiếu nhập thất bại");
+		 return -1;
 	}
 
-	public int suapm(PhieuNhap pm) {
-		return pmdal.SuaPn(pm) ;
+	public int suapn(PhieuNhap pm) {
+		 if(pmdal.SuaPn(pm) > 0) {
+			 JOptionPane.showMessageDialog(null, "Sửa phiếu nhập thành công");
+			 return 1;
+		 }
+		 JOptionPane.showMessageDialog(null, "Sửa phiếu nhập thất bại");
+		 return -1;
 	}
 
-	public int xoapm(PhieuNhap pm) {
-		return pmdal.xoanxb(pm); 
+	public int xoapn(PhieuNhap pm) {
+		 if(pmdal.xoapn(pm) > 0) {
+			 JOptionPane.showMessageDialog(null, "Xoá phiếu nhập thành công");
+			 return 1;
+		 }
+		 JOptionPane.showMessageDialog(null, "Xoá phiếu nhập thất bại");
+		 return -1;
 	}
 
 	public static PhieuNhapBUS iBus = null;

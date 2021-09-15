@@ -11,7 +11,7 @@ import DTO.TacGiaDTO;
 public class PhieuNhapDAL {
 	public static ArrayList<PhieuNhap> getdanhsachphieunhap() {
 		try {
-			String sql = "select * from phieunhap";
+			String sql = "select * from phieunhap where trangthai = 1";
 			Connection conn = DBConnect.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery();
@@ -37,7 +37,7 @@ public class PhieuNhapDAL {
 	// @SuppressWarnings("null")
 	public static int ThemPN(PhieuNhap ke) {
 		int i = -1;
-		String sql = "insert into phieunhap (MaNCC,MaNV,NgayNhap) values(?,?,?)";
+		String sql = "insert into phieunhap (MaNCC,MaNV,NgayNhap,TrangThai) values(?,?,?,?)";
 
 		try {
 
@@ -46,6 +46,7 @@ public class PhieuNhapDAL {
 			pstm.setInt(1, ke.getMaNhaCung());
 			pstm.setInt(2, ke.getMaNhanVien());
 			pstm.setString(3, ke.getNgayNhap());
+			pstm.setInt(4, 1);
 			i = pstm.executeUpdate();
 			conn.close();
 
@@ -82,10 +83,10 @@ public class PhieuNhapDAL {
 		return i;
 	}
 
-	public static int xoanxb(PhieuNhap ke) {
+	public static int xoapn(PhieuNhap ke) {
 		int i = -1;
-		String sql = "delete from phieunhap where maphieunhap = ?";
-
+//		String sql = "delete from phieunhap where maphieunhap = ?";
+		String sql = "update phieunhap set trangthai = 0 where maphieunhap = ?";
 		try {
 
 			Connection conn = DBConnect.getConnection();

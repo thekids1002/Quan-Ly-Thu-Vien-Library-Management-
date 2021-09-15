@@ -4012,8 +4012,8 @@ public class MainFrame extends JFrame {
 					}
 					int mactpm = Integer.parseInt(dtmctpm.getValueAt(i, 0).toString());
 					int mapm = Integer.parseInt(dtmctpm.getValueAt(i, 1).toString());
-					ChiTieuPMDTO ctpm = new ChiTieuPMDTO(mactpm,mapm,
-							Integer.parseInt(txtmasachmuon.getText()), ngaymuon2, ngaytra, txtghichuctpm.getText());
+					ChiTieuPMDTO ctpm = new ChiTieuPMDTO(mactpm, mapm, Integer.parseInt(txtmasachmuon.getText()),
+							ngaymuon2, ngaytra, txtghichuctpm.getText());
 					int j = chitietpmbus.gI().suactpm(ctpm);
 					if (j > 0) {
 						loadctphieumuon();
@@ -4079,15 +4079,10 @@ public class MainFrame extends JFrame {
 				int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
 				int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
 				PhieuNhap pn = new PhieuNhap(0, Mancc, Manv, ngaynhap);
-				if (PhieuNhapBUS.gI().thempm(pn) > 0) {
+				int j = PhieuNhapBUS.gI().thempn(pn);
+				if (j > 0) {
 					loadphieunhap();
-					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thành Công");
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Thêm Phiếu Nhập Thất Bại");
-
 				}
-
 			}
 		});
 		btnsuaphieunhap.addActionListener(new ActionListener() {
@@ -4114,13 +4109,9 @@ public class MainFrame extends JFrame {
 					int Manv = Integer.parseInt(txtManhanvienphieunhap.getText());
 					int Mancc = Integer.parseInt(txtManccPhieuNhap.getText());
 					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap);
-					if (PhieuNhapBUS.gI().suapm(pn) > 0) {
+					int j = PhieuNhapBUS.gI().suapn(pn);
+					if (j > 0) {
 						loadphieunhap();
-						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Sửa Phiếu Nhập Thất Bại");
-
 					}
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
@@ -4145,13 +4136,9 @@ public class MainFrame extends JFrame {
 					PhieuNhap pn = new PhieuNhap(vitri, Mancc, Manv, ngaynhap);
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (PhieuNhapBUS.gI().xoapm(pn) > 0) {
+						int j = PhieuNhapBUS.gI().xoapn(pn);
+						if (j > 0) {
 							loadphieunhap();
-							JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(null, "Xoá Phiếu Nhập Thất Bại");
-
 						}
 					}
 
@@ -4193,12 +4180,9 @@ public class MainFrame extends JFrame {
 				int sl = Integer.parseInt(txtsoluongctpn.getText());
 				int gia = Integer.parseInt(txtgianhap.getText());
 				ChiTietPhieuNhap ct = new ChiTietPhieuNhap(0, mapn, masach, gia, sl, sl * gia);
-				if (ChiTietPhieuNhapBUS.gI().thempm(ct) >= 0) {
+				int j = ChiTietPhieuNhapBUS.gI().themctpn(ct);
+				if(j > 0) {
 					loadctphieunhap();
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thành Công");
-				} else {
-					JOptionPane.showMessageDialog(contentPane, "Thêm Thất Bại");
-
 				}
 			}
 		});
@@ -4218,13 +4202,9 @@ public class MainFrame extends JFrame {
 					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl * gia);
 					int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá", "", JOptionPane.YES_NO_OPTION);
 					if (a == JOptionPane.YES_OPTION) {
-						if (ChiTietPhieuNhapBUS.gI().xoapm(ct) > 0) {
+						int j = ChiTietPhieuNhapBUS.gI().xoactpn(ct);
+						if(j > 0) {
 							loadctphieunhap();
-							JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thành Công");
-
-						} else {
-							JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thất Bại");
-
 						}
 					}
 
@@ -4265,13 +4245,9 @@ public class MainFrame extends JFrame {
 					int gia = Integer.parseInt(txtgianhap.getText());
 					int mactpn = Integer.parseInt(dtmchitietphieunhap.getValueAt(i, 0).toString());
 					ChiTietPhieuNhap ct = new ChiTietPhieuNhap(mactpn, mapn, masach, gia, sl, sl * gia);
-					if (ChiTietPhieuNhapBUS.gI().suapm(ct) > 0) {
+					int j = ChiTietPhieuNhapBUS.gI().suactpn(ct);
+					if(j > 0) {
 						loadctphieunhap();
-						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thành Công");
-
-					} else {
-						JOptionPane.showMessageDialog(null, "Xoá CT Phiếu Nhập Thất Bại");
-
 					}
 				} else {
 					JOptionPane.showMessageDialog(contentPane, "Bạn Chưa Chọn vào table");
