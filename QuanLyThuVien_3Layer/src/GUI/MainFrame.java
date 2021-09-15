@@ -786,6 +786,8 @@ public class MainFrame extends JFrame {
 
 		dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString("yyyy-MM-dd");
+		dateChooser.setEnabled(false);
+		dateChooser.setDate(Calendar.getInstance().getTime());
 		dateChooser.setBounds(111, 171, 236, 36);
 		panel_3.add(dateChooser);
 
@@ -879,6 +881,7 @@ public class MainFrame extends JFrame {
 		txtghichuctpm = new JTextField();
 		txtghichuctpm.setFont(new Font("Tahoma", Font.BOLD, 15));
 		txtghichuctpm.setColumns(10);
+		txtghichuctpm.setEditable(false);
 		txtghichuctpm.setBounds(96, 148, 142, 35);
 		panel.add(txtghichuctpm);
 
@@ -916,8 +919,11 @@ public class MainFrame extends JFrame {
 		panel.add(bnttailaictpm);
 
 		dateChooser_ngaytra = new JDateChooser();
+		Calendar c1 = Calendar.getInstance();
+		c1.setTime(Calendar.getInstance().getTime());
+		c1.roll(Calendar.DATE, 7);
 		dateChooser_ngaytra.setDateFormatString("yyyy-MM-dd");
-
+		dateChooser_ngaytra.setDate(c1.getTime());
 		dateChooser_ngaytra.setBounds(96, 79, 142, 35);
 		panel.add(dateChooser_ngaytra);
 
@@ -1016,6 +1022,8 @@ public class MainFrame extends JFrame {
 
 		NgayNhapPhieuNhap = new JDateChooser();
 		NgayNhapPhieuNhap.setBounds(144, 174, 145, 33);
+		NgayNhapPhieuNhap.setEnabled(false);
+		NgayNhapPhieuNhap.setDate(Calendar.getInstance().getTime());
 		NgayNhapPhieuNhap.setDateFormatString("yyyy-MM-dd");
 		panel_6.add(NgayNhapPhieuNhap);
 

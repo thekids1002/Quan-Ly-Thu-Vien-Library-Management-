@@ -121,7 +121,7 @@ public class chitietpmbus {
 				System.out.println(ctpm.getMaPhieuMuon());
 				i++;
 			}
-			if (i > 4) {
+			if (i > 5) {
 				// JOptionPane.showMessageDialog(null, "Bạn không được mượn quá 5 ");
 				return false;
 
