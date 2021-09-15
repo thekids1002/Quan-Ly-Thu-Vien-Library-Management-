@@ -373,7 +373,7 @@ public class MainFrame extends JFrame {
 
 		exit = new JLabel("");
 
-		exit.setIcon(new ImageIcon("C:\\Users\\ASUS\\eclipse-workspace\\QuanLyThuVien\\img\\exiticon.png"));
+		exit.setIcon(new ImageIcon("img\\exiticon.png"));
 		exit.setBounds(1244, 7, 24, 24);
 		contentPane.add(exit);
 
@@ -1411,7 +1411,7 @@ public class MainFrame extends JFrame {
 
 		btnlocthongke = new JButton("Lọc");
 		btnlocthongke.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btnlocthongke.setBounds(351, 484, 64, 23);
+		btnlocthongke.setBounds(351, 475, 64, 40);
 		panel.add(btnlocthongke);
 
 		JLabel lblNewLabel_20 = new JLabel("Số Sách Đã Nhập");
@@ -1452,12 +1452,12 @@ public class MainFrame extends JFrame {
 
 			}
 		});
-		comboBox.setBounds(200, 484, 76, 22);
+		comboBox.setBounds(154, 484, 149, 23);
 		panel.add(comboBox);
 
 		JButton btnNewButton_2 = new JButton("");
 		btnNewButton_2
-				.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\update.png"));
+				.setIcon(new ImageIcon("img\\update.png"));
 		btnNewButton_2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -1469,18 +1469,18 @@ public class MainFrame extends JFrame {
 
 		ngaybd = new JDateChooser();
 		ngaybd.setDateFormatString("yyyy-MM-dd");
-		ngaybd.setBounds(199, 546, 76, 22);
+		ngaybd.setBounds(154, 545, 149, 34);
 		panel.add(ngaybd);
 
 		ngayketthuc = new JDateChooser();
 		ngayketthuc.setDateFormatString("yyyy-MM-dd");
-		ngayketthuc.setBounds(351, 546, 76, 22);
+		ngayketthuc.setBounds(154, 605, 149, 29);
 		panel.add(ngayketthuc);
 
 		JLabel lblNewLabel_21_1 = new JLabel("Đến");
 		lblNewLabel_21_1.setForeground(Color.BLACK);
 		lblNewLabel_21_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_21_1.setBounds(298, 545, 41, 23);
+		lblNewLabel_21_1.setBounds(100, 611, 41, 23);
 		panel.add(lblNewLabel_21_1);
 
 		rdloctheonam = new JRadioButton("Năm");
@@ -1814,7 +1814,7 @@ public class MainFrame extends JFrame {
 		panelthongtindocgia.add(btnxoadocgia);
 
 		btnTiLi = new JButton("Tải Lại");
-		btnTiLi.setIcon(new ImageIcon("C:\\Users\\asus\\git\\repository\\QuanLyThuVien_3Layer\\img\\update.png"));
+		btnTiLi.setIcon(new ImageIcon("img\\update.png"));
 		btnTiLi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				loaddocgia();
@@ -3803,7 +3803,13 @@ public class MainFrame extends JFrame {
 				String tensach = txttensach.getText();
 				int namxb = Integer.parseInt(txtnamxbsach.getText());
 				System.out.println(namxb);
-				int soluong = Integer.parseInt(txtsoluongsach.getText());
+				int soluong ;
+				try {
+					 soluong = Integer.parseInt(txtsoluongsach.getText());
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Số lượng phải là số");
+					return ;
+				}
 
 				SachDTO sach = new SachDTO(0, tensach, matg, manxb, loai, namxb, soluong, "1", hinhanh, makesach);
 				int j = SachBus.gI().themsach(sach);
