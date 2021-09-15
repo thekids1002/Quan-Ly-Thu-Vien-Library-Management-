@@ -316,7 +316,7 @@ public class MainFrame extends JFrame {
 	private JRadioButton rdloctheongay;
 	private ButtonGroup group;
 	public static JLabel lblUser;
-
+	public static DocGia  thethanhvien = null;
 	public static int idtaikhoan;
 
 	/**
@@ -1876,9 +1876,26 @@ public class MainFrame extends JFrame {
 				if (i > -1) {
 					int ma = Integer.parseInt(dtmdocgia.getValueAt(i, 0).toString());
 					tv = TheThuVienDAL.thongtinthe(ma);
-					System.out.println(tv);
-					GUI.TheThuVien the = new GUI.TheThuVien();
-					the.setVisible(true);
+					System.out.println("Cái cần lấy " + tv);
+					if(tv.getMaTheThuVien() != 0) {
+//						System.out.println(tv);
+						GUI.TheThuVien the = new GUI.TheThuVien();
+						the.setVisible(true);
+					}
+					else {
+						int a = JOptionPane.showConfirmDialog(null, "Thành Viên này chưa có thẻ bạn có muốn thêm thẻ không", "", JOptionPane.YES_NO_OPTION);
+						if (a == JOptionPane.YES_OPTION) {
+							int maDocGia = Integer.parseInt(dtmdocgia.getValueAt(i, 0).toString());
+							String tenDocGia = dtmdocgia.getValueAt(i, 1).toString();
+							String gioiTinh = dtmdocgia.getValueAt(i, 2).toString();
+							String diachi = dtmdocgia.getValueAt(i, 3).toString();
+							String sdt = dtmdocgia.getValueAt(i, 4).toString();
+							 thethanhvien = new DocGia(maDocGia, tenDocGia, gioiTinh, diachi, sdt);
+							GUI.TheThuVien the = new GUI.TheThuVien();
+							the.setVisible(true);
+						}
+					}
+					
 				}
 
 			}

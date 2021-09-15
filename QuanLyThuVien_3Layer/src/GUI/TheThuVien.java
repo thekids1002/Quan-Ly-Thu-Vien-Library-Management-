@@ -18,6 +18,7 @@ import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
@@ -28,6 +29,8 @@ import BUS.ChiTietPhieuNhapBUS;
 import BUS.TheThuVienBUS;
 import DAL.TheThuVienDAL;
 import DTO.ChiTietPhieuNhap;
+import DTO.DocGia;
+
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -204,6 +207,36 @@ public class TheThuVien extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Gia Hạn");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int i = table.getSelectedRow();
+				if(i>-1) {
+					int ma = Integer.parseInt(txtmathe.getText()); 
+					int madocgia = Integer.parseInt(txtmadocgia.getText()) ;
+					String tendoc = txttendocgia.getText() ;
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+					Date date = ngaybatdau.getDate();
+					String ngaybatdau = sdf.format(date); 
+					Date datehientai =java.util.Calendar.getInstance().getTime(); 
+					Calendar c1 = Calendar.getInstance();
+					c1.setTime(datehientai);
+					c1.roll(Calendar.DATE, 30);
+					Date date2 = c1.getTime();
+					String ketthuc = sdf.format(date2);
+					DTO.TheThuVien the = new DTO.TheThuVien(ma,madocgia,tendoc,ngaybatdau,ketthuc); 
+					if(TheThuVienBUS.gI().suatacgia(the) > 0 ) {
+						JOptionPane.showMessageDialog(null, "Gia hạn Thẻ thành công");
+						loadctphieunhap();
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Gia hạn thẻ thất bại");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Bạn chưa click vào table");
+				}
+			}
+		});
 		btnNewButton_1_1.setBounds(470, 304, 97, 25);
 		contentPane.add(btnNewButton_1_1);
 		
@@ -247,7 +280,7 @@ public class TheThuVien extends JFrame {
 		lblNewLabel_1_1_1.setBounds(402, 67, 120, 32);
 		contentPane.add(lblNewLabel_1_1_1);
 		
-		JLabel lblNewLabel_1_1_1_1 = new JLabel("Ngày Bắt Đầu");
+		JLabel lblNewLabel_1_1_1_1 = new JLabel("Ngày Kết Thúc");
 		lblNewLabel_1_1_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_1_1_1_1.setBounds(402, 142, 120, 32);
 		contentPane.add(lblNewLabel_1_1_1_1);
@@ -290,29 +323,45 @@ public class TheThuVien extends JFrame {
 		lblNewLabel_1_1_2.setBounds(12, 207, 97, 32);
 		contentPane.add(lblNewLabel_1_1_2);
 		setLocationRelativeTo(null);
-		DTO.TheThuVien the = MainFrame.tv;
-		
-		if(the.getMaTheThuVien() == 0) {
-			JOptionPane.showMessageDialog(null, "Chưa có thẻ");
-			return; 
-		}
-		if(the!= null) {			
+		DocGia docgia = MainFrame.thethanhvien;
+		DTO.TheThuVien tv = MainFrame.tv;
+		if(tv.getMaTheThuVien() != 0 ) {			
 			
 			try {
-				txtmadocgia.setText(String.valueOf(the.getMadocgia()));
-				txtmathe.setText(String.valueOf(the.getMaTheThuVien()));
-				txttendocgia.setText(the.getTendocgia());
+				txtmadocgia.setText(String.valueOf(tv.getMadocgia()));
+				txtmathe.setText(String.valueOf(tv.getMadocgia()));
+				txttendocgia.setText(tv.getTendocgia());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") ;
-				Date date = sdf.parse(the.getNgayBatDau());
-				Date date2 = sdf.parse(the.getNgayKetThuc());
+				Date date = sdf.parse(tv.getNgayBatDau());
+				Date date2 = sdf.parse(tv.getNgayKetThuc());
 				ngaybatdau.setDate(date);
-				ngayketthuc.setDate(date);
+				ngayketthuc.setDate(date2);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, "Chưa có thẻ thư viện");
 			} 
 			
 			
+		}
+		else {
+			try {
+				Date datehientai =java.util.Calendar.getInstance().getTime(); 
+				Calendar c1 = Calendar.getInstance();
+				
+				txtmadocgia.setText(String.valueOf(docgia.getMaDocGia()));
+				txtmathe.setText(String.valueOf(docgia.getMaDocGia()));
+				txttendocgia.setText(docgia.getTenDocGia());
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd") ;
+				Date date = datehientai;
+				c1.setTime(datehientai);
+				c1.roll(Calendar.DATE, 30);
+				Date date2 = c1.getTime();
+				ngaybatdau.setDate(date);
+				ngayketthuc.setDate(date2);	
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "Chưa có thẻ thư viện");
+			} 
 		}
 		loadctphieunhap();
 		
