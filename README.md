@@ -10,6 +10,7 @@ HƯỚNG DẪN CÀI ĐẶT CHƯƠNG TRÌNH
 Mọi lỗi liên quan đến hiển thị là do màn hình máy tính có độ phân giải quá thấp.
 - Nếu không cài đặt được theo cách trên. Bạn có thể xem video này :
 https://www.youtube.com/watch?v=Ienj0g_Wrqw
+<br>
 Update 2024 : Dùng intelij để chạy đồ án.
 https://youtu.be/reFknNcF95U
 - Báo cáo đồ án :
